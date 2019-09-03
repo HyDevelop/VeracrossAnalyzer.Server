@@ -144,6 +144,9 @@ public class ApiHandler extends AbstractHandler
             // Declare response encoding and types
             response.setContentType("application/json; charset=utf-8");
 
+            // Allow CORS
+            response.setHeader("Access-Control-Allow-Origin", "*");
+
             // Declare response status code
             response.setStatus(HttpServletResponse.SC_OK);
 
