@@ -2,9 +2,8 @@ package org.hydev.veracross.analyzer;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.hydev.veracross.analyzer.utils.ResourceReader;
 
-import static org.hydev.veracross.analyzer.utils.ResourceReader.*;
+import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
 
 /**
  * This class stores the constants for this trash sorter program.
@@ -18,7 +17,7 @@ import static org.hydev.veracross.analyzer.utils.ResourceReader.*;
  */
 public class VAConstants
 {
-    public static final String VERSION = read("/version.entry");
+    public static final String VERSION = read("/version.entry".split(";")[0]);
 
     public static final HttpClient HTTP_CLIENT = HttpClientBuilder.create().build();
 
@@ -44,6 +43,6 @@ public class VAConstants
         DATABASE_PASS = dbInfo[2];
 
         // API server port
-        API_SERVER_PORT = Integer.parseInt(read("/api-server-port.entry"));
+        API_SERVER_PORT = Integer.parseInt(read("/api-server-port.entry").split(";")[0]);
     }
 }
