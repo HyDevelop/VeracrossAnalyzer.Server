@@ -8,6 +8,8 @@ import lombok.Getter;
 import org.eclipse.jetty.server.Server;
 import org.hydev.veracross.analyzer.VAConstants;
 import org.hydev.veracross.analyzer.api.nodes.*;
+import org.hydev.veracross.analyzer.api.nodes.veracross.NodeVeracrossAssignments;
+import org.hydev.veracross.analyzer.api.nodes.veracross.NodeVeracrossCourses;
 
 import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
 
@@ -47,7 +49,10 @@ public class VAApiServer
         ApiHandler handler = new ApiHandler(this);
         handler.getManager().register(
                 new NodeTest(),
-                new NodeVersion()
+                new NodeVersion(),
+
+                new NodeVeracrossAssignments(),
+                new NodeVeracrossCourses()
         );
 
         // Create Jetty server
