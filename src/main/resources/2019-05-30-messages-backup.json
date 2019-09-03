@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "type": 2,
+    "message_person_pk": 2935159,
+    "message_pk": 43046,
+    "subject": "Happening today - Finals Fair in CLAS - ALL Lunch Blocks",
+    "date_sent": "May 30",
+    "date": "2019-05-30T10:33:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 2,
+    "type": 2,
+    "message_person_pk": 2933056,
+    "message_pk": 43021,
+    "subject": "Final Exam Schedule 2018",
+    "date_sent": "May 29",
+    "date": "2019-05-29T12:58:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 3,
+    "type": 2,
+    "message_person_pk": 2931400,
+    "message_pk": 43005,
+    "subject": "Final Presentations",
+    "date_sent": "May 28",
+    "date": "2019-05-28T23:57:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 4,
+    "type": 2,
+    "message_person_pk": 2930085,
+    "message_pk": 42991,
+    "subject": "Pick Up Progress Check-in",
+    "date_sent": "May 28",
+    "date": "2019-05-28T18:37:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 5,
+    "type": 2,
+    "message_person_pk": 2919344,
+    "message_pk": 42750,
+    "subject": "Student Council election results and Information about Tomorrow!!!",
+    "date_sent": "May 21",
+    "date": "2019-05-21T20:00:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 6,
+    "type": 2,
+    "message_person_pk": 2916090,
+    "message_pk": 42707,
+    "subject": "LAST CALL TO SIGN UP FOR SUMMER THEATER!",
+    "date_sent": "May 20",
+    "date": "2019-05-20T20:01:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 7,
+    "type": 2,
+    "message_person_pk": 2914700,
+    "message_pk": 42702,
+    "subject": "Prep Partner Survey",
+    "date_sent": "May 20",
+    "date": "2019-05-20T19:08:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 8,
+    "type": 2,
+    "message_person_pk": 2909626,
+    "message_pk": 42630,
+    "subject": "Final Call: Write-In Sign Up --Can you conquer procrastination?",
+    "date_sent": "May 17",
+    "date": "2019-05-17T14:43:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 9,
+    "type": 2,
+    "message_person_pk": 2899075,
+    "message_pk": 42407,
+    "subject": "Summer Assignments 2019",
+    "date_sent": "May 13",
+    "date": "2019-05-13T18:07:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 10,
+    "type": 2,
+    "message_person_pk": 2897891,
+    "message_pk": 42394,
+    "subject": "Afternoon Write-In: May 21st",
+    "date_sent": "May 13",
+    "date": "2019-05-13T14:33:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 11,
+    "type": 2,
+    "message_person_pk": 2897086,
+    "message_pk": 42371,
+    "subject": "Class Today",
+    "date_sent": "May 13",
+    "date": "2019-05-13T05:42:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 12,
+    "type": 2,
+    "message_person_pk": 2893968,
+    "message_pk": 42333,
+    "subject": "PULSE Applications",
+    "date_sent": "May 10",
+    "date": "2019-05-10T12:32:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 13,
+    "type": 2,
+    "message_person_pk": 2889331,
+    "message_pk": 42257,
+    "subject": "You're Invited: Final SOAR Meeting of the year",
+    "date_sent": "May 08",
+    "date": "2019-05-08T13:40:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 14,
+    "type": 2,
+    "message_person_pk": 2888475,
+    "message_pk": 42254,
+    "subject": "Final Papers Write-In -- May 21st",
+    "date_sent": "May 08",
+    "date": "2019-05-08T12:57:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 15,
+    "type": 2,
+    "message_person_pk": 2886087,
+    "message_pk": 42212,
+    "subject": "Re: Re-signing I-20s",
+    "date_sent": "May 07",
+    "date": "2019-05-07T17:09:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 16,
+    "type": 2,
+    "message_person_pk": 2883067,
+    "message_pk": 42171,
+    "subject": "Need Service Hours: Service Opportunity",
+    "date_sent": "May 06",
+    "date": "2019-05-06T17:00:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 17,
+    "type": 2,
+    "message_person_pk": 2882010,
+    "message_pk": 42169,
+    "subject": "Summer Theater at SJP",
+    "date_sent": "May 06",
+    "date": "2019-05-06T16:41:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 18,
+    "type": 2,
+    "message_person_pk": 2873536,
+    "message_pk": 41934,
+    "subject": "Vouchers due!",
+    "date_sent": "May 01",
+    "date": "2019-05-01T18:16:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 19,
+    "type": 2,
+    "message_person_pk": 2872851,
+    "message_pk": 41931,
+    "subject": "Last chance to run for Student Council",
+    "date_sent": "May 01",
+    "date": "2019-05-01T17:51:00.000Z",
+    "opened": false
+  },
+  {
+    "id": 20,
+    "type": 2,
+    "message_person_pk": 2867812,
+    "message_pk": 41859,
+    "subject": "HELP needed for a Service Opportunity",
+    "date_sent": "Apr 30",
+    "date": "2019-04-30T14:44:00.000Z",
+    "opened": false
+  }
+]
