@@ -1,5 +1,6 @@
 package org.hydev.veracross.analyzer;
 
+import com.google.gson.Gson;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
@@ -28,6 +29,8 @@ public class VAConstants
     public static final String DATABASE_URL;
     public static final String DATABASE_USER;
     public static final String DATABASE_PASS;
+
+    public static Gson GSON = new Gson();
 
     static
     {
