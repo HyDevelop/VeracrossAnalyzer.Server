@@ -1,7 +1,16 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.ApiNode;
+import org.hydev.veracross.sdk.StJohnsHttpClient;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
+import org.hydev.veracross.sdk.exceptions.VeracrossException;
+
+import java.io.IOException;
+
+import static org.hydev.veracross.analyzer.VAConstants.GSON;
 
 /**
  * This api node logs in to Veracross with specified username and
@@ -16,7 +25,6 @@ import org.hydev.veracross.analyzer.api.ApiNode;
  */
 public class NodeLogin implements ApiNode
 {
-
     @Override
     public String path()
     {
@@ -26,6 +34,54 @@ public class NodeLogin implements ApiNode
     @Override
     public String process(ApiAccess access)
     {
-        return null;
+        try
+        {
+            // Validate body
+            String body = access.getContent();
+            if (body == null || body.isEmpty() || body.length() > 80)
+            {
+                return "";
+            }
+
+            // Parse body
+            SubmitData info = GSON.fromJson(access.getContent(), SubmitData.class);
+
+            // Login to St. John's
+            StJohnsHttpClient stJohns = new StJohnsHttpClient();
+            stJohns.login(info.username, info.password);
+
+            // Login to Veracross
+            VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
+
+            // Return cookies
+            return GSON.toJson(veracross.getCookies().getCookies());
+        }
+        catch (IOException | VeracrossException e)
+        {
+            e.printStackTrace();
+
+            // TODO: Log errors
+            return GSON.toJson(new ReturnData(false, e.getMessage()));
+        }
+    }
+
+    /**
+     * The JSON model for the data submitted from the client.
+     */
+    @Data
+    private class SubmitData
+    {
+        String username;
+        String password;
+    }
+
+    /**
+     * The JSON model for the data returned to the client.
+     */
+    @Data @AllArgsConstructor
+    private class ReturnData
+    {
+        boolean success;
+        String token;
     }
 }
