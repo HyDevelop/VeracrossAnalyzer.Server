@@ -40,7 +40,7 @@ public class NodeLogin implements ApiNode
             String body = access.getContent();
             if (body == null || body.isEmpty() || body.length() > 80)
             {
-                return "";
+                return GSON.toJson(new ReturnData(false, "Bad request"));
             }
 
             // Parse body
