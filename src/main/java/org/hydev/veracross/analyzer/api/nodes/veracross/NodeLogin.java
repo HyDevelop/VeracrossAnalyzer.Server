@@ -64,7 +64,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.SubmitData, GeneralReturnDa
      * The JSON model for the data submitted from the client.
      */
     @Data
-    public class SubmitData
+    protected class SubmitData
     {
         String username;
         String password;
