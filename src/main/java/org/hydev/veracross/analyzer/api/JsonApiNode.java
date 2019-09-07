@@ -2,7 +2,9 @@ package org.hydev.veracross.analyzer.api;
 
 import com.google.gson.reflect.TypeToken;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
 
@@ -59,7 +61,10 @@ public abstract class JsonApiNode<S, R extends JsonApiNode.GeneralReturnData> im
     /**
      * Return data
      */
-    @Data @AllArgsConstructor
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
     public static class GeneralReturnData
     {
         protected boolean success;
