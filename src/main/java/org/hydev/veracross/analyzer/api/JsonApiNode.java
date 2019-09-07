@@ -19,7 +19,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-09-07 10:32
  */
-public abstract class JsonApiNode<R extends JsonApiNode.GeneralReturnData> implements ApiNode
+public abstract class JsonApiNode implements ApiNode
 {
     protected int maxBodyLength = 2000;
 
@@ -39,7 +39,7 @@ public abstract class JsonApiNode<R extends JsonApiNode.GeneralReturnData> imple
         try
         {
             // Process
-            return GSON.toJson(processJson(access, data));
+            return GSON.toJson(new GeneralReturnData(true, processJson(access, data)));
         }
         catch (Exception e)
         {
@@ -57,7 +57,7 @@ public abstract class JsonApiNode<R extends JsonApiNode.GeneralReturnData> imple
      * @param data Submitted json data
      * @return Object to return as json
      */
-    protected abstract R processJson(ApiAccess access, JsonObject data) throws Exception;
+    protected abstract Object processJson(ApiAccess access, JsonObject data) throws Exception;
 
     /**
      * Return data
@@ -69,6 +69,6 @@ public abstract class JsonApiNode<R extends JsonApiNode.GeneralReturnData> imple
     public static class GeneralReturnData
     {
         protected boolean success;
-        protected String data;
+        protected Object data;
     }
 }
