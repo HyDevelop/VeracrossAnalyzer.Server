@@ -3,11 +3,8 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import com.google.gson.JsonObject;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-
-import static org.hydev.veracross.analyzer.VAConstants.GSON;
 
 /**
  * This api node obtains the courses information from Veracross and
@@ -20,7 +17,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-08-19 15:15
  */
-public class NodeCourses extends JsonApiNode<GeneralReturnData>
+public class NodeCourses extends JsonApiNode
 {
     @Override
     public String path()
@@ -29,8 +26,7 @@ public class NodeCourses extends JsonApiNode<GeneralReturnData>
     }
 
     @Override
-    protected GeneralReturnData processJson(ApiAccess access, JsonObject data)
-            throws Exception
+    protected Object processJson(ApiAccess access, JsonObject data) throws Exception
     {
         // Create http client
         VeracrossHttpClient veracross = new VeracrossHttpClient();
@@ -39,6 +35,6 @@ public class NodeCourses extends JsonApiNode<GeneralReturnData>
         CookieUtils.unwrap(veracross, data.get("token").getAsString());
 
         // Get it
-        return new GeneralReturnData(true, GSON.toJson(veracross.getCourses()));
+        return veracross.getCourses();
     }
 }
