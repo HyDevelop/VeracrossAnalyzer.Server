@@ -1,7 +1,7 @@
 # Mvn package first
 
 # Server
-server="root@cn2.hydev.org"
+server="root@hydev.org"
 
 # Upload libraries
 scp -r ../target/lib $server:/app/depl/veracross-analyzer/
@@ -42,3 +42,4 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
+# https://computingforgeeks.com/how-to-run-java-jar-application-with-systemd-on-linux/
