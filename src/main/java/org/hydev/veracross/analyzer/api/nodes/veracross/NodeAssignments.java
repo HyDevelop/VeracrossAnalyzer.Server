@@ -4,6 +4,12 @@ import lombok.Data;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
+import org.hydev.veracross.analyzer.utils.CookieUtils;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
+
+import java.io.IOException;
+
+import static org.hydev.veracross.analyzer.VAConstants.GSON;
 
 /**
  * This api node obtains the assignments information from Veracross and
@@ -25,9 +31,16 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.SubmitData, Gen
     }
 
     @Override
-    protected GeneralReturnData processJson(ApiAccess access, SubmitData data)
+    protected GeneralReturnData processJson(ApiAccess access, SubmitData data) throws IOException
     {
-        return null;
+        // Create http client
+        VeracrossHttpClient veracross = new VeracrossHttpClient();
+
+        // Unwrap cookies
+        CookieUtils.unwrap(veracross, data.token);
+
+        // Get it
+        return new GeneralReturnData(true, GSON.toJson(veracross.getAssignments(data.id)));
     }
 
     /**
@@ -37,5 +50,6 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.SubmitData, Gen
     public class SubmitData
     {
         String token;
+        long id;
     }
 }
