@@ -58,7 +58,7 @@ public class NodeLogin implements ApiNode
             String json = GSON.toJson(veracross.getCookies().getCookies());
             String base64 = Base64Utils.encodeBase64C(json.getBytes());
 
-                    // Return cookies
+            // Return cookies
             return GSON.toJson(new ReturnData(true, base64));
         }
         catch (IOException | VeracrossException e)
