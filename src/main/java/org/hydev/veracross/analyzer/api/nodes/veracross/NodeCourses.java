@@ -5,6 +5,11 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
+import org.hydev.veracross.sdk.model.StJohnsCourse;
+import org.hydev.veracross.sdk.model.VeracrossCourse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This api node obtains the courses information from Veracross and
@@ -34,7 +39,14 @@ public class NodeCourses extends JsonApiNode
         // Unwrap cookies
         CookieUtils.unwrap(veracross, data.get("token").getAsString());
 
-        // Get it
-        return veracross.getCourses();
+        // Get courses
+        List<VeracrossCourse> courses = veracross.getCourses();
+
+        // Convert to St. John's courses
+        List<StJohnsCourse> result = new ArrayList<>();
+        courses.forEach(course -> result.add(new StJohnsCourse(course)));
+
+        // Return it
+        return result;
     }
 }
