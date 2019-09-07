@@ -1,6 +1,6 @@
 package org.hydev.veracross.analyzer.api;
 
-import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +34,7 @@ public abstract class JsonApiNode<R extends JsonApiNode.GeneralReturnData> imple
         }
 
         // Parse body
-        JsonElement data = new JsonParser().parse(access.getContent());
+        JsonObject data = new JsonParser().parse(access.getContent()).getAsJsonObject();
 
         try
         {
@@ -57,7 +57,7 @@ public abstract class JsonApiNode<R extends JsonApiNode.GeneralReturnData> imple
      * @param data Submitted json data
      * @return Object to return as json
      */
-    protected abstract R processJson(ApiAccess access, JsonElement data) throws Exception;
+    protected abstract R processJson(ApiAccess access, JsonObject data) throws Exception;
 
     /**
      * Return data
