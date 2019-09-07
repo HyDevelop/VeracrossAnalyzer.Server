@@ -1,9 +1,13 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
+import lombok.Data;
 import org.hydev.veracross.analyzer.api.ApiAccess;
-import org.hydev.veracross.analyzer.api.ApiNode;
+import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
+import org.hydev.veracross.analyzer.utils.CookieUtils;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
 
-import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
+import static org.hydev.veracross.analyzer.VAConstants.GSON;
 
 /**
  * This api node obtains the courses information from Veracross and
@@ -16,7 +20,7 @@ import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-08-19 15:15
  */
-public class NodeCourses implements ApiNode
+public class NodeCourses extends JsonApiNode<NodeCourses.SubmitData, GeneralReturnData>
 {
     @Override
     public String path()
@@ -25,8 +29,24 @@ public class NodeCourses implements ApiNode
     }
 
     @Override
-    public String process(ApiAccess access)
+    protected GeneralReturnData processJson(ApiAccess access, SubmitData data) throws Exception
     {
-        return read("/2019-05-30-courses-backup.json");
+        // Create http client
+        VeracrossHttpClient veracross = new VeracrossHttpClient();
+
+        // Unwrap cookies
+        CookieUtils.unwrap(veracross, data.token);
+
+        // Get it
+        return new GeneralReturnData(true, GSON.toJson(veracross.getCourses()));
+    }
+
+    /**
+     * The JSON model for the data submitted from the client.
+     */
+    @Data
+    public class SubmitData
+    {
+        String token;
     }
 }
