@@ -1,9 +1,8 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hydev.veracross.analyzer.api.ApiAccess;
-import org.hydev.veracross.analyzer.api.ApiNode;
+import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.utils.Base64Utils;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
@@ -24,7 +23,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-09-03 08:53
  */
-public class NodeLogin implements ApiNode
+public class NodeLogin extends JsonApiNode<NodeLogin.SubmitData, JsonApiNode.GeneralReturnData>
 {
     @Override
     public String path()
@@ -33,23 +32,13 @@ public class NodeLogin implements ApiNode
     }
 
     @Override
-    public String process(ApiAccess access)
+    protected GeneralReturnData processJson(ApiAccess access, SubmitData data)
     {
         try
         {
-            // Validate body
-            String body = access.getContent();
-            if (body == null || body.isEmpty() || body.length() > 80)
-            {
-                return GSON.toJson(new ReturnData(false, "Bad request"));
-            }
-
-            // Parse body
-            SubmitData info = GSON.fromJson(access.getContent(), SubmitData.class);
-
             // Login to St. John's
             StJohnsHttpClient stJohns = new StJohnsHttpClient();
-            stJohns.login(info.username, info.password);
+            stJohns.login(data.username, data.password);
 
             // Login to Veracross
             VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
@@ -59,14 +48,14 @@ public class NodeLogin implements ApiNode
             String base64 = Base64Utils.encodeBase64C(json.getBytes());
 
             // Return cookies
-            return GSON.toJson(new ReturnData(true, base64));
+            return new GeneralReturnData(true, base64);
         }
         catch (IOException | VeracrossException e)
         {
             e.printStackTrace();
 
             // TODO: Log errors
-            return GSON.toJson(new ReturnData(false, e.getMessage()));
+            return new GeneralReturnData(false, e.getMessage());
         }
     }
 
@@ -74,19 +63,9 @@ public class NodeLogin implements ApiNode
      * The JSON model for the data submitted from the client.
      */
     @Data
-    private class SubmitData
+    public class SubmitData
     {
         String username;
         String password;
-    }
-
-    /**
-     * The JSON model for the data returned to the client.
-     */
-    @Data @AllArgsConstructor
-    private class ReturnData
-    {
-        boolean success;
-        String token;
     }
 }
