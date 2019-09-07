@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.api;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-09-07 10:32
  */
-public abstract class JsonApiNode<S, R extends JsonApiNode.GeneralReturnData> implements ApiNode
+public abstract class JsonApiNode<R extends JsonApiNode.GeneralReturnData> implements ApiNode
 {
     protected int maxBodyLength = 2000;
 
@@ -33,7 +34,7 @@ public abstract class JsonApiNode<S, R extends JsonApiNode.GeneralReturnData> im
         }
 
         // Parse body
-        S data = GSON.fromJson(access.getContent(), new TypeToken<S>(){}.getType());
+        JsonElement data = new JsonParser().parse(access.getContent());
 
         try
         {
@@ -56,7 +57,7 @@ public abstract class JsonApiNode<S, R extends JsonApiNode.GeneralReturnData> im
      * @param data Submitted json data
      * @return Object to return as json
      */
-    protected abstract R processJson(ApiAccess access, S data) throws Exception;
+    protected abstract R processJson(ApiAccess access, JsonElement data) throws Exception;
 
     /**
      * Return data
