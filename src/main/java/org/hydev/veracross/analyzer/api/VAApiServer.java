@@ -10,7 +10,7 @@ import org.hydev.veracross.analyzer.VAConstants;
 import org.hydev.veracross.analyzer.api.nodes.*;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeLogin;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeAssignments;
-import org.hydev.veracross.analyzer.api.nodes.veracross.NodeVeracrossCourses;
+import org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses;
 
 import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
 
@@ -55,7 +55,7 @@ public class VAApiServer
                 new NodeLogin(),
 
                 new NodeAssignments(),
-                new NodeVeracrossCourses()
+                new NodeCourses()
         );
 
         // Create Jetty server

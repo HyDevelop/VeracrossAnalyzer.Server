@@ -16,12 +16,12 @@ import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-08-19 15:15
  */
-public class NodeVeracrossCourses implements ApiNode
+public class NodeCourses implements ApiNode
 {
     @Override
     public String path()
     {
-        return "/api/veracross/courses";
+        return "/api/courses";
     }
 
     @Override
