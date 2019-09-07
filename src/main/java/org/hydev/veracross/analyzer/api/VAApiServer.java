@@ -9,7 +9,7 @@ import org.eclipse.jetty.server.Server;
 import org.hydev.veracross.analyzer.VAConstants;
 import org.hydev.veracross.analyzer.api.nodes.*;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeLogin;
-import org.hydev.veracross.analyzer.api.nodes.veracross.NodeVeracrossAssignments;
+import org.hydev.veracross.analyzer.api.nodes.veracross.NodeAssignments;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeVeracrossCourses;
 
 import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
@@ -54,7 +54,7 @@ public class VAApiServer
 
                 new NodeLogin(),
 
-                new NodeVeracrossAssignments(),
+                new NodeAssignments(),
                 new NodeVeracrossCourses()
         );
 

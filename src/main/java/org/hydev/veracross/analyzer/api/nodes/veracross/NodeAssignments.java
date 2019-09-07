@@ -1,9 +1,9 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
+import lombok.Data;
 import org.hydev.veracross.analyzer.api.ApiAccess;
-import org.hydev.veracross.analyzer.api.ApiNode;
-
-import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
+import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
 
 /**
  * This api node obtains the assignments information from Veracross and
@@ -16,17 +16,26 @@ import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-08-16 15:09
  */
-public class NodeVeracrossAssignments implements ApiNode
+public class NodeAssignments extends JsonApiNode<NodeAssignments.SubmitData, GeneralReturnData>
 {
     @Override
     public String path()
     {
-        return "/api/veracross/assignments";
+        return "/api/assignments";
     }
 
     @Override
-    public String process(ApiAccess access)
+    protected GeneralReturnData processJson(ApiAccess access, SubmitData data)
     {
-        return read("/2019-05-30-assignments-backup.json");
+        return null;
+    }
+
+    /**
+     * The JSON model for the data submitted from the client.
+     */
+    @Data
+    public class SubmitData
+    {
+        String token;
     }
 }
