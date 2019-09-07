@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.ApiNode;
+import org.hydev.veracross.analyzer.utils.Base64Utils;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.exceptions.VeracrossException;
@@ -53,8 +54,12 @@ public class NodeLogin implements ApiNode
             // Login to Veracross
             VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
-            // Return cookies
-            return GSON.toJson(veracross.getCookies().getCookies());
+            // Convert to token form
+            String json = GSON.toJson(veracross.getCookies().getCookies());
+            String base64 = Base64Utils.encodeBase64C(json.getBytes());
+
+                    // Return cookies
+            return GSON.toJson(new ReturnData(true, base64));
         }
         catch (IOException | VeracrossException e)
         {
