@@ -33,26 +33,17 @@ public class NodeLogin extends JsonApiNode<NodeLogin.SubmitData, GeneralReturnDa
 
     @Override
     protected GeneralReturnData processJson(ApiAccess access, SubmitData data)
+            throws IOException, VeracrossException
     {
-        try
-        {
-            // Login to St. John's
-            StJohnsHttpClient stJohns = new StJohnsHttpClient();
-            stJohns.login(data.username, data.password);
+        // Login to St. John's
+        StJohnsHttpClient stJohns = new StJohnsHttpClient();
+        stJohns.login(data.username, data.password);
 
-            // Login to Veracross
-            VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
+        // Login to Veracross
+        VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
-            // Return cookies
-            return new GeneralReturnData(true, CookieUtils.wrap(veracross));
-        }
-        catch (IOException | VeracrossException e)
-        {
-            e.printStackTrace();
-
-            // TODO: Log errors
-            return new GeneralReturnData(false, e.getMessage());
-        }
+        // Return cookies
+        return new GeneralReturnData(true, CookieUtils.wrap(veracross));
     }
 
     /**
