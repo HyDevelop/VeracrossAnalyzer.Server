@@ -10,8 +10,6 @@ import org.hydev.veracross.sdk.exceptions.VeracrossException;
 
 import java.io.IOException;
 
-import static org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
-
 /**
  * This api node logs in to Veracross with specified username and
  * password, and returns a token.
@@ -23,7 +21,7 @@ import static org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-09-03 08:53
  */
-public class NodeLogin extends JsonApiNode<GeneralReturnData>
+public class NodeLogin extends JsonApiNode
 {
     @Override
     public String path()
@@ -32,7 +30,7 @@ public class NodeLogin extends JsonApiNode<GeneralReturnData>
     }
 
     @Override
-    protected GeneralReturnData processJson(ApiAccess access, JsonObject data)
+    protected Object processJson(ApiAccess access, JsonObject data)
             throws IOException, VeracrossException
     {
         // Login to St. John's
@@ -43,6 +41,6 @@ public class NodeLogin extends JsonApiNode<GeneralReturnData>
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
         // Return cookies
-        return new GeneralReturnData(true, CookieUtils.wrap(veracross));
+        return CookieUtils.wrap(veracross);
     }
 }
