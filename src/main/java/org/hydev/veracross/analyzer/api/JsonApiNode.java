@@ -33,8 +33,18 @@ public abstract class JsonApiNode<S, R extends JsonApiNode.GeneralReturnData> im
         // Parse body
         S data = GSON.fromJson(access.getContent(), new TypeToken<S>(){}.getType());
 
-        // Process
-        return GSON.toJson(processJson(access, data));
+        try
+        {
+            // Process
+            return GSON.toJson(processJson(access, data));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+
+            // TODO: Log errors
+            return GSON.toJson(new GeneralReturnData(false, e.getMessage()));
+        }
     }
 
     /**
@@ -44,7 +54,7 @@ public abstract class JsonApiNode<S, R extends JsonApiNode.GeneralReturnData> im
      * @param data Submitted json data
      * @return Object to return as json
      */
-    protected abstract R processJson(ApiAccess access, S data);
+    protected abstract R processJson(ApiAccess access, S data) throws Exception;
 
     /**
      * Return data
