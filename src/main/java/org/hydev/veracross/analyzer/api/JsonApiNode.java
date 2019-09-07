@@ -68,6 +68,6 @@ public abstract class JsonApiNode<S, R extends JsonApiNode.GeneralReturnData> im
     public static class GeneralReturnData
     {
         protected boolean success;
-        protected String message;
+        protected String data;
     }
 }
