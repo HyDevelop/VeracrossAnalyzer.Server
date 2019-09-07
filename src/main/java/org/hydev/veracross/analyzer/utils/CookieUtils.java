@@ -2,6 +2,7 @@ package org.hydev.veracross.analyzer.utils;
 
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.hydev.veracross.sdk.GeneralHttpClient;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class CookieUtils
     public static List<Cookie> unwrap(String wrap)
     {
         String json = Base64Utils.decodeBase64CStr(wrap);
-        return GSON.fromJson(json, new TypeToken<List<Cookie>>(){}.getType());
+        return GSON.fromJson(json, new TypeToken<List<BasicClientCookie>>(){}.getType());
     }
 
     /**
