@@ -1,11 +1,12 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import lombok.Data;
+import com.google.gson.JsonObject;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
+import org.hydev.veracross.sdk.model.VeracrossAssignments;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-08-16 15:09
  */
-public class NodeAssignments extends JsonApiNode<NodeAssignments.SubmitData, GeneralReturnData>
+public class NodeAssignments extends JsonApiNode<GeneralReturnData>
 {
     @Override
     public String path()
@@ -31,25 +32,16 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.SubmitData, Gen
     }
 
     @Override
-    protected GeneralReturnData processJson(ApiAccess access, SubmitData data) throws IOException
+    protected GeneralReturnData processJson(ApiAccess access, JsonObject data) throws IOException
     {
         // Create http client
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
         // Unwrap cookies
-        CookieUtils.unwrap(veracross, data.token);
+        CookieUtils.unwrap(veracross, data.get("token").getAsString());
 
         // Get it
-        return new GeneralReturnData(true, GSON.toJson(veracross.getAssignments(data.id)));
-    }
-
-    /**
-     * The JSON model for the data submitted from the client.
-     */
-    @Data
-    public class SubmitData
-    {
-        String token;
-        long id;
+        VeracrossAssignments assignments = veracross.getAssignments(data.get("id").getAsLong());
+        return new GeneralReturnData(true, GSON.toJson(assignments));
     }
 }
