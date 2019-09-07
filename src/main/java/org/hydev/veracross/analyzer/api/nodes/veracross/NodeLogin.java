@@ -1,6 +1,6 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import lombok.Data;
+import com.google.gson.JsonObject;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
@@ -23,7 +23,7 @@ import static org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-09-03 08:53
  */
-public class NodeLogin extends JsonApiNode<NodeLogin.SubmitData, GeneralReturnData>
+public class NodeLogin extends JsonApiNode<GeneralReturnData>
 {
     @Override
     public String path()
@@ -32,27 +32,17 @@ public class NodeLogin extends JsonApiNode<NodeLogin.SubmitData, GeneralReturnDa
     }
 
     @Override
-    protected GeneralReturnData processJson(ApiAccess access, SubmitData data)
+    protected GeneralReturnData processJson(ApiAccess access, JsonObject data)
             throws IOException, VeracrossException
     {
         // Login to St. John's
         StJohnsHttpClient stJohns = new StJohnsHttpClient();
-        stJohns.login(data.username, data.password);
+        stJohns.login(data.get("username").getAsString(), data.get("password").getAsString());
 
         // Login to Veracross
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
         // Return cookies
         return new GeneralReturnData(true, CookieUtils.wrap(veracross));
-    }
-
-    /**
-     * The JSON model for the data submitted from the client.
-     */
-    @Data
-    protected class SubmitData
-    {
-        String username;
-        String password;
     }
 }
