@@ -8,6 +8,7 @@ import lombok.Getter;
 import org.eclipse.jetty.server.Server;
 import org.hydev.veracross.analyzer.VAConstants;
 import org.hydev.veracross.analyzer.api.nodes.*;
+import org.hydev.veracross.analyzer.api.nodes.veracross.NodeLogin;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeVeracrossAssignments;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeVeracrossCourses;
 
@@ -50,6 +51,8 @@ public class VAApiServer
         handler.getManager().register(
                 new NodeTest(),
                 new NodeVersion(),
+
+                new NodeLogin(),
 
                 new NodeVeracrossAssignments(),
                 new NodeVeracrossCourses()
