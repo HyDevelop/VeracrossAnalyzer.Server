@@ -11,6 +11,7 @@ import org.hydev.veracross.sdk.exceptions.VeracrossException;
 import java.io.IOException;
 
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
+import static org.hydev.veracross.analyzer.api.JsonApiNode.*;
 
 /**
  * This api node logs in to Veracross with specified username and
@@ -23,7 +24,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-09-03 08:53
  */
-public class NodeLogin extends JsonApiNode<NodeLogin.SubmitData, JsonApiNode.GeneralReturnData>
+public class NodeLogin extends JsonApiNode<NodeLogin.SubmitData, GeneralReturnData>
 {
     @Override
     public String path()
