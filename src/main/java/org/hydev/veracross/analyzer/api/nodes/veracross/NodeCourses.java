@@ -1,6 +1,6 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import lombok.Data;
+import com.google.gson.JsonObject;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
@@ -20,7 +20,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-08-19 15:15
  */
-public class NodeCourses extends JsonApiNode<NodeCourses.SubmitData, GeneralReturnData>
+public class NodeCourses extends JsonApiNode<GeneralReturnData>
 {
     @Override
     public String path()
@@ -29,24 +29,16 @@ public class NodeCourses extends JsonApiNode<NodeCourses.SubmitData, GeneralRetu
     }
 
     @Override
-    protected GeneralReturnData processJson(ApiAccess access, SubmitData data) throws Exception
+    protected GeneralReturnData processJson(ApiAccess access, JsonObject data)
+            throws Exception
     {
         // Create http client
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
         // Unwrap cookies
-        CookieUtils.unwrap(veracross, data.token);
+        CookieUtils.unwrap(veracross, data.get("token").getAsString());
 
         // Get it
         return new GeneralReturnData(true, GSON.toJson(veracross.getCourses()));
-    }
-
-    /**
-     * The JSON model for the data submitted from the client.
-     */
-    @Data
-    public class SubmitData
-    {
-        String token;
     }
 }
