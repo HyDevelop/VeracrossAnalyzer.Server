@@ -43,4 +43,15 @@ public class CookieUtils
         String json = Base64Utils.decodeBase64CStr(wrap);
         return GSON.fromJson(json, new TypeToken<List<Cookie>>(){}.getType());
     }
+
+    /**
+     * Unwrap cookies and store them back to the http client.
+     *
+     * @param client Http client
+     * @param wrap Wrapped cookies
+     */
+    public static void unwrap(GeneralHttpClient client, String wrap)
+    {
+        client.restoreCookies(unwrap(wrap));
+    }
 }
