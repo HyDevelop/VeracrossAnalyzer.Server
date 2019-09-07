@@ -3,15 +3,14 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import lombok.Data;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.utils.Base64Utils;
+import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.exceptions.VeracrossException;
 
 import java.io.IOException;
 
-import static org.hydev.veracross.analyzer.VAConstants.GSON;
-import static org.hydev.veracross.analyzer.api.JsonApiNode.*;
+import static org.hydev.veracross.analyzer.api.JsonApiNode.GeneralReturnData;
 
 /**
  * This api node logs in to Veracross with specified username and
@@ -44,12 +43,8 @@ public class NodeLogin extends JsonApiNode<NodeLogin.SubmitData, GeneralReturnDa
             // Login to Veracross
             VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
-            // Convert to token form
-            String json = GSON.toJson(veracross.getCookies().getCookies());
-            String base64 = Base64Utils.encodeBase64C(json.getBytes());
-
             // Return cookies
-            return new GeneralReturnData(true, base64);
+            return new GeneralReturnData(true, CookieUtils.wrap(veracross));
         }
         catch (IOException | VeracrossException e)
         {

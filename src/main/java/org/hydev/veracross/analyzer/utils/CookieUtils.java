@@ -1,5 +1,9 @@
 package org.hydev.veracross.analyzer.utils;
 
+import org.hydev.veracross.sdk.GeneralHttpClient;
+
+import static org.hydev.veracross.analyzer.VAConstants.GSON;
+
 /**
  * This class is an utility class for cookies.
  * <p>
@@ -12,5 +16,15 @@ package org.hydev.veracross.analyzer.utils;
  */
 public class CookieUtils
 {
-
+    /**
+     * Wrap cookies into base64 string.
+     *
+     * @param client Http client
+     * @return Wrapped cookies
+     */
+    public static String wrap(GeneralHttpClient client)
+    {
+        String json = GSON.toJson(client.getCookies().getCookies());
+        return Base64Utils.encodeBase64C(json.getBytes());
+    }
 }
