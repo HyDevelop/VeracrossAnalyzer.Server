@@ -40,7 +40,7 @@ public class NodeCourses extends JsonApiNode
         CookieUtils.unwrap(veracross, data.get("token").getAsString());
 
         // Get courses
-        List<VeracrossCourse> courses = veracross.getCoursesWithGrading();
+        List<VeracrossCourse> courses = veracross.getCourses();
 
         // Convert to St. John's courses
         List<StJohnsCourse> result = new ArrayList<>();
