@@ -15,6 +15,35 @@ import org.hibernate.Transaction;
  */
 public class VADatabase
 {
+    /**
+     * Start a transaction
+     *
+     * @param operation Callback
+     */
+    public static void start(TransactionOperation operation)
+    {
+        Transaction transaction = null;
+        try (Session session = HibernateUtils.getSessionFactory().openSession())
+        {
+            // Start a transaction
+            transaction = session.beginTransaction();
+
+            // Callback
+            operation.callback(session, transaction);
+
+            // Commit transaction
+            transaction.commit();
+        }
+        catch (Exception e)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Transaction callback for Lambda
