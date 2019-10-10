@@ -50,6 +50,6 @@ public class VADatabase
      */
     public interface TransactionOperation
     {
-        String callback(Session session, Transaction transaction);
+        void callback(Session session, Transaction transaction);
     }
 }
