@@ -21,6 +21,6 @@ public class VADatabase
      */
     public interface TransactionOperation
     {
-        String callback(Transaction transaction);
+        String callback(Session session, Transaction transaction);
     }
 }
