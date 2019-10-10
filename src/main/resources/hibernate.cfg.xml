@@ -33,7 +33,7 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
         <!-- Mapping -->
-        <mapping class="org.hydev.veracross.analyzer.database.User" />
-        <mapping class="org.hydev.veracross.analyzer.database.AccessLog" />
+        <mapping class="org.hydev.veracross.analyzer.database.model.User" />
+        <mapping class="org.hydev.veracross.analyzer.database.model.AccessLog" />
     </session-factory>
 </hibernate-configuration>

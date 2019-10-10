@@ -1,4 +1,4 @@
-package org.hydev.veracross.analyzer.database;
+package org.hydev.veracross.analyzer.database.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

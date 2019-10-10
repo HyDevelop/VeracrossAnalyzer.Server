@@ -1,11 +1,11 @@
-package org.hydev.veracross.analyzer.database;
+package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
 
 import javax.persistence.*;
 
 /**
- * TODO: Write a description for this class!
+ * User database model
  * <p>
  * Class created by the HyDEV Team on 2019-10-09!
  *
@@ -20,23 +20,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "va_access_log")
-public class AccessLog
+@Table(name = "va_users")
+public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @NonNull
-    @Column(name = "user")
-    private String user;
-
-    @NonNull
-    @Column(name = "action")
-    private String action;
-
-    @NonNull
-    @Column(name = "details")
-    private String details;
+    @Column(name = "username")
+    private String username;
 }

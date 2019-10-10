@@ -1,7 +1,7 @@
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hydev.veracross.analyzer.database.HibernateUtils;
-import org.hydev.veracross.analyzer.database.User;
+import org.hydev.veracross.analyzer.database.model.User;
 
 import java.util.List;
 
