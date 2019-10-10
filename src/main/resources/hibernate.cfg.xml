@@ -34,5 +34,6 @@
 
         <!-- Mapping -->
         <mapping class="org.hydev.veracross.analyzer.database.User" />
+        <mapping class="org.hydev.veracross.analyzer.database.AccessLog" />
     </session-factory>
 </hibernate-configuration>
