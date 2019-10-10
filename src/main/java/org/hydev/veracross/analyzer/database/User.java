@@ -1,5 +1,7 @@
 package org.hydev.veracross.analyzer.database;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 /**
@@ -12,6 +14,11 @@ import javax.persistence.*;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-10-09 16:28
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "va_users")
 public class User
@@ -21,6 +28,7 @@ public class User
     @Column(name = "id")
     private int id;
 
+    @NonNull
     @Column(name = "username")
     private String username;
 }
