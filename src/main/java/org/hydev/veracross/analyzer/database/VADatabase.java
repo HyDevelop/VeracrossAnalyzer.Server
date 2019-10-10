@@ -16,4 +16,11 @@ import org.hibernate.Transaction;
 public class VADatabase
 {
 
+    /**
+     * Transaction callback for Lambda
+     */
+    public interface TransactionOperation
+    {
+        String callback(Transaction transaction);
+    }
 }
