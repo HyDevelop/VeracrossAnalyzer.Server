@@ -1,8 +1,13 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
 import com.google.gson.JsonObject;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.database.HibernateUtils;
+import org.hydev.veracross.analyzer.database.VADatabase;
+import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
@@ -33,9 +38,19 @@ public class NodeLogin extends JsonApiNode
     protected Object processJson(ApiAccess access, JsonObject data)
             throws IOException, VeracrossException
     {
+        // Get username and password
+        String username = data.get("username").getAsString();
+        String password = data.get("password").getAsString();
+
+        // Throw an access log
+        VADatabase.start((s, t) ->
+        {
+            s.save(new AccessLog(username, "Access Login API", "Before Login"));
+        });
+
         // Login to St. John's
         StJohnsHttpClient stJohns = new StJohnsHttpClient();
-        stJohns.login(data.get("username").getAsString(), data.get("password").getAsString());
+        stJohns.login(username, password);
 
         // Login to Veracross
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
