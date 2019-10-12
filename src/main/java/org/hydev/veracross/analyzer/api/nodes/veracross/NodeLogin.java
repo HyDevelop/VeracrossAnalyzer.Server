@@ -46,10 +46,7 @@ public class NodeLogin extends JsonApiNode
         if (!username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Invalid username");
 
         // Throw an access log
-        VADatabase.transaction((s, t) ->
-        {
-            s.save(new AccessLog(username, "Access Login API", "Before Login"));
-        });
+        VADatabase.transaction(s -> s.save(new AccessLog(username, "Access Login API", "Before Login")));
 
         // Login to St. John's
         StJohnsHttpClient stJohns = new StJohnsHttpClient();
@@ -67,6 +64,10 @@ public class NodeLogin extends JsonApiNode
 
         // Update last login
         user.setLastLogin(new Date());
+
+        // Save user
+        User finalUser = user;
+        VADatabase.transaction(s -> s.save(finalUser));
 
         // Return cookies
         return CookieUtils.wrap(veracross);
