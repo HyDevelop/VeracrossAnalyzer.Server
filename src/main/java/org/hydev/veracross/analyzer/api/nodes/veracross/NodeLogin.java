@@ -11,6 +11,8 @@ import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
+import java.util.Date;
+
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_PASSWORD;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
 
@@ -59,6 +61,9 @@ public class NodeLogin extends JsonApiNode
         // Check database
         User user = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
                 .setParameter("username", username).getSingleResult());
+
+        // No user -> Create user
+        if (user == null) user = new User(username, null);
 
         // Return cookies
         return CookieUtils.wrap(veracross);
