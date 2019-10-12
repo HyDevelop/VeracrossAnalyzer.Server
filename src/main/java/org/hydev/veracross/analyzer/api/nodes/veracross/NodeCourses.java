@@ -12,6 +12,8 @@ import org.hydev.veracross.sdk.model.VeracrossCourse;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+
 /**
  * This api node obtains the courses information from Veracross and
  * returns it to the requester.
@@ -56,6 +58,6 @@ public class NodeCourses extends JsonApiNode
     {
         return new JsonApiConfig()
                 .maxBodyLength(1410)
-                .key("token", 1400);
+                .key("token", LENGTH_TOKEN);
     }
 }

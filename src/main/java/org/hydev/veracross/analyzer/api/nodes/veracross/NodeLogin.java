@@ -18,6 +18,9 @@ import org.hydev.veracross.sdk.exceptions.VeracrossException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_PASSWORD;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
+
 /**
  * This api node logs in to Veracross with specified username and
  * password, and returns a token.
@@ -67,7 +70,7 @@ public class NodeLogin extends JsonApiNode
     {
         return new JsonApiConfig()
                 .maxBodyLength(70)
-                .key("username", 30)
-                .key("password", 30);
+                .key("username", LENGTH_USERNAME)
+                .key("password", LENGTH_PASSWORD);
     }
 }

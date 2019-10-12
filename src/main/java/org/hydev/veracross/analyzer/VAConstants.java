@@ -23,6 +23,13 @@ public class VAConstants
     public static boolean DEBUG = false;
     public static Gson GSON = new Gson();
 
+    // Param key lengths limits
+    public static final int LENGTH_USERNAME = 30;
+    public static final int LENGTH_PASSWORD = 30;
+    public static final int LENGTH_TOKEN = 1400;
+    public static final int LENGTH_ASSIGNMENT_ID = 15;
+
+
     static
     {
         // API server port

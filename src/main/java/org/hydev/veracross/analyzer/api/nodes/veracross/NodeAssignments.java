@@ -9,6 +9,9 @@ import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.io.IOException;
 
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_ASSIGNMENT_ID;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+
 /**
  * This api node obtains the assignments information from Veracross and
  * returns it to the requester.
@@ -38,7 +41,7 @@ public class NodeAssignments extends JsonApiNode
         CookieUtils.unwrap(veracross, data.get("token").getAsString());
 
         // Get it
-        return veracross.getAssignments(data.get("id").getAsLong());
+        return veracross.getAssignments(data.get("assignment_id").getAsLong());
     }
 
     @Override
@@ -46,7 +49,7 @@ public class NodeAssignments extends JsonApiNode
     {
         return new JsonApiConfig()
                 .maxBodyLength(1425)
-                .key("token", 1400)
-                .key("id", 15);
+                .key("token", LENGTH_TOKEN)
+                .key("assignment_id", LENGTH_ASSIGNMENT_ID);
     }
 }

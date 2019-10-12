@@ -7,6 +7,9 @@ import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_ASSIGNMENT_ID;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+
 /**
  * TODO: Write a description for this class!
  * <p>
@@ -46,7 +49,7 @@ public class NodeGrading extends JsonApiNode
     {
         return  new JsonApiConfig()
                 .maxBodyLength(1425)
-                .key("token", 1400)
-                .key("id", 15);
+                .key("token", LENGTH_TOKEN)
+                .key("id", LENGTH_ASSIGNMENT_ID);
     }
 }
