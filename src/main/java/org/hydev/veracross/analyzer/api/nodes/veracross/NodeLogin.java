@@ -1,9 +1,11 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
+import cc.moecraft.utils.ArrayUtils;
 import com.google.gson.JsonObject;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hydev.veracross.analyzer.api.ApiAccess;
+import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.HibernateUtils;
 import org.hydev.veracross.analyzer.database.VADatabase;
@@ -14,6 +16,7 @@ import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.exceptions.VeracrossException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This api node logs in to Veracross with specified username and
@@ -57,5 +60,14 @@ public class NodeLogin extends JsonApiNode
 
         // Return cookies
         return CookieUtils.wrap(veracross);
+    }
+
+    @Override
+    protected JsonApiConfig config()
+    {
+        return JsonApiConfig.builder()
+                .maxBodyLength(70).build()
+                .key("username", 30)
+                .key("password", 30);
     }
 }
