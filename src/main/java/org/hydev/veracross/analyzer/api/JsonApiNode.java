@@ -24,7 +24,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  */
 public abstract class JsonApiNode implements ApiNode
 {
-    private final JsonApiConfig config = config();
+    private final JsonApiConfig config = initConfig();
 
     @Override
     public String process(ApiAccess access)
@@ -85,6 +85,31 @@ public abstract class JsonApiNode implements ApiNode
      * @return Config
      */
     protected abstract JsonApiConfig config();
+
+    /**
+     * Init config
+     *
+     * @return Config
+     */
+    private JsonApiConfig initConfig()
+    {
+        // Get config from sub class
+        JsonApiConfig config = config();
+
+        // Check null case
+        if (config == null) throw new NullPointerException("Config can't be null");
+
+        // Check auto length
+        if (config.getMaxBodyLength() == -1)
+        {
+            int length = 0;
+            for (int value : config.getKeyLengths().values()) length += value + 5;
+            config.maxBodyLength(length);
+        }
+
+        // Return
+        return config;
+    }
 
     /**
      * Return data
