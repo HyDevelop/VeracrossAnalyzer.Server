@@ -3,6 +3,7 @@ package org.hydev.veracross.analyzer.database.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * User database model
@@ -31,4 +32,8 @@ public class User
     @NonNull
     @Column(name = "username")
     private String username;
+
+    @NonNull
+    @Column(name = "last_login")
+    private Date lastLogin;
 }
