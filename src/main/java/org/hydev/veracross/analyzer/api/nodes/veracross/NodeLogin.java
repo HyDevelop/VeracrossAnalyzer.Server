@@ -1,6 +1,5 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import com.google.gson.JsonObject;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
@@ -26,7 +25,7 @@ import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-09-03 08:53
  */
-public class NodeLogin extends JsonApiNode
+public class NodeLogin extends JsonApiNode<NodeLogin.Model>
 {
     @Override
     public String path()
@@ -35,11 +34,11 @@ public class NodeLogin extends JsonApiNode
     }
 
     @Override
-    protected Object processJson(ApiAccess access, JsonObject data) throws Exception
+    protected Object processJson(ApiAccess access, Model data) throws Exception
     {
         // Get username and password
-        String username = data.get("username").getAsString();
-        String password = data.get("password").getAsString();
+        String username = data.username;
+        String password = data.username;
 
         // Check username (Always in "flast00" format)
         if (!username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Invalid username");
@@ -78,5 +77,11 @@ public class NodeLogin extends JsonApiNode
         return new JsonApiConfig()
                 .key("username", LENGTH_USERNAME)
                 .key("password", LENGTH_PASSWORD);
+    }
+
+    protected static class Model
+    {
+        String username;
+        String password;
     }
 }
