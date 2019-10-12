@@ -10,6 +10,7 @@ import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.HibernateUtils;
 import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
+import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
@@ -17,6 +18,7 @@ import org.hydev.veracross.sdk.exceptions.VeracrossException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_PASSWORD;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
@@ -48,7 +50,7 @@ public class NodeLogin extends JsonApiNode
         String password = data.get("password").getAsString();
 
         // Check username (Always in "flast00" format)
-        if (!username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Username format");
+        if (!username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Invalid username");
 
         // Throw an access log
         VADatabase.start((s, t) ->
@@ -62,6 +64,10 @@ public class NodeLogin extends JsonApiNode
 
         // Login to Veracross
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
+
+        // Check database
+        User user = VADatabase.get(s -> s.createNamedQuery("byUsername", User.class)
+                .setParameter("username", username).getSingleResult());
 
         // Return cookies
         return CookieUtils.wrap(veracross);
