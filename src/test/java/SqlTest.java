@@ -19,7 +19,7 @@ public class SqlTest
 {
     public static void main(String[] args)
     {
-        User user = new User("test");
+        User user = new User("test", null);
 
         Transaction transaction = null;
         try (Session session = HibernateUtils.getSessionFactory().openSession())
