@@ -48,7 +48,6 @@ public class NodeAssignments extends JsonApiNode
     protected JsonApiConfig config()
     {
         return new JsonApiConfig()
-                .maxBodyLength(1425)
                 .key("token", LENGTH_TOKEN)
                 .key("assignment_id", LENGTH_ASSIGNMENT_ID);
     }

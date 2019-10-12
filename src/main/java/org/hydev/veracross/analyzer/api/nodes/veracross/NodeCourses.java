@@ -57,7 +57,6 @@ public class NodeCourses extends JsonApiNode
     protected JsonApiConfig config()
     {
         return new JsonApiConfig()
-                .maxBodyLength(1410)
                 .key("token", LENGTH_TOKEN);
     }
 }

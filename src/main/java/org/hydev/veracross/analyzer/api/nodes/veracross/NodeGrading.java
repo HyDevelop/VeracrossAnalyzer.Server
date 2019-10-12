@@ -48,7 +48,6 @@ public class NodeGrading extends JsonApiNode
     protected JsonApiConfig config()
     {
         return  new JsonApiConfig()
-                .maxBodyLength(1425)
                 .key("token", LENGTH_TOKEN)
                 .key("id", LENGTH_ASSIGNMENT_ID);
     }

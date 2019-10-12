@@ -69,7 +69,6 @@ public class NodeLogin extends JsonApiNode
     protected JsonApiConfig config()
     {
         return new JsonApiConfig()
-                .maxBodyLength(70)
                 .key("username", LENGTH_USERNAME)
                 .key("password", LENGTH_PASSWORD);
     }
