@@ -20,6 +20,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "va_courses")
+@NamedQueries(
+{
+    @NamedQuery(name="byId", query="from Course where id=:id"),
+})
 public class Course
 {
     @Id
