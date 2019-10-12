@@ -20,7 +20,7 @@ public class VADatabase
      *
      * @param operation Callback
      */
-    public static void start(TransactionOperation operation)
+    public static void transaction(TransactionOperation operation)
     {
         Transaction transaction = null;
         try (Session session = HibernateUtils.getSessionFactory().openSession())
@@ -53,8 +53,14 @@ public class VADatabase
         void callback(Session session, Transaction transaction);
     }
 
-
-    public static <T> T get(QueryOperation<T> operation)
+    /**
+     * Get a query
+     *
+     * @param operation Query operation
+     * @param <T> Return type
+     * @return Query data
+     */
+    public static <T> T query(QueryOperation<T> operation)
     {
         try (Session session = HibernateUtils.getSessionFactory().openSession())
         {

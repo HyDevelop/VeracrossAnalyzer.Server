@@ -44,7 +44,7 @@ public class NodeLogin extends JsonApiNode
         if (!username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Invalid username");
 
         // Throw an access log
-        VADatabase.start((s, t) ->
+        VADatabase.transaction((s, t) ->
         {
             s.save(new AccessLog(username, "Access Login API", "Before Login"));
         });
@@ -57,7 +57,7 @@ public class NodeLogin extends JsonApiNode
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
         // Check database
-        User user = VADatabase.get(s -> s.createNamedQuery("byUsername", User.class)
+        User user = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
                 .setParameter("username", username).getSingleResult());
 
         // Return cookies
