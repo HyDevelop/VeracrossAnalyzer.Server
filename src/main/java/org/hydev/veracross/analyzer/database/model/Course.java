@@ -28,10 +28,10 @@ public class Course
 {
     @Id
     @Column(name = "id")
-    private int id;
+    private long id;
 
     @Column(name = "assignmentsId")
-    private int assignmentsId;
+    private long assignmentsId;
 
     @Column(name = "name")
     private String name;
