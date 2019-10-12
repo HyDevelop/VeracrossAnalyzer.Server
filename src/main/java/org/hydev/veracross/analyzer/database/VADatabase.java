@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
 
+import java.util.Date;
+
 /**
  * This class is for database operations
  * <p>
@@ -109,6 +111,6 @@ public class VADatabase
      */
     public static void accessLog(String user, String action, String details)
     {
-        VADatabase.transaction(s -> s.save(new AccessLog(user, action, details)));
+        VADatabase.transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
     }
 }
