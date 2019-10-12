@@ -7,11 +7,11 @@ import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
-import static org.hydev.veracross.analyzer.VAConstants.LENGTH_ASSIGNMENT_ID;
-import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.VAConstants.*;
 
 /**
- * TODO: Write a description for this class!
+ * This api node obtains the courses grading information from Veracross
+ * and returns it to the requester.
  * <p>
  * Class created by the HyDEV Team on 2019-10-01!
  *
