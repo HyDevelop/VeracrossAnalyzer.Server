@@ -26,9 +26,6 @@ public class JsonApiConfig
     /** Check for body length */
     private int maxBodyLength = 2000;
 
-    /** Check for must-contain keys */
-    private String[] mustContainKeys = {};
-
-    /** Check for value length */
-    private Map<String, Integer> lengthCheck = new HashMap<>();
+    /** Check for key value length */
+    private Map<String, Integer> keyLengths = new HashMap<>();
 }
