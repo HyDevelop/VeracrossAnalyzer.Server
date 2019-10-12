@@ -28,4 +28,17 @@ public class JsonApiConfig
 
     /** Check for key value length */
     private Map<String, Integer> keyLengths = new HashMap<>();
+
+    /**
+     * Add a key value length check
+     *
+     * @param key Key name
+     * @param length Value length
+     * @return Self
+     */
+    public JsonApiConfig key(String key, int length)
+    {
+        keyLengths.put(key, length);
+        return this;
+    }
 }
