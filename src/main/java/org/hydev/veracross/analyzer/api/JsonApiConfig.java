@@ -3,6 +3,7 @@ package org.hydev.veracross.analyzer.api;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -26,8 +27,8 @@ public class JsonApiConfig
     private int maxBodyLength = 2000;
 
     /** Check for must-contain keys */
-    private String[] mustContainKeys;
+    private String[] mustContainKeys = {};
 
     /** Check for value length */
-    private Map<String, Integer> lengthCheck;
+    private Map<String, Integer> lengthCheck = new HashMap<>();
 }
