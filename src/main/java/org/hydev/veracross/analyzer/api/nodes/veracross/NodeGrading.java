@@ -1,6 +1,5 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import com.google.gson.JsonObject;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
@@ -20,7 +19,7 @@ import static org.hydev.veracross.analyzer.VAConstants.*;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-10-01 17:59
  */
-public class NodeGrading extends JsonApiNode
+public class NodeGrading extends JsonApiNode<NodeGrading.Model>
 {
     @Override
     public String path()
@@ -29,27 +28,33 @@ public class NodeGrading extends JsonApiNode
     }
 
     @Override
-    protected Object processJson(ApiAccess access, JsonObject data) throws Exception
+    protected Object processJson(ApiAccess access, Model data) throws Exception
     {
+        // Parse values
+
         // Create http client
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
         // Unwrap cookies
-        CookieUtils.unwrap(veracross, data.get("token").getAsString());
+        CookieUtils.unwrap(veracross, data.token);
 
-        // Get course info
-        long assignmentId = data.get("assignment_id").getAsLong();
-
-        // Return it
-        return veracross.getGrading(assignmentId);
+        // Return grading
+        return veracross.getGrading(data.assignmentId);
     }
 
     @Override
     protected JsonApiConfig config()
     {
-        return  new JsonApiConfig()
+        return new JsonApiConfig()
                 .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN)
-                .key("id", LENGTH_ASSIGNMENT_ID);
+                .key("assignmentId", LENGTH_ASSIGNMENT_ID);
+    }
+
+    protected static class Model
+    {
+        String username;
+        String token;
+        long assignmentId;
     }
 }
