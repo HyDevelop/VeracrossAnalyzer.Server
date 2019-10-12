@@ -3,6 +3,7 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.StJohnsCourse;
@@ -36,6 +37,9 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
+        // Throw an access log
+        VADatabase.accessLog(data.username, "Access Courses API", "Begin");
+
         // Create http client
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
@@ -49,6 +53,9 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         List<StJohnsCourse> result = new ArrayList<>();
         courses.forEach(course -> result.add(new StJohnsCourse(course)));
 
+        // Throw an access log
+        VADatabase.accessLog(data.username, "Access Courses API", "Success");
+        
         // Return it
         return result;
     }
