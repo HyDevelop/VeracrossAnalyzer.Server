@@ -9,8 +9,7 @@ import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.io.IOException;
 
-import static org.hydev.veracross.analyzer.VAConstants.LENGTH_ASSIGNMENT_ID;
-import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.VAConstants.*;
 
 /**
  * This api node obtains the assignments information from Veracross and
@@ -48,6 +47,7 @@ public class NodeAssignments extends JsonApiNode
     protected JsonApiConfig config()
     {
         return new JsonApiConfig()
+                .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN)
                 .key("assignment_id", LENGTH_ASSIGNMENT_ID);
     }

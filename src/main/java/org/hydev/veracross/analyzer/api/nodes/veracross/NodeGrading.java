@@ -48,6 +48,7 @@ public class NodeGrading extends JsonApiNode
     protected JsonApiConfig config()
     {
         return  new JsonApiConfig()
+                .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN)
                 .key("id", LENGTH_ASSIGNMENT_ID);
     }

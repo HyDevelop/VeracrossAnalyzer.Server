@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
 
 /**
  * This api node obtains the courses information from Veracross and
@@ -57,6 +58,7 @@ public class NodeCourses extends JsonApiNode
     protected JsonApiConfig config()
     {
         return new JsonApiConfig()
+                .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN);
     }
 }
