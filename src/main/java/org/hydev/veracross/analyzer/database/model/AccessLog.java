@@ -3,6 +3,7 @@ package org.hydev.veracross.analyzer.database.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * TODO: Write a description for this class!
@@ -39,4 +40,8 @@ public class AccessLog
     @NonNull
     @Column(name = "details")
     private String details;
+
+    @NonNull
+    @Column(name = "time")
+    private Date time;
 }
