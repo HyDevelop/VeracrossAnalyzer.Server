@@ -65,6 +65,9 @@ public class NodeLogin extends JsonApiNode
         // No user -> Create user
         if (user == null) user = new User(username, null);
 
+        // Update last login
+        user.setLastLogin(new Date());
+
         // Return cookies
         return CookieUtils.wrap(veracross);
     }
