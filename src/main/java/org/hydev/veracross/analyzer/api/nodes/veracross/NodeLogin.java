@@ -36,29 +36,25 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
-        // Get username and password
-        String username = data.username;
-        String password = data.username;
-
         // Check username (Always in "flast00" format)
-        if (!username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Invalid username");
+        if (!data.username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Invalid username");
 
         // Throw an access log
-        VADatabase.accessLog(username, "Access Login API", "Before Login");
+        VADatabase.accessLog(data.username, "Access Login API", "Before Login");
 
         // Login to St. John's
         StJohnsHttpClient stJohns = new StJohnsHttpClient();
-        stJohns.login(username, password);
+        stJohns.login(data.username, data.password);
 
         // Login to Veracross
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
         // Check database
         User user = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
-                .setParameter("username", username).getSingleResult());
+                .setParameter("username", data.username).getSingleResult());
 
         // No user -> Create user
-        if (user == null) user = new User(username, null);
+        if (user == null) user = new User(data.username, null);
 
         // Update last login
         user.setLastLogin(new Date());
