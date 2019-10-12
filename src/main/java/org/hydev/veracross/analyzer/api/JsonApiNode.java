@@ -39,7 +39,13 @@ public abstract class JsonApiNode implements ApiNode
         try
         {
             // Process
-            return GSON.toJson(new GeneralReturnData(true, processJson(access, data)));
+            Object result = processJson(access, data);
+
+            // Null case
+            if (result == null || result == "") return "";
+
+            // Return
+            return GSON.toJson(new GeneralReturnData(true, result));
         }
         catch (Exception e)
         {
