@@ -5,7 +5,6 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.VADatabase;
-import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
@@ -46,7 +45,7 @@ public class NodeLogin extends JsonApiNode
         if (!username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Invalid username");
 
         // Throw an access log
-        VADatabase.transaction(s -> s.save(new AccessLog(username, "Access Login API", "Before Login")));
+        VADatabase.accessLog(username, "Access Login API", "Before Login");
 
         // Login to St. John's
         StJohnsHttpClient stJohns = new StJohnsHttpClient();

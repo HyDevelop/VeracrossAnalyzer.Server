@@ -2,6 +2,7 @@ package org.hydev.veracross.analyzer.database;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hydev.veracross.analyzer.database.model.AccessLog;
 
 /**
  * This class is for database operations
@@ -97,5 +98,17 @@ public class VADatabase
     public interface QueryOperation<T>
     {
         T callback(Session session);
+    }
+
+    /**
+     * Record an access log
+     *
+     * @param user Username
+     * @param action Action
+     * @param details Details
+     */
+    public static void accessLog(String user, String action, String details)
+    {
+        VADatabase.transaction(s -> s.save(new AccessLog(user, action, details)));
     }
 }
