@@ -46,6 +46,10 @@ public abstract class JsonApiNode implements ApiNode
             {
                 // Check if key exists
                 if (!data.has(entry.getKey())) throw new Exception("Missing keys");
+
+                // Check key length
+                if (data.get(entry.getKey()).getAsString().length() > entry.getValue())
+                    throw new Exception("Bad request");
             }
 
             // Process
