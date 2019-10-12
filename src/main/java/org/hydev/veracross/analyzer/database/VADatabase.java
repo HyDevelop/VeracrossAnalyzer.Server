@@ -2,6 +2,9 @@ package org.hydev.veracross.analyzer.database;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hydev.veracross.analyzer.database.model.User;
+
+import java.util.List;
 
 /**
  * This class is for database operations
@@ -51,5 +54,27 @@ public class VADatabase
     public interface TransactionOperation
     {
         void callback(Session session, Transaction transaction);
+    }
+
+
+    public static <T> T get(QueryOperation<T> operation)
+    {
+        try (Session session = HibernateUtils.getSessionFactory().openSession())
+        {
+            // Callback
+            return operation.callback(session);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Query operation for lombok
+     */
+    public interface QueryOperation<T>
+    {
+        T callback(Session session);
     }
 }
