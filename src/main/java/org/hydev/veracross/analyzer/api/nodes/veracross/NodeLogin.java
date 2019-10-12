@@ -45,7 +45,7 @@ public class NodeLogin extends JsonApiNode
             throws IOException, VeracrossException
     {
         // Get username and password
-        String username = data.get("username").getAsString().replace(" ", "");
+        String username = data.get("username").getAsString();
         String password = data.get("password").getAsString();
 
         // Throw an access log
