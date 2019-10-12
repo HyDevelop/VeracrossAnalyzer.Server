@@ -54,6 +54,24 @@ public class VADatabase
     }
 
     /**
+     * Start a transaction
+     *
+     * @param operation Callback
+     */
+    public static void transaction(SimpleTransactionOperation operation)
+    {
+        transaction((s, v) -> operation.callback(s));
+    }
+
+    /**
+     * Transaction callback for Lambda
+     */
+    public interface SimpleTransactionOperation
+    {
+        void callback(Session session);
+    }
+
+    /**
      * Get a query
      *
      * @param operation Query operation
