@@ -20,7 +20,6 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class JsonApiConfig
 {
     /** Check for body length */
@@ -28,6 +27,18 @@ public class JsonApiConfig
 
     /** Check for key value length */
     private Map<String, Integer> keyLengths = new HashMap<>();
+
+    /**
+     * Set max body length
+     *
+     * @param value Max body length
+     * @return Self
+     */
+    public JsonApiConfig maxBodyLength(int value)
+    {
+        maxBodyLength = value;
+        return this;
+    }
 
     /**
      * Add a key value length check
