@@ -7,11 +7,12 @@ import cc.moecraft.logger.environments.FileEnv;
 import lombok.Getter;
 import org.eclipse.jetty.server.Server;
 import org.hydev.veracross.analyzer.VAConstants;
-import org.hydev.veracross.analyzer.api.nodes.*;
-import org.hydev.veracross.analyzer.api.nodes.veracross.NodeGrading;
-import org.hydev.veracross.analyzer.api.nodes.veracross.NodeLogin;
+import org.hydev.veracross.analyzer.api.nodes.NodeTest;
+import org.hydev.veracross.analyzer.api.nodes.NodeVersion;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeAssignments;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses;
+import org.hydev.veracross.analyzer.api.nodes.veracross.NodeGrading;
+import org.hydev.veracross.analyzer.api.nodes.veracross.NodeLogin;
 
 import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
 

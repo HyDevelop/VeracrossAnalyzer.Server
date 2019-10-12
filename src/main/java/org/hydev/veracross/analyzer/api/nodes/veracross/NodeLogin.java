@@ -1,24 +1,15 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import cc.moecraft.utils.ArrayUtils;
 import com.google.gson.JsonObject;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.database.HibernateUtils;
 import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.exceptions.VeracrossException;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_PASSWORD;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;

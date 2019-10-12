@@ -2,9 +2,6 @@ package org.hydev.veracross.analyzer.database;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hydev.veracross.analyzer.database.model.User;
-
-import java.util.List;
 
 /**
  * This class is for database operations

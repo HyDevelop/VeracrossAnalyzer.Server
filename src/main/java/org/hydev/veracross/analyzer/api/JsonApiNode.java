@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
 import java.util.Map.Entry;
 
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
