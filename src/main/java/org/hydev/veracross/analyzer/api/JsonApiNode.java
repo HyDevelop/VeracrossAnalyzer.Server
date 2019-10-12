@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
 
 /**
@@ -38,10 +41,11 @@ public abstract class JsonApiNode implements ApiNode
 
         try
         {
-            // Check must-contain keys
-            for (String mustContainKey : config.getMustContainKeys())
+            // Check key length
+            for (Entry<String, Integer> entry : config.getKeyLengths().entrySet())
             {
-                if (!data.has(mustContainKey)) throw new Exception("Missing keys");
+                // Check if key exists
+                if (!data.has(entry.getKey())) throw new Exception("Missing keys");
             }
 
             // Process
