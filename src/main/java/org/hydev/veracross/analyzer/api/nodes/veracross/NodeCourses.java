@@ -4,6 +4,7 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.VADatabase;
+import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.StJohnsCourse;
@@ -55,7 +56,10 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
 
         // Throw an access log
         VADatabase.accessLog(data.username, "Access Courses API", "Success");
-        
+
+        // Save course info
+        result.forEach(NodeCourses::storeCourse);
+
         // Return it
         return result;
     }
@@ -72,5 +76,24 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     {
         String username;
         String token;
+    }
+
+    /**
+     * Save course info if not already saved
+     *
+     * @param course Course info
+     */
+    private static void storeCourse(VeracrossCourse course)
+    {
+        // Check if already exists
+        Course existing = VADatabase.query(s -> s.createNamedQuery("byId", Course.class).getSingleResult());
+
+        // Create one if it does not exist
+        if (existing == null)
+        {
+            Course saved = new Course(course.getId(), course.getAssignmentsId(),
+                    course.getName(), course.getTeacherName());
+            VADatabase.transaction(s -> s.save(saved));
+        }
     }
 }
