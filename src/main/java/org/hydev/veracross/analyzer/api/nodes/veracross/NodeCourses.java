@@ -2,6 +2,7 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 
 import com.google.gson.JsonObject;
 import org.hydev.veracross.analyzer.api.ApiAccess;
+import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
@@ -48,5 +49,13 @@ public class NodeCourses extends JsonApiNode
 
         // Return it
         return result;
+    }
+
+    @Override
+    protected JsonApiConfig config()
+    {
+        return new JsonApiConfig()
+                .maxBodyLength(1410)
+                .key("token", 1400);
     }
 }
