@@ -22,6 +22,10 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "va_users")
+@NamedQueries(
+{
+    @NamedQuery(name="byUsername", query="from User where username=:username"),
+})
 public class User
 {
     @Id
