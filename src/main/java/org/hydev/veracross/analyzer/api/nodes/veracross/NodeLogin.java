@@ -41,12 +41,14 @@ public class NodeLogin extends JsonApiNode
     }
 
     @Override
-    protected Object processJson(ApiAccess access, JsonObject data)
-            throws IOException, VeracrossException
+    protected Object processJson(ApiAccess access, JsonObject data) throws Exception
     {
         // Get username and password
         String username = data.get("username").getAsString();
         String password = data.get("password").getAsString();
+
+        // Check username (Always in "flast00" format)
+        if (!username.matches("[A-Za-z]+[0-9]+")) throw new Exception("Username format");
 
         // Throw an access log
         VADatabase.start((s, t) ->
