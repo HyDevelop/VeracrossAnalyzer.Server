@@ -23,7 +23,7 @@ import java.util.Map;
 public class JsonApiConfig
 {
     /** Check for body length */
-    private int maxBodyLength = 2000;
+    private int maxBodyLength = -1;
 
     /** Check for key value length */
     private Map<String, Integer> keyLengths = new HashMap<>();
