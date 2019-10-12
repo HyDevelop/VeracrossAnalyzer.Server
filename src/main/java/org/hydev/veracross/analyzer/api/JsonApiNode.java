@@ -21,14 +21,14 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  */
 public abstract class JsonApiNode implements ApiNode
 {
-    protected int maxBodyLength = 2000;
+    private final JsonApiConfig config = config();
 
     @Override
     public String process(ApiAccess access)
     {
         // Validate body
         String body = access.getContent();
-        if (body == null || body.isEmpty() || body.length() > maxBodyLength)
+        if (body == null || body.isEmpty() || body.length() > config.getMaxBodyLength())
         {
             return GSON.toJson(new GeneralReturnData(false, "Bad request"));
         }
@@ -64,6 +64,13 @@ public abstract class JsonApiNode implements ApiNode
      * @return Object to return as json
      */
     protected abstract Object processJson(ApiAccess access, JsonObject data) throws Exception;
+
+    /**
+     * Define the config
+     *
+     * @return Config
+     */
+    protected abstract JsonApiConfig config();
 
     /**
      * Return data
