@@ -1,7 +1,8 @@
 package org.hydev.veracross.analyzer.database.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.*;
+
+import javax.persistence.*;
 
 /**
  * TODO: Write a description for this class!
@@ -13,8 +14,24 @@ import javax.persistence.Table;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-10-09 16:56
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "va_courses")
-public class Courses
+public class Course
 {
+    @Id
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "assignmentsId")
+    private int assignmentsId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "teacher")
+    private String teacher;
 }
