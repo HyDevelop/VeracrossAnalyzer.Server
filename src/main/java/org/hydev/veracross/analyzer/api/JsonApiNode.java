@@ -38,6 +38,12 @@ public abstract class JsonApiNode implements ApiNode
 
         try
         {
+            // Check must-contain keys
+            for (String mustContainKey : config.getMustContainKeys())
+            {
+                if (!data.has(mustContainKey)) throw new Exception("Missing keys");
+            }
+
             // Process
             Object result = processJson(access, data);
 
