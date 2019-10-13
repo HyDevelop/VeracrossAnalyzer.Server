@@ -92,6 +92,7 @@ public class CookieUtils
     @AllArgsConstructor
     public static class CookieData
     {
+        private String username;
         private List<Cookie> cookies;
         private String csrf;
     }

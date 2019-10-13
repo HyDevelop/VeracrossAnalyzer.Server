@@ -18,7 +18,6 @@ import static org.hydev.veracross.analyzer.utils.Base64Utils.encodeBase64C;
  *
  * @author Hykilpikonna
  */
-@SuppressWarnings("WeakerAccess")
 public class CryptUtils
 {
     /**
