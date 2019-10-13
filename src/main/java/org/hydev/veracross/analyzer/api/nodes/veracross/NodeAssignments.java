@@ -48,7 +48,7 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
         return new JsonApiConfig()
                 .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN)
-                .key("assignmentsId", LENGTH_ASSIGNMENT_ID);
+                .key("assignmentsId", LENGTH_ASSIGNMENTS_ID);
     }
 
     @Override
