@@ -38,7 +38,7 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
                 .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN)
                 .key("csrf", LENGTH_CSRF)
-                .key("assignmentId", LENGTH_ASSIGNMENT_ID);
+                .key("scoreId", LENGTH_SCORE_ID);
     }
 
     @Override
@@ -52,6 +52,6 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
         String username;
         String token;
         String csrf;
-        long assignmentId;
+        long scoreId;
     }
 }
