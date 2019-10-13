@@ -2,7 +2,6 @@ package org.hydev.veracross.analyzer.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -53,7 +52,7 @@ public abstract class JsonApiNode<T> implements ApiNode
             }
 
             // Process
-            Object result = processJson(access, GSON.fromJson(data, new TypeToken<T>(){}.getType()));
+            Object result = processJson(access, GSON.fromJson(data, model()));
 
             // Null case
             if (result == null || result == "") return "";
@@ -85,6 +84,13 @@ public abstract class JsonApiNode<T> implements ApiNode
      * @return Config
      */
     protected abstract JsonApiConfig config();
+
+    /**
+     * Define the data model
+     *
+     * @return Data model class
+     */
+    protected abstract Class<? extends T> model();
 
     /**
      * Init config
