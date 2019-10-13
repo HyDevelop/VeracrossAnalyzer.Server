@@ -64,15 +64,18 @@ public class VAApiServer
 
         // Load Hibernate
         VADatabase.query(s -> s.createSQLQuery("SELECT 1 + 1 FROM DUAL"));
+        logger.log("Hibernate Initialized!");
 
         // Create Jetty server
         Server server = new Server(VAConstants.API_SERVER_PORT);
         server.setHandler(handler);
+        logger.log("Jetty Server Created!");
 
         // Start Jetty server
         try
         {
             server.start();
+            logger.log("Jetty Server Started! Joining...");
             server.join();
         }
         catch (Exception e)

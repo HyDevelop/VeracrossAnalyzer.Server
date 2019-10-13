@@ -40,7 +40,7 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
 
         // Not success
         if (!success) throw new RuntimeException("Unable to mark as read");
-        
+
         // Return success
         return "Marked as read";
     }
