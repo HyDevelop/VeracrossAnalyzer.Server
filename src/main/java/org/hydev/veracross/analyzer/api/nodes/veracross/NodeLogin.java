@@ -41,15 +41,15 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         data.username = data.username.toLowerCase();
         if (!data.username.matches("[a-z]+[0-9]+")) throw new Exception("Invalid username");
 
-        // Throw an access log
-        VADatabase.accessLog(data.username, "Access Login API", "Before Login");
-
         // Login to St. John's
         StJohnsHttpClient stJohns = new StJohnsHttpClient();
         stJohns.login(data.username, data.password);
 
         // Login to Veracross
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
+
+        // Throw an access log
+        VADatabase.accessLog(data.username, "Access Login API", "Before Login");
 
         // Check database
         List<User> users = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
