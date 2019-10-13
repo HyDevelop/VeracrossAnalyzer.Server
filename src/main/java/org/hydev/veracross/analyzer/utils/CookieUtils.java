@@ -26,11 +26,23 @@ public class CookieUtils
      * Wrap cookies into base64 string.
      *
      * @param client Http client
+     * @param csrf CSRF token
      * @return Wrapped cookies
      */
-    public static String wrap(GeneralHttpClient client)
+    public static String wrap(GeneralHttpClient client, String csrf)
     {
-        String json = GSON.toJson(client.getCookies().getCookies());
+        return wrap(new CookieData(client.getCookies().getCookies(), csrf));
+    }
+
+    /**
+     * Wrap cookies into base64 string.
+     *
+     * @param cookieData Cookie data
+     * @return Wrapped cookies
+     */
+    public static String wrap(CookieData cookieData)
+    {
+        String json = GSON.toJson(cookieData);
         return Base64Utils.encodeBase64C(json.getBytes());
     }
 
