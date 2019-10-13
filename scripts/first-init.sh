@@ -4,7 +4,7 @@
 server="root@hydev.org"
 
 # Upload libraries
-scp -r ../target/lib $server:/app/depl/veracross-analyzer/
+scp -r ./target/lib $server:/app/depl/veracross-analyzer/
 
 # Execute command
 ssh $server << EOF
