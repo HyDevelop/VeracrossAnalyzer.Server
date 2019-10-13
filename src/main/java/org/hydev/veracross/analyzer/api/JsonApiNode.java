@@ -67,7 +67,7 @@ public abstract class JsonApiNode<T> implements ApiNode
             }
 
             // TODO: Log errors
-            return GSON.toJson(new GeneralReturnData(false, e.getMessage()));
+            return GSON.toJson(new GeneralReturnData(false, "Error: " + e.getMessage()));
         }
     }
 
