@@ -13,6 +13,7 @@ import org.hydev.veracross.analyzer.api.nodes.veracross.NodeAssignments;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeGrading;
 import org.hydev.veracross.analyzer.api.nodes.veracross.NodeLogin;
+import org.hydev.veracross.analyzer.database.VADatabase;
 
 import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
 
@@ -60,6 +61,9 @@ public class VAApiServer
                 new NodeCourses(),
                 new NodeGrading()
         );
+
+        // Load Hibernate
+        VADatabase.query(s -> s.createSQLQuery("SELECT 1 + 1 FROM DUAL"));
 
         // Create Jetty server
         Server server = new Server(VAConstants.API_SERVER_PORT);
