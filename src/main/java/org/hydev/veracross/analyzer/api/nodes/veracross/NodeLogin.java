@@ -10,6 +10,7 @@ import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_PASSWORD;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
@@ -50,11 +51,13 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
         // Check database
-        User user = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
-                .setParameter("username", data.username).getSingleResult());
+        List<User> users = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
+                .setParameter("username", data.username).list());
+        User user;
 
         // No user -> Create user
-        if (user == null) user = new User(data.username, null);
+        if (users.size() == 0) user = new User(data.username, null);
+        else user = users.get(0);
 
         // Update last login
         user.setLastLogin(new Date());
