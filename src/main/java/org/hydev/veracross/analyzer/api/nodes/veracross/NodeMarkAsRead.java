@@ -3,7 +3,8 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.api.JsonKnownError;
+import org.hydev.veracross.analyzer.utils.CookieUtils;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import static org.hydev.veracross.analyzer.VAConstants.*;
 
@@ -28,7 +29,20 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
-        throw new JsonKnownError("Not implemented yet");
+        // Create http client
+        VeracrossHttpClient veracross = new VeracrossHttpClient();
+
+        // Unwrap cookies
+        CookieUtils.unwrap(veracross, data.token);
+
+        // Mark as read
+        boolean success = veracross.markAssignmentAsRead(data.csrf, data.scoreId);
+
+        // Not success
+        if (!success) throw new RuntimeException("Unable to mark as read");
+        
+        // Return success
+        return "Marked as read";
     }
 
     @Override
