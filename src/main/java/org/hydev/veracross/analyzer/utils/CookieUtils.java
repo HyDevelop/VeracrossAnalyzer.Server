@@ -1,5 +1,7 @@
 package org.hydev.veracross.analyzer.utils;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import lombok.AllArgsConstructor;
 import org.apache.http.cookie.Cookie;
@@ -58,8 +60,16 @@ public class CookieUtils
      */
     public static CookieData unwrap(String wrap)
     {
-        String json = Base64Utils.decodeBase64CStr(wrap);
-        return GSON.fromJson(json, CookieData.class);
+        // Decode json
+        String jsonString = Base64Utils.decodeBase64CStr(wrap);
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+
+        // Deserialize cookies
+        List<Cookie> cookies = GSON.fromJson(json.get("cookies"), PARSABLE_COOKIES_TYPE);
+        String csrf = json.get("csrf").getAsString();
+
+        // Return it
+        return new CookieData(cookies, csrf);
     }
 
     /**
