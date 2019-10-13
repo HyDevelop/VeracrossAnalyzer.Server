@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hydev.veracross.sdk.exceptions.VeracrossException;
 
 import java.util.Map.Entry;
 
@@ -61,7 +62,7 @@ public abstract class JsonApiNode<T> implements ApiNode
         catch (Exception e)
         {
             // Log errors if it is not known
-            if (!(e instanceof JsonKnownError))
+            if (!(e instanceof JsonKnownError || e instanceof VeracrossException))
             {
                 e.printStackTrace();
             }
