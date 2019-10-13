@@ -1,6 +1,5 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import lombok.AllArgsConstructor;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
@@ -61,7 +60,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         result.forEach(NodeCourses::storeCourse);
 
         // Return it
-        return new ReturnModel(result, veracross.getCsrfToken());
+        return result;
     }
 
     @Override
@@ -79,13 +78,6 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     protected static class Model
     {
         String token;
-    }
-
-    @AllArgsConstructor
-    protected static class ReturnModel
-    {
-        List<StJohnsCourse> courses;
-        String csrf;
     }
 
     /**
