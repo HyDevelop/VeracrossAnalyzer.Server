@@ -1,5 +1,6 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
+import lombok.AllArgsConstructor;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
@@ -76,6 +77,13 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     {
         String username;
         String token;
+    }
+
+    @AllArgsConstructor
+    protected static class ReturnModel
+    {
+        List<StJohnsCourse> courses;
+        String csrf;
     }
 
     /**
