@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
-import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
 import static org.hydev.veracross.analyzer.database.VADatabase.query;
 import static org.hydev.veracross.analyzer.database.VADatabase.transaction;
 
@@ -70,9 +69,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     @Override
     protected JsonApiConfig config()
     {
-        return new JsonApiConfig()
-                .key("username", LENGTH_USERNAME)
-                .key("token", LENGTH_TOKEN);
+        return new JsonApiConfig().key("token", LENGTH_TOKEN);
     }
 
     @Override
@@ -83,7 +80,6 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
 
     protected static class Model
     {
-        String username;
         String token;
     }
 

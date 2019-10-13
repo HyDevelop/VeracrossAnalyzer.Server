@@ -49,7 +49,6 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
     protected JsonApiConfig config()
     {
         return new JsonApiConfig()
-                .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN)
                 .key("csrf", LENGTH_CSRF)
                 .key("scoreId", LENGTH_SCORE_ID);
@@ -63,7 +62,6 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
 
     protected static class Model
     {
-        String username;
         String token;
         String csrf;
         long scoreId;

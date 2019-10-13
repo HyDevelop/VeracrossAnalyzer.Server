@@ -30,8 +30,6 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
-        // Parse values
-
         // Create http client
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
@@ -46,7 +44,6 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
     protected JsonApiConfig config()
     {
         return new JsonApiConfig()
-                .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN)
                 .key("assignmentsId", LENGTH_ASSIGNMENTS_ID);
     }
@@ -59,7 +56,6 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
 
     protected static class Model
     {
-        String username;
         String token;
         long assignmentsId;
     }

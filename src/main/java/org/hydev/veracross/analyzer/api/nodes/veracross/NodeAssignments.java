@@ -46,7 +46,6 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
     protected JsonApiConfig config()
     {
         return new JsonApiConfig()
-                .key("username", LENGTH_USERNAME)
                 .key("token", LENGTH_TOKEN)
                 .key("assignmentsId", LENGTH_ASSIGNMENTS_ID);
     }
@@ -59,7 +58,6 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
 
     protected static class Model
     {
-        String username;
         String token;
         long assignmentsId;
     }
