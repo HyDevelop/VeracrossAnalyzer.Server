@@ -17,7 +17,7 @@ import static org.hydev.veracross.analyzer.VAConstants.*;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-10-13 12:51
  */
-public class NodeMarkAsRead extends JsonApiNode
+public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
 {
     @Override
     public String path()
@@ -26,7 +26,7 @@ public class NodeMarkAsRead extends JsonApiNode
     }
 
     @Override
-    protected Object processJson(ApiAccess access, Object data) throws Exception
+    protected Object processJson(ApiAccess access, Model data) throws Exception
     {
         throw new JsonKnownError("Not implemented yet");
     }
