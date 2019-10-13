@@ -28,27 +28,25 @@ public abstract class JsonApiNode<T> implements ApiNode
     @Override
     public String process(ApiAccess access)
     {
-        // Validate body
-        String body = access.getContent();
-        if (body == null || body.isEmpty() || body.length() > config.getMaxBodyLength())
-        {
-            return GSON.toJson(new GeneralReturnData(false, "Bad request"));
-        }
-
-        // Parse body
-        JsonObject data = new JsonParser().parse(access.getContent()).getAsJsonObject();
-
         try
         {
+            // Validate body
+            String body = access.getContent();
+            if (body == null || body.isEmpty() || body.length() > config.getMaxBodyLength())
+                throw new JsonKnownError("Bad request");
+
+            // Parse body
+            JsonObject data = new JsonParser().parse(access.getContent()).getAsJsonObject();
+
             // Check key length
             for (Entry<String, Integer> entry : config.getKeyLengths().entrySet())
             {
                 // Check if key exists
-                if (!data.has(entry.getKey())) throw new Exception("Missing keys");
+                if (!data.has(entry.getKey())) throw new JsonKnownError("Missing keys");
 
                 // Check key length
                 if (data.get(entry.getKey()).getAsString().length() > entry.getValue())
-                    throw new Exception("Bad request");
+                    throw new JsonKnownError("Bad request");
             }
 
             // Process
@@ -62,7 +60,11 @@ public abstract class JsonApiNode<T> implements ApiNode
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            // Log errors if it is not known
+            if (!(e instanceof JsonKnownError))
+            {
+                e.printStackTrace();
+            }
 
             // TODO: Log errors
             return GSON.toJson(new GeneralReturnData(false, e.getMessage()));
