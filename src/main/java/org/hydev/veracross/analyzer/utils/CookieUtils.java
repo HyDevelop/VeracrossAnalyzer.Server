@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.utils;
 
 import com.google.gson.reflect.TypeToken;
+import lombok.AllArgsConstructor;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.hydev.veracross.sdk.GeneralHttpClient;
@@ -54,5 +55,15 @@ public class CookieUtils
     public static void unwrap(GeneralHttpClient client, String wrap)
     {
         client.restoreCookies(unwrap(wrap));
+    }
+
+    /**
+     * This class contains data for cookies
+     */
+    @AllArgsConstructor
+    public static class CookieData
+    {
+        private List<BasicClientCookie> cookies;
+        private String csrf;
     }
 }
