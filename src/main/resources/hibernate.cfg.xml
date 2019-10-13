@@ -16,6 +16,9 @@
         <property name="hibernate.c3p0.acquire_increment">5</property>
         <property name="hibernate.c3p0.timeout">1800</property>
 
+        <!-- Validate every time -->
+        <property name="hibernate.c3p0.validate">true</property>
+
         <!-- Select our SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MariaDBDialect</property>
 
