@@ -6,6 +6,8 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.hydev.veracross.sdk.GeneralHttpClient;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
@@ -63,10 +65,13 @@ public class CookieUtils
      *
      * @param client Http client
      * @param wrap Wrapped cookies
+     * @return CSRF token
      */
-    public static void unwrap(GeneralHttpClient client, String wrap)
+    public static String unwrap(GeneralHttpClient client, String wrap)
     {
-        client.restoreCookies(unwrap(wrap));
+        CookieData data = unwrap(wrap);
+        client.restoreCookies(new ArrayList<>(data.cookies));
+        return data.csrf;
     }
 
     /**
