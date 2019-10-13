@@ -17,7 +17,10 @@
         <property name="hibernate.c3p0.timeout">1800</property>
 
         <!-- Validate every time -->
-        <property name="hibernate.c3p0.validate">true</property>
+        <property name="hibernate.c3p0.validate">false</property>
+
+        <!-- Test idle connections every x seconds -->
+        <property name="hibernate.c3p0.idle_test_period">120</property>
 
         <!-- Select our SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MariaDBDialect</property>
