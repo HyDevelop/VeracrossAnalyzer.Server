@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.hydev.veracross.sdk.GeneralHttpClient;
@@ -91,6 +92,7 @@ public class CookieUtils
     /**
      * This class contains data for cookies
      */
+    @Data
     @AllArgsConstructor
     public static class CookieData
     {
