@@ -62,7 +62,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         result.forEach(NodeCourses::storeCourse);
 
         // Return it
-        return result;
+        return new ReturnModel(result, veracross.getCsrfToken());
     }
 
     @Override
