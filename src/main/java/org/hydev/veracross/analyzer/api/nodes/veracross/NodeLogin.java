@@ -56,7 +56,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         User user;
 
         // No user -> Create user
-        if (users.size() == 0) user = new User(data.username, null);
+        if (users.size() == 0) user = new User(data.username, new Date());
         else user = users.get(0);
 
         // Update last login
