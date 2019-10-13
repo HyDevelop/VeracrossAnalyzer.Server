@@ -39,7 +39,7 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
         CookieUtils.unwrap(veracross, data.token);
 
         // Get it
-        return veracross.getAssignments(data.assignmentId);
+        return veracross.getAssignments(data.assignmentsId);
     }
 
     @Override
@@ -61,6 +61,6 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
     {
         String username;
         String token;
-        long assignmentId;
+        long assignmentsId;
     }
 }

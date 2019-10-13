@@ -39,7 +39,7 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
         CookieUtils.unwrap(veracross, data.token);
 
         // Return grading
-        return veracross.getGrading(data.assignmentId);
+        return veracross.getGrading(data.assignmentsId);
     }
 
     @Override
@@ -61,6 +61,6 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
     {
         String username;
         String token;
-        long assignmentId;
+        long assignmentsId;
     }
 }
