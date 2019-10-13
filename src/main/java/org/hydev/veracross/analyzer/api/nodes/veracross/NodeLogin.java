@@ -75,7 +75,13 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
                 .key("password", LENGTH_PASSWORD);
     }
 
-    protected static class Model
+    @Override
+    protected Class model()
+    {
+        return Model.class;
+    }
+
+    public static class Model
     {
         String username;
         String password;

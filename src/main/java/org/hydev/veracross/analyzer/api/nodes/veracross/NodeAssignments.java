@@ -51,6 +51,12 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
                 .key("assignmentsId", LENGTH_ASSIGNMENT_ID);
     }
 
+    @Override
+    protected Class model()
+    {
+        return Model.class;
+    }
+
     protected static class Model
     {
         String username;

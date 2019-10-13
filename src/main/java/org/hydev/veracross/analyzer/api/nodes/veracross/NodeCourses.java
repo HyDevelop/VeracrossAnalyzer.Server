@@ -73,6 +73,12 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
                 .key("token", LENGTH_TOKEN);
     }
 
+    @Override
+    protected Class model()
+    {
+        return Model.class;
+    }
+
     protected static class Model
     {
         String username;
