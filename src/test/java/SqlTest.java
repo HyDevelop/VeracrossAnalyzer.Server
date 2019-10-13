@@ -6,7 +6,7 @@ import org.hydev.veracross.analyzer.database.model.User;
 import java.util.List;
 
 /**
- * TODO: Write a description for this class!
+ * This class is a tester for Hibernate sql operations.
  * <p>
  * Class created by the HyDEV Team on 2019-10-09!
  *
