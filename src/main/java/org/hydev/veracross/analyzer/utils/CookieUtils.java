@@ -81,11 +81,11 @@ public class CookieUtils
      * @param wrap Wrapped cookies
      * @return CSRF token
      */
-    public static String unwrap(GeneralHttpClient client, String wrap)
+    public static CookieData unwrap(GeneralHttpClient client, String wrap)
     {
         CookieData data = unwrap(wrap);
         client.restoreCookies(data.cookies);
-        return data.csrf;
+        return data;
     }
 
     /**
