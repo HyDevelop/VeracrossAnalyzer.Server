@@ -50,12 +50,12 @@ public class CookieUtils
      * Unwrap cookies
      *
      * @param wrap Wrapped cookies
-     * @return List of cookies
+     * @return Cookie data
      */
-    public static List<Cookie> unwrap(String wrap)
+    public static CookieData unwrap(String wrap)
     {
         String json = Base64Utils.decodeBase64CStr(wrap);
-        return GSON.fromJson(json, new TypeToken<List<BasicClientCookie>>(){}.getType());
+        return GSON.fromJson(json, CookieData.class);
     }
 
     /**
