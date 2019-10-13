@@ -72,7 +72,7 @@ public class CookieUtils
     public static String unwrap(GeneralHttpClient client, String wrap)
     {
         CookieData data = unwrap(wrap);
-        client.restoreCookies(new ArrayList<>(data.cookies));
+        client.restoreCookies(data.cookies);
         return data.csrf;
     }
 
@@ -82,7 +82,7 @@ public class CookieUtils
     @AllArgsConstructor
     public static class CookieData
     {
-        private List<BasicClientCookie> cookies;
+        private List<Cookie> cookies;
         private String csrf;
     }
 }
