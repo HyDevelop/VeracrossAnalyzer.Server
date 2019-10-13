@@ -67,7 +67,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         VADatabase.transaction(s -> s.save(finalUser));
 
         // Return cookies
-        return CookieUtils.wrap(veracross);
+        return CookieUtils.wrap(veracross, veracross.getCsrfToken());
     }
 
     @Override
