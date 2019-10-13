@@ -6,8 +6,8 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.hydev.veracross.sdk.GeneralHttpClient;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
@@ -24,6 +24,8 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
  */
 public class CookieUtils
 {
+    private static final Type PARSABLE_COOKIES_TYPE = new TypeToken<ArrayList<BasicClientCookie>>(){}.getType();
+
     /**
      * Wrap cookies into base64 string.
      *
