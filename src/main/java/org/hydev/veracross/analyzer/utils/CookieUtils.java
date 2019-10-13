@@ -31,13 +31,14 @@ public class CookieUtils
     /**
      * Wrap cookies into base64 string.
      *
+     * @param username Username
      * @param client Http client
      * @param csrf CSRF token
      * @return Wrapped cookies
      */
-    public static String wrap(GeneralHttpClient client, String csrf)
+    public static String wrap(String username, GeneralHttpClient client, String csrf)
     {
-        return wrap(new CookieData(client.getCookies().getCookies(), csrf));
+        return wrap(new CookieData(username, client.getCookies().getCookies(), csrf));
     }
 
     /**
