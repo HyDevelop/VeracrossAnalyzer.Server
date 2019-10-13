@@ -58,7 +58,7 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
     @Override
     protected Class model()
     {
-        return NodeCourses.Model.class;
+        return Model.class;
     }
 
     protected static class Model
