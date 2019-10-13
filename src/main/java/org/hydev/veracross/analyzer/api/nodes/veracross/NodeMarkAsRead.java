@@ -8,7 +8,7 @@ import org.hydev.veracross.analyzer.api.JsonKnownError;
 import static org.hydev.veracross.analyzer.VAConstants.*;
 
 /**
- * TODO: Write a description for this class!
+ * This api node marks unread assignment as read
  * <p>
  * Class created by the HyDEV Team on 2019-10-13!
  *
