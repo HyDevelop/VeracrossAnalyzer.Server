@@ -66,11 +66,12 @@ public class CookieUtils
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
 
         // Deserialize cookies
+        String username = json.get("username").getAsString();
         List<Cookie> cookies = GSON.fromJson(json.get("cookies"), PARSABLE_COOKIES_TYPE);
         String csrf = json.get("csrf").getAsString();
 
         // Return it
-        return new CookieData(cookies, csrf);
+        return new CookieData(username, cookies, csrf);
     }
 
     /**
