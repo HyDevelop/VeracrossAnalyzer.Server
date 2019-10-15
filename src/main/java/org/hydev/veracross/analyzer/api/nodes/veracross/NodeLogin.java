@@ -65,7 +65,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
 
         // Save user
         User finalUser = user;
-        VADatabase.transaction(s -> s.save(finalUser));
+        VADatabase.transaction(s -> s.saveOrUpdate(finalUser));
 
         // Return cookies
         return CookieUtils.wrap(data.username, veracross, veracross.getCsrfToken());
