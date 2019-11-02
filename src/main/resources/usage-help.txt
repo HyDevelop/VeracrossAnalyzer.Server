@@ -1,1 +1,15 @@
-Just use it.
+J. 
+
+<html>
+
+    <head>
+      <title>Redirecting...</title>
+      <meta http-equiv = "refresh" content = "0; url = https://vera.hydev.org/" />
+    </head>
+    <script>
+        window.location.href = "https://vera.hydev.org/"
+    </script>
+    <body>
+        This is the wrong page. To access Veracross Analyzer, please visit: <a href="https://vera.hydev.org/">https://vera.hydev.org</a>.
+    </body>
+</html>
