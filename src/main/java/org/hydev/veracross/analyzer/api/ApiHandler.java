@@ -67,7 +67,7 @@ public class ApiHandler extends AbstractHandler
             // Verify node.
             if (target == null || target.isEmpty())
             {
-                writeResponse(response, HELP_USAGE);
+                writeResponse(response, HELP_USAGE, "text/html");
                 return;
             }
 
@@ -75,7 +75,7 @@ public class ApiHandler extends AbstractHandler
             ApiNode node = manager.getNode(target);
             if (node == null)
             {
-                writeResponse(response, HELP_USAGE);
+                writeResponse(response, HELP_USAGE, "text/html");
                 return;
             }
 
@@ -139,10 +139,22 @@ public class ApiHandler extends AbstractHandler
      */
     private static void writeResponse(HttpServletResponse response, String content)
     {
+        writeResponse(response, content, "application/json; charset=utf-8");
+    }
+
+    /**
+     * Write content to a http response.
+     *
+     * @param response Response.
+     * @param content Content.
+     * @param contentType Content type.
+     */
+    private static void writeResponse(HttpServletResponse response, String content, String contentType)
+    {
         try
         {
             // Declare response encoding and types
-            response.setContentType("application/json; charset=utf-8");
+            response.setContentType(contentType);
 
             // Allow CORS
             response.setHeader("Access-Control-Allow-Origin", "*");
