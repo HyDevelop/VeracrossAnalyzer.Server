@@ -2,6 +2,7 @@ package org.hydev.veracross.analyzer.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -62,7 +63,10 @@ public abstract class JsonApiNode<T> implements ApiNode
         catch (Exception e)
         {
             // Log errors if it is not known
-            if (!(e instanceof JsonKnownError || e instanceof VeracrossException))
+            if (!(e instanceof JsonKnownError
+                    || e instanceof VeracrossException
+                    || e.getMessage().equals("JsonNull")
+                    || e instanceof JsonSyntaxException))
             {
                 e.printStackTrace();
             }
