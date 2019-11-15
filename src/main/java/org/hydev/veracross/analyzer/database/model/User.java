@@ -56,4 +56,8 @@ public class User
     @NonNull
     @Column(name = "avatarUrl")
     private String avatarUrl;
+
+    @NonNull
+    @Column(name = "token")
+    private String token;
 }
