@@ -50,6 +50,6 @@ public class User
     private String lastName;
 
     @NonNull
-    @Column(name = "nick")
+    @Column(name = "nick", length = 32)
     private String nickname;
 }
