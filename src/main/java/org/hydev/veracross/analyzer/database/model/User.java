@@ -52,4 +52,8 @@ public class User
     @NonNull
     @Column(name = "nick", length = 32)
     private String nickname;
+
+    @NonNull
+    @Column(name = "avatarUrl")
+    private String avatarUrl;
 }
