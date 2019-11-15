@@ -42,6 +42,10 @@ public class User
     private Date lastLogin;
 
     @NonNull
+    @Column(name = "first_login")
+    private Date firstLogin;
+
+    @NonNull
     @Column(name = "first")
     private String firstName;
 
