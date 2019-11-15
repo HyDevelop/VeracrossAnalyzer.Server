@@ -34,7 +34,7 @@ public class User
     private int id;
 
     @NonNull
-    @Column(name = "username")
+    @Column(name = "username", length = 32)
     private String username;
 
     @NonNull
