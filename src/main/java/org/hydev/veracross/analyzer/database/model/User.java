@@ -48,4 +48,8 @@ public class User
     @NonNull
     @Column(name = "last")
     private String lastName;
+
+    @NonNull
+    @Column(name = "nick")
+    private String nickname;
 }
