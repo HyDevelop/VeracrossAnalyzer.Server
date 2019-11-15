@@ -45,6 +45,11 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
 
     public static class Model
     {
+        String token;
+    }
+
+    public static class ReturnModel
+    {
         User user;
     }
 }
