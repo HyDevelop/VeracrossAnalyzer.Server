@@ -34,10 +34,18 @@ public class User
     private int id;
 
     @NonNull
-    @Column(name = "username", length = 32)
+    @Column(name = "username")
     private String username;
 
     @NonNull
     @Column(name = "last_login")
     private Date lastLogin;
+
+    @NonNull
+    @Column(name = "first")
+    private String firstName;
+
+    @NonNull
+    @Column(name = "last")
+    private String lastName;
 }
