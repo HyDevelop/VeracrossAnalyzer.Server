@@ -51,22 +51,6 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         // Throw an access log
         VADatabase.accessLog(data.username, "Access Login API", "Before Login");
 
-        // Check database
-        List<User> users = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
-                .setParameter("username", data.username).list());
-        User user;
-
-        // No user -> Create user
-        if (users.size() == 0) user = new User(data.username, new Date());
-        else user = users.get(0);
-
-        // Update last login
-        user.setLastLogin(new Date());
-
-        // Save user
-        User finalUser = user;
-        VADatabase.transaction(s -> s.saveOrUpdate(finalUser));
-
         // Return cookies
         return CookieUtils.wrap(data.username, veracross, veracross.getCsrfToken());
     }
