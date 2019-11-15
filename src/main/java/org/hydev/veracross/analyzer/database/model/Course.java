@@ -30,9 +30,6 @@ public class Course
     @Column(name = "id")
     private long id;
 
-    @Column(name = "assignmentsId")
-    private long assignmentsId;
-
     @Column(name = "name")
     private String name;
 

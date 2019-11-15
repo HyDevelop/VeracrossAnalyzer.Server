@@ -90,8 +90,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         // Create one if it does not exist
         if (query(s -> s.createNamedQuery("byId", Course.class).setParameter("id", course.getId()).list()).size() == 0)
         {
-            Course saved = new Course(course.getId(), course.getAssignmentsId(),
-                    course.getName(), course.getTeacherName());
+            Course saved = new Course(course.getId(), course.getName(), course.getTeacherName());
             transaction(s -> s.save(saved));
         }
     }
