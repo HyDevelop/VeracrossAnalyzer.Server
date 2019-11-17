@@ -1,5 +1,7 @@
 package org.hydev.veracross.analyzer.database.update;
 
+import lombok.AllArgsConstructor;
+
 /**
  * This class is a utility class to upgrade the database.
  * <p>
@@ -12,4 +14,14 @@ package org.hydev.veracross.analyzer.database.update;
  */
 public class VADatabaseUpgrade
 {
+    /**
+     * The implementations of this interface represent updates from one
+     * specific version to the next.
+     */
+    @AllArgsConstructor
+    public static class DatabaseVersion
+    {
+        String currentVersion;
+        String lowestVersion;
+    }
 }
