@@ -54,6 +54,18 @@ public class L$<T>
     }
 
     /**
+     * Find a value
+     *
+     * @param operator Operator
+     * @return value if found, null if not found
+     */
+    public T find(FindOperator<T> operator)
+    {
+        for (T thisOne : list) if (operator.isIt(thisOne)) return thisOne;
+        return null;
+    }
+
+    /**
      * Lambda operator for find()
      *
      * @param <T> Type
