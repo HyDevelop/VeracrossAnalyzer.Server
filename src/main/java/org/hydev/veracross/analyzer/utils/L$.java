@@ -20,4 +20,11 @@ import java.util.List;
  */
 public class L$<T>
 {
+    @Getter
+    private List<T> list;
+
+    private L$(List<T> list)
+    {
+        this.list = list;
+    }
 }
