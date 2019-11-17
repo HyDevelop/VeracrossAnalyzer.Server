@@ -2,10 +2,11 @@ package org.hydev.veracross.analyzer;
 
 import com.google.gson.Gson;
 
+import static org.hydev.veracross.analyzer.utils.L$.l$;
 import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
 
 /**
- * This class stores the constants for this trash sorter program.
+ * This class stores the constants.
  * <p>
  * Class created by the HyDEV Team on 2019-07-02!
  *
@@ -17,6 +18,7 @@ import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
 public class VAConstants
 {
     public static final String VERSION = read("/version.entry".split(";")[0]);
+    public static final int VERSION_BUILD = Integer.parseInt(l$(VERSION.split("\\.")).last());
 
     public static final int API_SERVER_PORT;
 
