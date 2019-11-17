@@ -62,6 +62,10 @@ public class User
     private int graduationYear;
 
     @NonNull
+    @Column(name = "emails")
+    private String emails;
+
+    @NonNull
     @Column(name = "avatarUrl")
     private String avatarUrl;
 
