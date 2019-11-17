@@ -4,6 +4,9 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.model.User;
+import org.hydev.veracross.analyzer.utils.CookieUtils;
+import org.hydev.veracross.analyzer.utils.CookieUtils.CookieData;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
@@ -28,7 +31,9 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
-        throw new UnsupportedOperationException("TODO");
+        // Create http client with token
+        VeracrossHttpClient veracross = new VeracrossHttpClient();
+        CookieData cookie = unwrap(veracross, data.token);
     }
 
     @Override
