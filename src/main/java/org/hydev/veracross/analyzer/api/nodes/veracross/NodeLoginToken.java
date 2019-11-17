@@ -56,7 +56,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         // Save user
         VADatabase.saveOrUpdate(user);
 
-        return new ReturnModel(user);
+        return new ReturnModel(user, false);
     }
 
     @Override
@@ -80,5 +80,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
     public static class ReturnModel
     {
         User user;
+
+        boolean maintenance;
     }
 }
