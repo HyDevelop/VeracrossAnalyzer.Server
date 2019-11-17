@@ -47,6 +47,12 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         // Get user from database
         User user = VADatabase.getUser(cookie.getUsername(), veracross);
 
+        // Update last login
+        user.setLastLogin(new Date());
+
+        // Save user
+        VADatabase.transaction(s -> s.saveOrUpdate(user));
+
         return new ReturnModel(user);
     }
 
