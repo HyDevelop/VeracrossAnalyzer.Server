@@ -39,4 +39,17 @@ public class L$<T>
     {
         return new L$<>(list);
     }
+
+    /**
+     * Constructor but looks better with static import
+     *
+     * @param list List
+     * @param <T> Type
+     * @return Syntax sugar object
+     */
+    @SafeVarargs
+    public static <T> L$<T> l$(T... list)
+    {
+        return new L$<T>(new ArrayList<T>(Arrays.asList(list)));
+    }
 }
