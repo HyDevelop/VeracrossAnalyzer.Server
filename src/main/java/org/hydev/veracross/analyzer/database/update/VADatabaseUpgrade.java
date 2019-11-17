@@ -14,14 +14,16 @@ import lombok.AllArgsConstructor;
  */
 public class VADatabaseUpgrade
 {
+
     /**
      * The implementations of this interface represent updates from one
      * specific version to the next.
      */
     @AllArgsConstructor
-    public static class DatabaseVersion
+    private static class VersionUpdate
     {
         String currentVersion;
         String lowestVersion;
+        Runnable operator;
     }
 }
