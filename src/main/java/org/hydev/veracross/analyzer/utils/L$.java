@@ -52,4 +52,15 @@ public class L$<T>
     {
         return new L$<T>(new ArrayList<T>(Arrays.asList(list)));
     }
+
+    /**
+     * Lambda operator for find()
+     *
+     * @param <T> Type
+     */
+    @FunctionalInterface
+    public interface FindOperator<T>
+    {
+        boolean isIt(T thisOne);
+    }
 }
