@@ -110,6 +110,17 @@ public class VADatabase
     }
 
     /**
+     * Save or update
+     *
+     * @param object Database model object
+     * @param <T> Type of the object
+     */
+    public static <T> void saveOrUpdate(T object)
+    {
+        transaction(s -> s.saveOrUpdate(object));
+    }
+
+    /**
      * Record an access log
      *
      * @param user Username
