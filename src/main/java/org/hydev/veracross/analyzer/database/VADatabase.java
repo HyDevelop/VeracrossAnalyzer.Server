@@ -3,8 +3,15 @@ package org.hydev.veracross.analyzer.database;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
+import org.hydev.veracross.analyzer.database.model.User;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
+import org.hydev.veracross.sdk.model.VeracrossStudent;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+
+import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
  * This class is for database operations
@@ -112,5 +119,33 @@ public class VADatabase
     public static void accessLog(String user, String action, String details)
     {
         VADatabase.transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
+    }
+
+    /**
+     * Get user by username, and register if not exist
+     *
+     * @param username Username
+     * @param client Veracross HTTP Client
+     * @return User
+     */
+    public static User getUser(String username, VeracrossHttpClient client) throws IOException
+    {
+        // Check database
+        List<User> users = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
+                .setParameter("username", username).list());
+        User user;
+
+        // No user -> Create user
+        if (users.size() == 0)
+        {
+            // Get user data from Veracross
+            VeracrossStudent student = l$(client.getDirectoryStudents()).find(s ->
+                    s.getEmail().equalsIgnoreCase(username + "@stjohnsprep.org"));
+
+            user = new User(student, "Unassigned");
+        }
+        else user = users.get(0);
+
+        return user;
     }
 }
