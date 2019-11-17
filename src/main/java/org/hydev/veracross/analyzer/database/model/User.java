@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
+import org.hydev.veracross.sdk.model.VeracrossStudent;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,6 +29,18 @@ import java.util.Date;
 })
 public class User
 {
+    /**
+     * Create user from student data
+     *
+     * @param student Student data
+     */
+    public User(VeracrossStudent student, String token)
+    {
+        this("username", new Date(), new Date(), student.getFirstName(), student.getLastName(), student.getFullName(),
+                student.getGraduationYear(), "student", student.getEmail(), student.getAllClasses(), student.getBirthday(),
+                student.getPhotoUrl(), token);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
