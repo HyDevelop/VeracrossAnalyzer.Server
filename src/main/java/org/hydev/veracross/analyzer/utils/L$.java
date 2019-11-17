@@ -98,4 +98,15 @@ public class L$<T>
     {
         return list.size();
     }
+
+    /**
+     * Find the last entry in the list
+     *
+     * @param def Default value
+     * @return Last entry
+     */
+    public T last(T def)
+    {
+        return length() == 0 ? def : list.get(length() - 1);
+    }
 }
