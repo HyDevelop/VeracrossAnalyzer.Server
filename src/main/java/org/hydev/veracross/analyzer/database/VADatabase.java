@@ -153,7 +153,11 @@ public class VADatabase
             VeracrossStudent student = l$(client.getDirectoryStudents()).find(s ->
                     s.getEmail().equalsIgnoreCase(username + "@stjohnsprep.org"));
 
+            // Create user
             user = new User(student, "Unassigned");
+
+            // Save
+            saveOrUpdate(user);
         }
         else user = users.get(0);
 
