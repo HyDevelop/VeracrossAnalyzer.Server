@@ -79,7 +79,7 @@ public class L$<T>
     }
 
     /**
-     * Lambda operator for find()
+     * Lambda operator for the find() method
      *
      * @param <T> Type
      */
@@ -107,7 +107,7 @@ public class L$<T>
      */
     public T last(T def)
     {
-        return length() == 0 ? def : list.get(length() - 1);
+        return list.isEmpty() ? def : list.get(length() - 1);
     }
 
     /**
