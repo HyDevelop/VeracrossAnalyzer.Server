@@ -109,4 +109,14 @@ public class L$<T>
     {
         return length() == 0 ? def : list.get(length() - 1);
     }
+
+    /**
+     * Find the last entry in the list
+     *
+     * @return Last entry
+     */
+    public T last()
+    {
+        return last(null);
+    }
 }
