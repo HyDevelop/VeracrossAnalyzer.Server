@@ -122,7 +122,7 @@ public class VADatabase
     }
 
     /**
-     * Get user by username, and register if not exist
+     * Find user by the username, and register if it didn't find any records
      *
      * @param username Username
      * @param client Veracross HTTP Client
