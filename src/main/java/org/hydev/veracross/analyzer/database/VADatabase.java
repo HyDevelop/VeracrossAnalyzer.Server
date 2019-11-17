@@ -129,7 +129,7 @@ public class VADatabase
      */
     public static void accessLog(String user, String action, String details)
     {
-        .transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
+        transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
     }
 
     /**
