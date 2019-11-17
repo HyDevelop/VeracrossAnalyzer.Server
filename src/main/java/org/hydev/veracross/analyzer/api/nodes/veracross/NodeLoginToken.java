@@ -58,6 +58,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         String token;
     }
 
+    @AllArgsConstructor
     public static class ReturnModel
     {
         User user;
