@@ -70,6 +70,10 @@ public class User
     private String classes;
 
     @NonNull
+    @Column(name = "birthday")
+    private String birthday;
+
+    @NonNull
     @Column(name = "avatarUrl")
     private String avatarUrl;
 
