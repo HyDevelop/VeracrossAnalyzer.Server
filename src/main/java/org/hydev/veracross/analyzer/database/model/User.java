@@ -66,6 +66,10 @@ public class User
     private String emails;
 
     @NonNull
+    @Column(name = "classes")
+    private String classes;
+
+    @NonNull
     @Column(name = "avatarUrl")
     private String avatarUrl;
 
