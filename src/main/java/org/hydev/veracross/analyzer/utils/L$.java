@@ -27,4 +27,16 @@ public class L$<T>
     {
         this.list = list;
     }
+
+    /**
+     * Constructor but looks better with static import
+     *
+     * @param list List
+     * @param <T> Type
+     * @return Syntax sugar object
+     */
+    public static <T> L$<T> l$(List<T> list)
+    {
+        return new L$<>(list);
+    }
 }
