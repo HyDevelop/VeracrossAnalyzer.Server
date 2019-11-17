@@ -129,7 +129,7 @@ public class VADatabase
      */
     public static void accessLog(String user, String action, String details)
     {
-        VADatabase.transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
+        .transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
     }
 
     /**
@@ -142,9 +142,9 @@ public class VADatabase
     public static User getUser(String username, VeracrossHttpClient client) throws IOException
     {
         // Check database
-        List<User> users = VADatabase.query(s -> s.createNamedQuery("byUsername", User.class)
-                .setParameter("username", username).list());
         User user;
+        List<User> users = query(s -> s.createNamedQuery("byUsername", User.class)
+                .setParameter("username", username).list());
 
         // No user -> Create user
         if (users.size() == 0)
