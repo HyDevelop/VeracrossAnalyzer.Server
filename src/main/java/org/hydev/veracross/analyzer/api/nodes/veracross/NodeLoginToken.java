@@ -50,6 +50,9 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         // Update last login
         user.setLastLogin(new Date());
 
+        // Update token
+        user.setToken(CookieUtils.wrap(cookie));
+
         // Save user
         VADatabase.transaction(s -> s.saveOrUpdate(user));
 
