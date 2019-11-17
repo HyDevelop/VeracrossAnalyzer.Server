@@ -88,4 +88,14 @@ public class L$<T>
     {
         boolean isIt(T thisOne);
     }
+
+    /**
+     * Get the length of the list
+     *
+     * @return List size
+     */
+    public int length()
+    {
+        return list.size();
+    }
 }
