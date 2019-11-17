@@ -58,6 +58,10 @@ public class User
     private String nickname;
 
     @NonNull
+    @Column(name = "graduation_year", length = 6)
+    private int graduationYear;
+
+    @NonNull
     @Column(name = "avatarUrl")
     private String avatarUrl;
 
