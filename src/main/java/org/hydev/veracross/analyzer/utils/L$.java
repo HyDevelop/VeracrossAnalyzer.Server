@@ -66,6 +66,19 @@ public class L$<T>
     }
 
     /**
+     * Find a value
+     *
+     * @param operator Operator
+     * @param def Default
+     * @return value if found, null if not found
+     */
+    public T find(FindOperator<T> operator, T def)
+    {
+        T val = find(operator);
+        return val == null ? def : val;
+    }
+
+    /**
      * Lambda operator for find()
      *
      * @param <T> Type
