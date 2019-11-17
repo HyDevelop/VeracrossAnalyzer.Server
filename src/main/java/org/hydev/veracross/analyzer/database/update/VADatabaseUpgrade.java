@@ -2,6 +2,9 @@ package org.hydev.veracross.analyzer.database.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hydev.veracross.analyzer.utils.L$;
+
+import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
  * This class is a utility class to upgrade the database.
@@ -15,6 +18,7 @@ import lombok.Data;
  */
 public class VADatabaseUpgrade
 {
+    private static L$<VersionUpdate> updates = l$();
 
     /**
      * The implementations of this interface represent updates from one
