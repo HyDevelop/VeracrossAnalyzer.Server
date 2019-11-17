@@ -9,6 +9,7 @@ import org.hydev.veracross.analyzer.utils.CookieUtils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.utils.CookieUtils.unwrap;
 
 /**
  * Login with token
@@ -34,6 +35,10 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         // Create http client with token
         VeracrossHttpClient veracross = new VeracrossHttpClient();
         CookieData cookie = unwrap(veracross, data.token);
+
+        // Update token TODO: Check if actually online
+        String csrf = veracross.getCsrfToken();
+        String newToken = CookieUtils.wrap(cookie.getUsername(), veracross, csrf);
     }
 
     @Override
