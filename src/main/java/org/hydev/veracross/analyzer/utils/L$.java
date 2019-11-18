@@ -89,6 +89,19 @@ public class L$<T> extends ArrayList<T>
         boolean isIt(T thisOne);
     }
 
+    /**
+     * For each with currentValue and index
+     * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+     *
+     * @param operator Operator
+     */
+    public void forEach(ForEachOperator<T> operator)
+    {
+        for (int i = 0; i < this.size(); i++)
+        {
+            operator.run(get(i), i);
+        }
+    }
 
     /**
      * Lambda operator for the forEach() method
@@ -100,6 +113,7 @@ public class L$<T> extends ArrayList<T>
     {
         void run(T value, int index);
     }
+
     /**
      * Find the last entry in the list
      *
