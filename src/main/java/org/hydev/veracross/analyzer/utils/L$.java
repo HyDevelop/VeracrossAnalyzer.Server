@@ -115,6 +115,31 @@ public class L$<T> extends ArrayList<T>
     }
 
     /**
+     * For each with currentValue, index, and array
+     * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+     *
+     * @param operator Operator
+     */
+    public void forEach(ForEachOperator2<T> operator)
+    {
+        for (int i = 0; i < this.size(); i++)
+        {
+            operator.run(get(i), i, this);
+        }
+    }
+
+    /**
+     * Lambda operator for the forEach() method
+     *
+     * @param <T> Type
+     */
+    @FunctionalInterface
+    public interface ForEachOperator2<T>
+    {
+        void run(T value, int index, L$<T> list);
+    }
+
+    /**
      * Find the last entry in the list
      *
      * @param def Default value
