@@ -1,7 +1,5 @@
 package org.hydev.veracross.analyzer.utils;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,14 +16,16 @@ import java.util.List;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-11-14 22:29
  */
-public class L$<T>
+public class L$<T> extends ArrayList<T>
 {
-    @Getter
-    private List<T> list;
-
-    private L$(List<T> list)
+    /**
+     * Construct the list with a list
+     *
+     * @param list List
+     */
+    private L$(List<? extends T> list)
     {
-        this.list = list;
+        super(list);
     }
 
     /**
@@ -35,7 +35,7 @@ public class L$<T>
      * @param <T> Type
      * @return Syntax sugar object
      */
-    public static <T> L$<T> l$(List<T> list)
+    public static <T> L$<T> l$(List<? extends T> list)
     {
         return new L$<>(list);
     }
@@ -50,7 +50,7 @@ public class L$<T>
     @SafeVarargs
     public static <T> L$<T> l$(T... list)
     {
-        return new L$<T>(new ArrayList<T>(Arrays.asList(list)));
+        return new L$<>(Arrays.asList(list));
     }
 
     /**
@@ -61,7 +61,7 @@ public class L$<T>
      */
     public T find(FindOperator<T> operator)
     {
-        for (T thisOne : list) if (operator.isIt(thisOne)) return thisOne;
+        for (T thisOne : this) if (operator.isIt(thisOne)) return thisOne;
         return null;
     }
 
@@ -90,16 +90,6 @@ public class L$<T>
     }
 
     /**
-     * Get the length of the list
-     *
-     * @return List size
-     */
-    public int length()
-    {
-        return list.size();
-    }
-
-    /**
      * Find the last entry in the list
      *
      * @param def Default value
@@ -107,7 +97,7 @@ public class L$<T>
      */
     public T last(T def)
     {
-        return list.isEmpty() ? def : list.get(length() - 1);
+        return isEmpty() ? def : get(size() - 1);
     }
 
     /**
