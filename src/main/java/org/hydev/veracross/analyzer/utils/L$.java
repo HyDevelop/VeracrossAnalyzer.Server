@@ -89,6 +89,17 @@ public class L$<T> extends ArrayList<T>
         boolean isIt(T thisOne);
     }
 
+
+    /**
+     * Lambda operator for the forEach() method
+     *
+     * @param <T> Type
+     */
+    @FunctionalInterface
+    public interface ForEachOperator<T>
+    {
+        void run(T value, int index);
+    }
     /**
      * Find the last entry in the list
      *
