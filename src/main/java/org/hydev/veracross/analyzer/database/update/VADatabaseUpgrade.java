@@ -3,6 +3,7 @@ package org.hydev.veracross.analyzer.database.update;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hydev.veracross.analyzer.utils.L$;
+import java.io.IOException;
 
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
@@ -31,6 +32,12 @@ public class VADatabaseUpgrade
         final int currentVersion; // Those are build versions
         final int lowestVersion;
 
-        final Runnable operator;
+        final UpdateOperator operator;
+    }
+
+    @FunctionalInterface
+    private interface UpdateOperator
+    {
+        void run(VeracrossHttpClient veracross) throws IOException;
     }
 }
