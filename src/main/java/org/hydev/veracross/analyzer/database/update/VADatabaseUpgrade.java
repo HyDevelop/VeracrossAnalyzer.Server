@@ -27,42 +27,48 @@ public class VADatabaseUpgrade
 {
     private static L$<VersionUpdate> updates = l$
     (
-        // TODO: Use actual release version number
-        new VersionUpdate(66, 999, veracross ->
-        {
-            // Update: Users database
-
-            // List all existing users
-            List<User> users = VADatabase.query(s -> s.createQuery("from User").list());
-
-            // Get students' information
-            L$<VeracrossStudent> students = l$(veracross.getDirectoryStudents());
-
-            // Give them individual updates
-            users.forEach(user ->
+            // First time initialization
+            new VersionUpdate(-1, 66, veracross ->
             {
-                // Update: First login was actually last login
-                user.setFirstLogin(user.getLastLogin());
 
-                // Find student
-                VeracrossStudent student = students.find(s ->
-                        s.getEmail().equalsIgnoreCase(user.getUsername() + "@stjohnsprep.org"));
+            }),
 
-                // Update: All the other fields
-                user.setFirstName(student.getFirstName());
-                user.setLastName(student.getLastName());
-                user.setNickname(student.getFullName());
-                user.setGraduationYear(student.getGraduationYear());
-                user.setGroups("Student");
-                user.setEmails(student.getEmail());
-                user.setClasses(student.getAllClasses());
-                user.setAvatarUrl(student.getPhotoUrl());
-                user.setToken("Unassigned");
+            // TODO: Use actual release version number
+            new VersionUpdate(66, 999, veracross ->
+            {
+                // Update: Users database
 
-                // Save user
-                VADatabase.saveOrUpdate(user);
-            });
-        })
+                // List all existing users
+                List<User> users = VADatabase.query(s -> s.createQuery("from User").list());
+
+                // Get students' information
+                L$<VeracrossStudent> students = l$(veracross.getDirectoryStudents());
+
+                // Give them individual updates
+                users.forEach(user ->
+                {
+                    // Update: First login was actually last login
+                    user.setFirstLogin(user.getLastLogin());
+
+                    // Find student
+                    VeracrossStudent student = students.find(s ->
+                            s.getEmail().equalsIgnoreCase(user.getUsername() + "@stjohnsprep.org"));
+
+                    // Update: All the other fields
+                    user.setFirstName(student.getFirstName());
+                    user.setLastName(student.getLastName());
+                    user.setNickname(student.getFullName());
+                    user.setGraduationYear(student.getGraduationYear());
+                    user.setGroups("Student");
+                    user.setEmails(student.getEmail());
+                    user.setClasses(student.getAllClasses());
+                    user.setAvatarUrl(student.getPhotoUrl());
+                    user.setToken("Unassigned");
+
+                    // Save user
+                    VADatabase.saveOrUpdate(user);
+                });
+            })
     );
 
     /**
