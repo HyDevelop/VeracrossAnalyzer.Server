@@ -28,9 +28,12 @@ import javax.persistence.Table;
 @Table(name = "va_system_meta")
 public class SystemMeta
 {
+    // ID list
+    public static final int ID_VERSION = 0;
+
     @Id
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
