@@ -182,7 +182,7 @@ public class L$<T> extends ArrayList<T>
      * @param comparator Comparator
      * @return Self
      */
-    public L$ sort(ToIntFunction<? super T> comparator)
+    public L$ sortInt(ToIntFunction<? super T> comparator)
     {
         sort(Comparator.comparingInt(comparator));
         return this;
@@ -195,7 +195,7 @@ public class L$<T> extends ArrayList<T>
      * @param comparator Comparator
      * @return Self
      */
-    public L$ sort(ToLongFunction<? super T> comparator)
+    public L$ sortLong(ToLongFunction<? super T> comparator)
     {
         sort(Comparator.comparingLong(comparator));
         return this;
@@ -208,7 +208,7 @@ public class L$<T> extends ArrayList<T>
      * @param comparator Comparator
      * @return Self
      */
-    public L$ sort(ToDoubleFunction<? super T> comparator)
+    public L$ sortDouble(ToDoubleFunction<? super T> comparator)
     {
         sort(Comparator.comparingDouble(comparator));
         return this;
