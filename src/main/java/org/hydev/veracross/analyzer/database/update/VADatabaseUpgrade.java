@@ -91,6 +91,11 @@ public class VADatabaseUpgrade
         final int currentVersion; // Those are build versions
 
         final UpdateOperator operator;
+
+        public String toString()
+        {
+            return "from " + lowestVersion + " to " + currentVersion;
+        }
     }
 
     @FunctionalInterface
