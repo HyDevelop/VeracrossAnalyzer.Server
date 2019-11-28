@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hydev.veracross.analyzer.database.VADatabase;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,4 +42,28 @@ public class SystemMeta
 
     @Column(name = "value")
     private String value;
+
+    /**
+     * Get entry by id
+     *
+     * @param id ID
+     * @return Value
+     */
+    public static String get(int id)
+    {
+        return VADatabase.query(session -> session.createQuery("from SystemMeta where id=:id", SystemMeta.class)
+                .setParameter("id", id).getSingleResult().name);
+    }
+
+    /**
+     * Get entry by id
+     *
+     * @param id ID
+     * @param name Name
+     * @param value Value
+     */
+    public static void set(int id, String name, String value)
+    {
+        VADatabase.saveOrUpdate(new SystemMeta(id, name, value));
+    }
 }
