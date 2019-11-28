@@ -1,8 +1,6 @@
 package org.hydev.veracross.analyzer.utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * List $weetener
@@ -158,5 +156,18 @@ public class L$<T> extends ArrayList<T>
     public T last()
     {
         return last(null);
+    }
+
+    /**
+     * Sort array. Note: This method changes the array!
+     * Returning the array is just for convenience.
+     *
+     * @param comparator Comparator
+     * @return Self
+     */
+    public L$ sort$(Comparator<? super T> comparator)
+    {
+        sort(comparator);
+        return this;
     }
 }
