@@ -12,6 +12,7 @@ import org.hydev.veracross.sdk.model.VeracrossStudent;
 import java.io.IOException;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
 import static org.hydev.veracross.analyzer.VAConstants.VERSION_BUILD;
 import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.ID_VERSION_BUILD;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
@@ -74,6 +75,46 @@ public class VADatabaseUpgrade
                 });
             })
     );
+
+    /**
+     * Check for updates
+     *
+     * @param veracross Veracross HTTP Client
+     */
+    public static void checkUpdates(VeracrossHttpClient veracross)
+    {
+        // Get current database version from database
+        String currentVersionString = SystemMeta.get(ID_VERSION_BUILD);
+        int currentVersion = currentVersionString == null ? -1 : parseInt(currentVersionString);
+
+        // Sort
+        updates.sortInt(u -> u.lowestVersion);
+
+        // Update everything
+        updates.forEach(update ->
+        {
+            // Has update
+            if (currentVersion <= update.lowestVersion)
+            {
+                // TODO: Remove debug output
+                System.out.println(update.lowestVersion);
+                
+                try
+                {
+                    // Update
+                    update.operator.run(veracross);
+                }
+                catch (IOException e)
+                {
+                    // Set database version to previous version
+                    SystemMeta.setBuildVersion(update.lowestVersion);
+
+                    // Throw exception
+                    throw new RuntimeException("Unable to update " + update, e);
+                }
+            }
+        });
+    }
 
     /**
      * The implementations of this interface represent updates from one
