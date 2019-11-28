@@ -2,6 +2,7 @@ package org.hydev.veracross.analyzer.utils;
 
 import java.util.*;
 import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 /**
  * List $weetener
@@ -182,6 +183,19 @@ public class L$<T> extends ArrayList<T>
     public L$ sort(ToIntFunction<? super T> comparator)
     {
         sort(Comparator.comparingInt(comparator));
+        return this;
+    }
+
+    /**
+     * Sort array. Note: This method changes the array!
+     * Returning the array is just for convenience.
+     *
+     * @param comparator Comparator
+     * @return Self
+     */
+    public L$ sort(ToLongFunction<? super T> comparator)
+    {
+        sort(Comparator.comparingLong(comparator));
         return this;
     }
 }
