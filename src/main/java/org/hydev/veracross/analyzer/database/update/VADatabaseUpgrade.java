@@ -12,11 +12,8 @@ import org.hydev.veracross.sdk.model.VeracrossStudent;
 import java.io.IOException;
 import java.util.List;
 
-import static org.hydev.veracross.analyzer.VAConstants.VERSION;
 import static org.hydev.veracross.analyzer.VAConstants.VERSION_BUILD;
-import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.ID_VERSION;
 import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.ID_VERSION_BUILD;
-import static org.hydev.veracross.analyzer.utils.J$.str;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
@@ -37,7 +34,7 @@ public class VADatabaseUpgrade
             new VersionUpdate(-1, 66, veracross ->
             {
                 // Create meta
-                SystemMeta.set(ID_VERSION_BUILD, "Build Version", str(VERSION_BUILD));
+                SystemMeta.setBuildVersion(VERSION_BUILD);
             }),
 
             // TODO: Use actual release version number
