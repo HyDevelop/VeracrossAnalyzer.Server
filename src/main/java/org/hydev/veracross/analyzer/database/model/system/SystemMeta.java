@@ -55,7 +55,7 @@ public class SystemMeta
     }
 
     /**
-     * Get entry by id
+     * Set entry by id
      *
      * @param id ID
      * @param name Name
@@ -64,5 +64,15 @@ public class SystemMeta
     public static void set(int id, String name, String value)
     {
         VADatabase.saveOrUpdate(new SystemMeta(id, name, value));
+    }
+
+    /**
+     * Set build version
+     *
+     * @param version Build version number
+     */
+    public static void setBuildVersion(int version)
+    {
+        set(ID_VERSION_BUILD, "Build Version", "" + version);
     }
 }
