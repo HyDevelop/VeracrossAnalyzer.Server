@@ -31,7 +31,6 @@ public class SystemMeta
 {
     // ID list
     public static final int ID_VERSION_BUILD = 0;
-    public static final int ID_VERSION = 1;
 
     @Id
     @Column(name = "id")

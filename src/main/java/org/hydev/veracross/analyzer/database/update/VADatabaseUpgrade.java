@@ -38,7 +38,6 @@ public class VADatabaseUpgrade
             {
                 // Create meta
                 SystemMeta.set(ID_VERSION_BUILD, "Build Version", str(VERSION_BUILD));
-                SystemMeta.set(ID_VERSION, "Version", str(VERSION));
             }),
 
             // TODO: Use actual release version number
