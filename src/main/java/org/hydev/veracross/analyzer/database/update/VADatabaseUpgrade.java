@@ -28,7 +28,7 @@ public class VADatabaseUpgrade
     private static L$<VersionUpdate> updates = l$
     (
         // TODO: Use actual release version number
-        new VersionUpdate(999, 66, veracross ->
+        new VersionUpdate(66, 999, veracross ->
         {
             // Update: Users database
 
@@ -73,8 +73,8 @@ public class VADatabaseUpgrade
     @AllArgsConstructor
     private static class VersionUpdate
     {
-        final int currentVersion; // Those are build versions
         final int lowestVersion;
+        final int currentVersion; // Those are build versions
 
         final UpdateOperator operator;
     }
