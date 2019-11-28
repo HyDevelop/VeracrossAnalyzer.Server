@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.utils;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
@@ -210,6 +211,19 @@ public class L$<T> extends ArrayList<T>
     public L$ sort(ToDoubleFunction<? super T> comparator)
     {
         sort(Comparator.comparingDouble(comparator));
+        return this;
+    }
+
+    /**
+     * Sort array. Note: This method changes the array!
+     * Returning the array is just for convenience.
+     *
+     * @param comparator Comparator
+     * @return Self
+     */
+    public L$ sort(Function<? super T, ? extends Comparable> comparator)
+    {
+        sort(Comparator.comparing(comparator));
         return this;
     }
 }
