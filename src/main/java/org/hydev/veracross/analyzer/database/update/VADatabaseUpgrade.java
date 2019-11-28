@@ -2,8 +2,10 @@ package org.hydev.veracross.analyzer.database.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hydev.veracross.analyzer.VAConstants;
 import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.analyzer.database.model.User;
+import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
 import org.hydev.veracross.analyzer.utils.L$;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeracrossStudent;
@@ -11,6 +13,9 @@ import org.hydev.veracross.sdk.model.VeracrossStudent;
 import java.io.IOException;
 import java.util.List;
 
+import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.ID_VERSION;
+import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.ID_VERSION_BUILD;
+import static org.hydev.veracross.analyzer.utils.J$.str;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
@@ -30,7 +35,9 @@ public class VADatabaseUpgrade
             // First time initialization
             new VersionUpdate(-1, 66, veracross ->
             {
-
+                // Create meta
+                VADatabase.saveOrUpdate(new SystemMeta(ID_VERSION_BUILD, "version_build", str(VAConstants.VERSION_BUILD)));
+                VADatabase.saveOrUpdate(new SystemMeta(ID_VERSION, "version", VAConstants.VERSION));
             }),
 
             // TODO: Use actual release version number
