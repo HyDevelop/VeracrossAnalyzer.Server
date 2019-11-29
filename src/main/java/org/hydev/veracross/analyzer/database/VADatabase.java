@@ -7,6 +7,7 @@ import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeracrossStudent;
 
+import javax.persistence.NoResultException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -94,6 +95,10 @@ public class VADatabase
         {
             // Callback
             return operation.callback(session);
+        }
+        catch (NoResultException e)
+        {
+            return null;
         }
         catch (Exception e)
         {
