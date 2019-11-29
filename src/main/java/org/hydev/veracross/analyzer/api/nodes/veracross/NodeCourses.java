@@ -8,11 +8,8 @@ import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.analyzer.utils.CookieUtils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.StJohnsCourse;
 import org.hydev.veracross.sdk.model.VeracrossCourse;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.hydev.veracross.sdk.model.VeracrossCourses;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.database.VADatabase.query;
@@ -47,20 +44,16 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         CookieData cookie = CookieUtils.unwrap(veracross, data.token);
 
         // Get courses
-        List<VeracrossCourse> courses = veracross.getCourses();
-
-        // Convert to St. John's courses
-        List<StJohnsCourse> result = new ArrayList<>();
-        courses.forEach(course -> result.add(new StJohnsCourse(course)));
+        VeracrossCourses courses = veracross.getCourses();
 
         // Throw an access log
         VADatabase.accessLog(cookie.getUsername(), "Access Courses API", "Success");
 
         // Save course info
-        result.forEach(NodeCourses::storeCourse);
+        courses.forEach(NodeCourses::storeCourse);
 
         // Return it
-        return result;
+        return courses;
     }
 
     @Override
