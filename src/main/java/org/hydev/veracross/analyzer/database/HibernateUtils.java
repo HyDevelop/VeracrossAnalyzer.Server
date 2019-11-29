@@ -35,7 +35,10 @@ public class HibernateUtils
             try
             {
                 // Create registry
-                registry = new StandardServiceRegistryBuilder().configure().build();
+                registry = new StandardServiceRegistryBuilder()
+                        .configure("hibernate.open.xml")
+                        .configure("hibernate.secret.xml")
+                        .build();
 
                 // Create MetadataSources
                 MetadataSources sources = new MetadataSources(registry);
