@@ -159,7 +159,7 @@ public class VADatabase
                     s.getEmail().equalsIgnoreCase(username + "@stjohnsprep.org"));
 
             // Create user
-            user = new User(student, "Unassigned");
+            user = User.create(student);
 
             // Save
             saveOrUpdate(user);
