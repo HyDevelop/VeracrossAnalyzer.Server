@@ -5,10 +5,6 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.username">Username</property>
-        <property name="connection.password">Ha Nope!</property>
-        <property name="connection.url">jdbc:mysql://ovh.hydev.org:3306/vera?autoReconnect=true&amp;serverTimezone=UTC</property>
-
 
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="hibernate.c3p0.min_size">5</property>
