@@ -45,6 +45,9 @@
         <mapping class="org.hydev.veracross.analyzer.database.model.AccessLog" />
         <mapping class="org.hydev.veracross.analyzer.database.model.Course" />
         <mapping class="org.hydev.veracross.analyzer.database.model.User" />
+
         <mapping class="org.hydev.veracross.analyzer.database.model.msg.UserMessage" />
+
+        <mapping class="org.hydev.veracross.analyzer.database.model.system.SystemMeta" />
     </session-factory>
 </hibernate-configuration>
