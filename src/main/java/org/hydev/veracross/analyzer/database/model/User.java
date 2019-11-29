@@ -66,7 +66,6 @@ public class User
     @Column(name = "last")
     private String lastName;
 
-    @NonNull
     @Column(name = "nick", length = 32)
     private String nickname;
 
@@ -74,7 +73,6 @@ public class User
     @Column(name = "graduation_year", length = 6)
     private Short graduationYear;
 
-    @NonNull
     @Column(name = "groups")
     private String groups;
 
@@ -86,15 +84,12 @@ public class User
     @Column(name = "classes")
     private String classes;
 
-    @NonNull
     @Column(name = "birthday")
     private String birthday;
 
-    @NonNull
     @Column(name = "avatarUrl")
     private String avatarUrl;
 
-    @NonNull
     @Column(name = "token")
     private String token;
 }
