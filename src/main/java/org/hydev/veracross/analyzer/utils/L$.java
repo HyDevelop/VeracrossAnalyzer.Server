@@ -153,7 +153,7 @@ public class L$<T> extends ArrayList<T>
     }
 
     /**
-     * Find the last entry in the list
+     * Find the last entry in the list or return null
      *
      * @return Last entry
      */
@@ -176,7 +176,7 @@ public class L$<T> extends ArrayList<T>
     }
 
     /**
-     * Find the last entry in array
+     * Find the last entry in array or return null
      *
      * @param arr Array
      * @param <T> Type
@@ -187,6 +187,16 @@ public class L$<T> extends ArrayList<T>
         return last(arr, null);
     }
 
+    /**
+     * Find the first entry in array
+     *
+     * @param def Default
+     * @return First entry
+     */
+    public T first(T def)
+    {
+        return isEmpty() ? def : get(0);
+    }
     /**
      * Sort array. Note: This method changes the array!
      * Returning the array is just for convenience.
