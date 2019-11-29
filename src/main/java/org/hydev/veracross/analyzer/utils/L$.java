@@ -197,6 +197,17 @@ public class L$<T> extends ArrayList<T>
     {
         return isEmpty() ? def : get(0);
     }
+
+    /**
+     * Find the first entry in array or return null
+     *
+     * @return First entry
+     */
+    public T first()
+    {
+        return first(null);
+    }
+
     /**
      * Sort array. Note: This method changes the array!
      * Returning the array is just for convenience.
