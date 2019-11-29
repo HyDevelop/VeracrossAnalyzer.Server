@@ -22,8 +22,8 @@ public class VAUtils
      */
     public static String getUsername(VeracrossStudent student)
     {
-        return student.getFirstName().toLowerCase().replace(" ", "").charAt(0) +
-                student.getLastName().toLowerCase().replace(" ", "") +
+        return student.getFirstName().toLowerCase().replaceAll("[^a-zA-Z0-9]", "").charAt(0) +
+                student.getLastName().toLowerCase().replaceAll("[^a-zA-Z0-9]", "") +
                 student.getGraduationYear().toString().substring(2);
     }
 }
