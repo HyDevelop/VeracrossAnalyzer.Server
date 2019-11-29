@@ -159,7 +159,32 @@ public class L$<T> extends ArrayList<T>
      */
     public T last()
     {
-        return last(null);
+        return last((T) null);
+    }
+
+    /**
+     * Find the last entry in array
+     *
+     * @param arr Array
+     * @param def Default value
+     * @param <T> Type
+     * @return Last entry
+     */
+    public static <T> T last(T[] arr, T def)
+    {
+        return arr.length == 0 ? def : arr[arr.length - 1];
+    }
+
+    /**
+     * Find the last entry in array
+     *
+     * @param arr Array
+     * @param <T> Type
+     * @return Last entry
+     */
+    public static <T> T last(T[] arr)
+    {
+        return last(arr, null);
     }
 
     /**
