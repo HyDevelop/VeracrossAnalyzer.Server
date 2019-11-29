@@ -11,6 +11,7 @@ import org.hydev.veracross.analyzer.api.nodes.NodeTest;
 import org.hydev.veracross.analyzer.api.nodes.NodeVersion;
 import org.hydev.veracross.analyzer.api.nodes.veracross.*;
 import org.hydev.veracross.analyzer.database.VADatabase;
+import org.hydev.veracross.analyzer.database.update.VADatabaseUpgrade;
 
 import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
 
@@ -80,6 +81,9 @@ public class VAApiServer
         {
             throw new RuntimeException("Server start error.", e);
         }
+
+        // Check for updates
+        VADatabaseUpgrade.checkUpdates(VAConstants.DVC);
     }
 
     /**
