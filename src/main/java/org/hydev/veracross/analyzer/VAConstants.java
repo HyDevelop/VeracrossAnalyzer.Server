@@ -5,9 +5,9 @@ import org.hydev.veracross.analyzer.utils.CookieUtils;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import static java.lang.Integer.parseInt;
-import static org.hydev.veracross.analyzer.utils.CookieUtils.*;
-import static org.hydev.veracross.analyzer.utils.L$.l$;
-import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
+import static org.hydev.veracross.analyzer.utils.CookieUtils.CookieData;
+import static org.hydev.veracross.analyzer.utils.L$.last;
+import static org.hydev.veracross.analyzer.utils.ResourceReader.readSplit;
 
 /**
  * This class stores the constants.
@@ -22,11 +22,11 @@ import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
 public class VAConstants
 {
     // Version
-    public static final String VERSION = read("/version.entry".split(";")[0]);
-    public static final int VERSION_BUILD = parseInt(l$(VERSION.split("\\.")).last());
+    public static final String VERSION = readSplit("/version.entry")[0];
+    public static final int VERSION_BUILD = parseInt(last(VERSION.split("\\.")));
 
     // Port
-    public static final int API_SERVER_PORT = parseInt(read("/api-server-port.entry").split(";")[0]);
+    public static final int API_SERVER_PORT = parseInt(readSplit("/api-server-port.entry")[0]);
 
     // Other settings
     public static boolean DEBUG = false;
@@ -42,5 +42,5 @@ public class VAConstants
 
     // Default veracross account
     public static final VeracrossHttpClient DVC = new VeracrossHttpClient();
-    public static final CookieData DVC_COOKIE = CookieUtils.unwrap(DVC, read("/operation-account.entry"));
+    public static final CookieData DVC_COOKIE = CookieUtils.unwrap(DVC, readSplit("/operation-account.entry")[0]);
 }
