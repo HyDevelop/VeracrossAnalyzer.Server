@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.sdk.model.VeracrossStudent;
 
 import javax.persistence.*;
@@ -111,4 +112,15 @@ public class User
 
     @Column(name = "token")
     private String token;
+
+    /**
+     * Save or update
+     *
+     * @return Self
+     */
+    public User save()
+    {
+        VADatabase.saveOrUpdate(this);
+        return this;
+    }
 }
