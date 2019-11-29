@@ -3,14 +3,11 @@ package org.hydev.veracross.analyzer.database.update;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hydev.veracross.analyzer.database.VADatabase;
-import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
 import org.hydev.veracross.analyzer.utils.L$;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.VeracrossStudent;
 
 import java.io.IOException;
-import java.util.List;
 
 import static java.lang.Integer.parseInt;
 import static org.hydev.veracross.analyzer.VAConstants.VERSION_BUILD;
@@ -41,38 +38,8 @@ public class VADatabaseUpgrade
             // TODO: Use actual release version number
             new VersionUpdate(66, 999, veracross ->
             {
-                // Update: Users database
-
-                // List all existing users
-                List<User> users = VADatabase.query(s -> s.createQuery("from User").list());
-
-                // Get students' information
-                L$<VeracrossStudent> students = l$(veracross.getDirectoryStudents());
-
-                // Give them individual updates
-                users.forEach(user ->
-                {
-                    // Update: First login was actually last login
-                    user.setFirstLogin(user.getLastLogin());
-
-                    // Find student
-                    VeracrossStudent student = students.find(s ->
-                            s.getEmail().equalsIgnoreCase(user.getUsername() + "@stjohnsprep.org"));
-
-                    // Update: All the other fields
-                    user.setFirstName(student.getFirstName());
-                    user.setLastName(student.getLastName());
-                    user.setNickname(student.getFullName());
-                    user.setGraduationYear(student.getGraduationYear());
-                    user.setGroups("Student");
-                    user.setEmails(student.getEmail());
-                    user.setClasses(student.getAllClasses());
-                    user.setAvatarUrl(student.getPhotoUrl());
-                    user.setToken("Unassigned");
-
-                    // Save user
-                    VADatabase.saveOrUpdate(user);
-                });
+                // Update: Users database - remove all existing users
+                VADatabase.transaction(session -> session.createQuery("delete from User").executeUpdate());
             })
     );
 
