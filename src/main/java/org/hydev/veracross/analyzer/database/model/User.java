@@ -44,7 +44,7 @@ public class User
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @NonNull
     @Column(name = "username")
@@ -72,7 +72,7 @@ public class User
 
     @NonNull
     @Column(name = "graduation_year", length = 6)
-    private int graduationYear;
+    private Integer graduationYear;
 
     @NonNull
     @Column(name = "groups")
