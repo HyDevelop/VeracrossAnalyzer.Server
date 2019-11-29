@@ -72,7 +72,7 @@ public class User
 
     @NonNull
     @Column(name = "graduation_year", length = 6)
-    private Integer graduationYear;
+    private Short graduationYear;
 
     @NonNull
     @Column(name = "groups")
