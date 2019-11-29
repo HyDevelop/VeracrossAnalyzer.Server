@@ -1,7 +1,6 @@
 package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
-import org.hydev.veracross.analyzer.utils.VAUtils;
 import org.hydev.veracross.sdk.model.VeracrossStudent;
 
 import javax.persistence.*;
@@ -37,10 +36,10 @@ public class User
      *
      * @param student Student data
      */
-    public static User create(VeracrossStudent student)
+    public static User create(VeracrossStudent student, String username)
     {
         return User.builder()
-                .username(VAUtils.getUsername(student))
+                .username(username)
                 .firstLogin(new Date())
                 .lastLogin(new Date())
                 .firstName(student.getFirstName())
@@ -48,7 +47,7 @@ public class User
                 .nickname(student.getFullName())
                 .graduationYear(student.getGraduationYear())
                 .groups("student")
-                .emails(student.getEmail() == null ? VAUtils.getUsername(student) + EMAIL_SUFFIX : student.getEmail())
+                .emails(student.getEmail() == null ? username + EMAIL_SUFFIX : student.getEmail())
                 .classes(student.getAllClasses())
                 .birthday(student.getBirthday())
                 .avatarUrl(null)
