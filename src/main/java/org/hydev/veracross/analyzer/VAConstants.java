@@ -2,6 +2,7 @@ package org.hydev.veracross.analyzer;
 
 import com.google.gson.Gson;
 
+import static java.lang.Integer.parseInt;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
 
@@ -17,11 +18,14 @@ import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
  */
 public class VAConstants
 {
+    // Version
     public static final String VERSION = read("/version.entry".split(";")[0]);
-    public static final int VERSION_BUILD = Integer.parseInt(l$(VERSION.split("\\.")).last());
+    public static final int VERSION_BUILD = parseInt(l$(VERSION.split("\\.")).last());
 
-    public static final int API_SERVER_PORT;
+    // Port
+    public static final int API_SERVER_PORT = parseInt(read("/api-server-port.entry").split(";")[0]);
 
+    // Other settings
     public static boolean DEBUG = false;
     public static Gson GSON = new Gson();
 
@@ -33,9 +37,4 @@ public class VAConstants
     public static final int LENGTH_SCORE_ID = 25;
     public static final int LENGTH_CSRF = 90;
 
-    static
-    {
-        // API server port
-        API_SERVER_PORT = Integer.parseInt(read("/api-server-port.entry").split(";")[0]);
-    }
 }

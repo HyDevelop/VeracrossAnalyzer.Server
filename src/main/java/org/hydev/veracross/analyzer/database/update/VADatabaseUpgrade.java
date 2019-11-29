@@ -98,7 +98,7 @@ public class VADatabaseUpgrade
             {
                 // TODO: Remove debug output
                 System.out.println(update.lowestVersion);
-                
+
                 try
                 {
                     // Update
