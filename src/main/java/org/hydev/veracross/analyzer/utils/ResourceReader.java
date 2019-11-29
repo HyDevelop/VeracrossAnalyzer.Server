@@ -35,4 +35,15 @@ public class ResourceReader
             throw new RuntimeException("Failed to read resource information", e);
         }
     }
+
+    /**
+     * Read resource, split by ';'
+     *
+     * @param name File name
+     * @return String in the file.
+     */
+    public static String[] readSplit(String name)
+    {
+        return read(name).split(";");
+    }
 }
