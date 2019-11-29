@@ -31,3 +31,11 @@ VeracrossAnalyzer.Server.iml
 .idea/dataSources.local.xml
 .idea/dataSources.xml
 .idea/sqldialects.xml
+
+###################
+# Sensative files #
+###################
+
+# Operation Account (DVC)
+# This file stores a token string
+src/main/resources/operation-account.entry
