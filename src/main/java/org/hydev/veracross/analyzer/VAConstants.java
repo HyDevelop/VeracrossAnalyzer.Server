@@ -1,8 +1,11 @@
 package org.hydev.veracross.analyzer;
 
 import com.google.gson.Gson;
+import org.hydev.veracross.analyzer.utils.CookieUtils;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import static java.lang.Integer.parseInt;
+import static org.hydev.veracross.analyzer.utils.CookieUtils.*;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
 
@@ -37,4 +40,7 @@ public class VAConstants
     public static final int LENGTH_SCORE_ID = 25;
     public static final int LENGTH_CSRF = 90;
 
+    // Default veracross account
+    public static final VeracrossHttpClient DVC = new VeracrossHttpClient();
+    public static final CookieData DVC_COOKIE = CookieUtils.unwrap(DVC, read("/operation-account.entry"));
 }
