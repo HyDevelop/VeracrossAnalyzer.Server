@@ -150,36 +150,4 @@ public class VADatabase
     {
         transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
     }
-
-    /**
-     * Find user by the username, and register if it didn't find any records
-     *
-     * @param username Username
-     * @param client Veracross HTTP Client
-     * @return User
-     */
-    public static User getUser(String username, VeracrossHttpClient client) throws IOException
-    {
-        // Check database
-        User user;
-        List<User> users = query(s -> s.createNamedQuery("byUsername", User.class)
-                .setParameter("username", username).list());
-
-        // No user -> Create user
-        if (users.size() == 0)
-        {
-            // Get user data from Veracross
-            VeracrossStudent student = l$(client.getDirectoryStudents()).find(s ->
-                    s.getEmail().equalsIgnoreCase(username + "@stjohnsprep.org"));
-
-            // Create user
-            user = User.create(student);
-
-            // Save
-            saveOrUpdate(user);
-        }
-        else user = users.get(0);
-
-        return user;
-    }
 }
