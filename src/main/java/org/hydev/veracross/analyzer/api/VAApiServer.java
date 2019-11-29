@@ -65,6 +65,9 @@ public class VAApiServer
         VADatabase.query(s -> s.createSQLQuery("SELECT 1 + 1 FROM DUAL"));
         logger.log("Hibernate Initialized!");
 
+        // Check for database updates
+        VADatabaseUpgrade.checkUpdates(VAConstants.DVC);
+
         // Create Jetty server
         Server server = new Server(VAConstants.API_SERVER_PORT);
         server.setHandler(handler);
@@ -81,9 +84,6 @@ public class VAApiServer
         {
             throw new RuntimeException("Server start error.", e);
         }
-
-        // Check for updates
-        VADatabaseUpgrade.checkUpdates(VAConstants.DVC);
     }
 
     /**
