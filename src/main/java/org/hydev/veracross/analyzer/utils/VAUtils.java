@@ -24,6 +24,6 @@ public class VAUtils
     {
         return student.getFirstName().toLowerCase().replace(" ", "").charAt(0) +
                 student.getLastName().toLowerCase().replace(" ", "") +
-                student.getGraduationYear().toString().substring(1);
+                student.getGraduationYear().toString().substring(2);
     }
 }
