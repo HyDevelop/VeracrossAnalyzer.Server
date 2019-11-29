@@ -2,8 +2,10 @@ package org.hydev.veracross.analyzer.database;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hydev.veracross.analyzer.VAConstants;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.User;
+import org.hydev.veracross.analyzer.database.update.VADatabaseUpgrade;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeracrossStudent;
 
@@ -26,6 +28,18 @@ import static org.hydev.veracross.analyzer.utils.L$.l$;
  */
 public class VADatabase
 {
+    /**
+     * Initialize database
+     */
+    public static void init()
+    {
+        // Query a random thing to get Hibernate started
+        VADatabase.query(s -> s.createSQLQuery("SELECT 1 + 1 FROM DUAL"));
+
+        // Check for database updates
+        VADatabaseUpgrade.checkUpdates(VAConstants.DVC);
+    }
+
     /**
      * Start a transaction
      *
