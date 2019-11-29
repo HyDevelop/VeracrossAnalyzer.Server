@@ -53,7 +53,7 @@ public class SystemMeta
         return VADatabase.query(s -> s
                 .createQuery("from SystemMeta where id=:id", SystemMeta.class)
                 .setParameter("id", id)
-                .getSingleResult().name);
+                .getSingleResult().value);
     }
 
     /**
