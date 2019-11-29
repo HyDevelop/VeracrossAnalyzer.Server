@@ -40,6 +40,7 @@ public class User
     {
         return User.builder()
                 .username(username)
+                .schoolPersonPk(student.getPersonPk())
                 .firstLogin(new Date())
                 .lastLogin(new Date())
                 .firstName(student.getFirstName())
@@ -56,8 +57,12 @@ public class User
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private long id;
+
+    @Column(name = "school_person_pk")
+    private Integer schoolPersonPk;
 
     @NonNull
     @Column(name = "username")
