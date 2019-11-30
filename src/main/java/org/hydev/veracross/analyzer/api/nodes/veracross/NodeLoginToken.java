@@ -45,7 +45,10 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         String newToken = CookieUtils.wrap(cookie.getUsername(), veracross, csrf);
 
         // Get user from database
-        User user = VADatabase.getUser(cookie.getUsername(), veracross);
+        User user = User.get(cookie.getUsername());
+
+        // If user doesn't exist, register.
+        if (user == null) user = User.register(cookie.getUsername(), veracross);
 
         // Update last login
         user.setLastLogin(new Date());
