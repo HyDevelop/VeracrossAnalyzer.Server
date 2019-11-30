@@ -73,6 +73,12 @@ public class CookieUtils
     @AllArgsConstructor
     public static class CookieData
     {
+        private Long id;
+        private Integer personPk;
+        private String username;
+        private List<Cookie> cookies;
+        private String csrf;
+
         /**
          * Constructor
          *
@@ -86,12 +92,6 @@ public class CookieUtils
         {
             this(id, personPk, username, client.getCookies().getCookies(), csrf);
         }
-
-        private Long id;
-        private Integer personPk;
-        private String username;
-        private List<Cookie> cookies;
-        private String csrf;
 
         /**
          * Wrap cookies into base64 string.
