@@ -4,6 +4,7 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
+import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
@@ -46,8 +47,12 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         // Throw access log
         AccessLog.record(data.username, "Access Login API", "Before Login");
 
+        // Get pk
+        long pk = veracross.getCourses().getPersonPk();
+
         // Return cookies
-        return CookieUtils.wrap(data.username, veracross, veracross.getCsrfToken());
+        return NodeLoginToken.afterLogin(veracross,
+                new CookieData(null, pk, data.username, veracross, veracross.getCsrfToken()));
     }
 
     @Override
