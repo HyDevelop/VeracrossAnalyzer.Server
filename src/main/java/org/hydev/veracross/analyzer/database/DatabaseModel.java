@@ -17,9 +17,19 @@ public abstract class DatabaseModel<T>
      *
      * @return Self
      */
-    public T save()
+    public T saveOrUpdate()
     {
         VADatabase.saveOrUpdate(this);
+        return (T) this;
+    }
+    /**
+     * Save or update
+     *
+     * @return Self
+     */
+    public T save()
+    {
+        VADatabase.save(this);
         return (T) this;
     }
 }

@@ -129,4 +129,15 @@ public class VADatabase
     {
         transaction(s -> s.saveOrUpdate(object));
     }
+
+    /**
+     * Save
+     *
+     * @param object Database model object
+     * @param <T> Type of the object
+     */
+    public static <T> void save(T object)
+    {
+        transaction(s -> s.save(object));
+    }
 }
