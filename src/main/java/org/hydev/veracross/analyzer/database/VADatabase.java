@@ -3,18 +3,9 @@ package org.hydev.veracross.analyzer.database;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hydev.veracross.analyzer.VAConstants;
-import org.hydev.veracross.analyzer.database.model.AccessLog;
-import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.database.update.VADatabaseUpgrade;
-import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.VeracrossStudent;
 
 import javax.persistence.NoResultException;
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-
-import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
  * This class is for database operations
@@ -137,17 +128,5 @@ public class VADatabase
     public static <T> void saveOrUpdate(T object)
     {
         transaction(s -> s.saveOrUpdate(object));
-    }
-
-    /**
-     * Record an access log
-     *
-     * @param user Username
-     * @param action Action
-     * @param details Details
-     */
-    public static void accessLog(String user, String action, String details)
-    {
-        transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
     }
 }

@@ -46,4 +46,16 @@ public class AccessLog extends DatabaseModel<AccessLog>
     @NonNull
     @Column(name = "time")
     private Date time;
+
+    /**
+     * Record an access log
+     *
+     * @param user Username
+     * @param action Action
+     * @param details Details
+     */
+    public static void record(String user, String action, String details)
+    {
+        VADatabase.transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
+    }
 }
