@@ -3,10 +3,10 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.utils.CookieUtils;
-import org.hydev.veracross.sdk.VeracrossHttpClient;
+import org.hydev.veracross.analyzer.utils.CookieData;
 
-import static org.hydev.veracross.analyzer.VAConstants.*;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_ASSIGNMENTS_ID;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
 /**
  * This api node obtains the courses grading information from Veracross
@@ -30,14 +30,8 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
-        // Create http client
-        VeracrossHttpClient veracross = new VeracrossHttpClient();
-
-        // Unwrap cookies
-        CookieUtils.unwrap(veracross, data.token);
-
         // Return grading
-        return veracross.getGrading(data.assignmentsId);
+        return CookieData.restore(data.token).getGrading(data.assignmentsId);
     }
 
     @Override
