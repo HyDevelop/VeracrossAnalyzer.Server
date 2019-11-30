@@ -2,12 +2,16 @@ package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
 import org.hydev.veracross.analyzer.database.VADatabase;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeracrossStudent;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.EMAIL_SUFFIX;
+import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
  * User database model
@@ -120,5 +124,22 @@ public class User
     {
         VADatabase.saveOrUpdate(this);
         return this;
+    }
+
+    /**
+     * Find user by the username or return null
+     *
+     * @param username Username
+     * @return User
+     */
+    public static User get(String username) throws IOException
+    {
+        // Check database
+        List<User> users = VADatabase.query(s -> s
+                .createQuery("from User where username=:username", User.class)
+                .setParameter("username", username).list());
+
+        // Return
+        return l$(users).first();
     }
 }
