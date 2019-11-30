@@ -78,6 +78,9 @@ public class VADatabaseUpgrade
                 }
             }
         });
+
+        // Set version number
+        SystemMeta.setBuildVersion(VERSION_BUILD);
     }
 
     /**
