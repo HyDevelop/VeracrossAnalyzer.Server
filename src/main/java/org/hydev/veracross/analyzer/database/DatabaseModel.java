@@ -12,4 +12,14 @@ package org.hydev.veracross.analyzer.database;
  */
 public abstract class DatabaseModel<T>
 {
+    /**
+     * Save or update
+     *
+     * @return Self
+     */
+    public T save()
+    {
+        VADatabase.saveOrUpdate(this);
+        return (T) this;
+    }
 }
