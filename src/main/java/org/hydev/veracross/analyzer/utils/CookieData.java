@@ -33,7 +33,7 @@ public class CookieData
     private static final Type PARSABLE_COOKIES_TYPE = new TypeToken<ArrayList<BasicClientCookie>>(){}.getType();
 
     private Long id;
-    private Integer personPk;
+    private Long personPk;
     private String username;
     private List<Cookie> cookies;
     private String csrf;
@@ -47,7 +47,7 @@ public class CookieData
      * @param client Http client
      * @param csrf CSRF token
      */
-    public CookieData(Long id, Integer personPk, String username, GeneralHttpClient client, String csrf)
+    public CookieData(Long id, Long personPk, String username, GeneralHttpClient client, String csrf)
     {
         this(id, personPk, username, client.getCookies().getCookies(), csrf);
     }
@@ -65,7 +65,7 @@ public class CookieData
 
         // Deserialize cookies
         id = json.get("id").getAsLong();
-        personPk = json.get("personPk").getAsInt();
+        personPk = json.get("personPk").getAsLong();
         username = json.get("username").getAsString();
         cookies = GSON.fromJson(json.get("cookies"), PARSABLE_COOKIES_TYPE);
         csrf = json.get("csrf").getAsString();
