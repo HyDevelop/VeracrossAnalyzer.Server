@@ -8,6 +8,7 @@ import lombok.Data;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.hydev.veracross.sdk.GeneralHttpClient;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -91,5 +92,18 @@ public class CookieData
     {
         String json = GSON.toJson(this);
         return Base64Utils.encodeBase64C(json.getBytes());
+    }
+
+    /**
+     * Restore a veracross http client
+     *
+     * @param wrap Wrapped cookies
+     * @return Veracross http client
+     */
+    public static VeracrossHttpClient restore(String wrap)
+    {
+        VeracrossHttpClient client = new VeracrossHttpClient();
+        new CookieData(wrap).store(client);
+        return client;
     }
 }
