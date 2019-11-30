@@ -36,7 +36,7 @@ public class User
      *
      * @param student Student data
      */
-    public static User create(VeracrossStudent student, String username)
+    private static User create(VeracrossStudent student, String username)
     {
         return User.builder()
                 .username(username)
@@ -137,5 +137,22 @@ public class User
 
         // Return
         return l$(users).first();
+    }
+
+    /**
+     * Register user
+     *
+     * @param username Username
+     */
+    public static User register(String username, VeracrossHttpClient client) throws IOException
+    {
+        // Get person pk
+        long personPk = client.getCourses().getPersonPk();
+
+        // Get user data from Veracross
+        VeracrossStudent student = l$(client.getDirectoryStudents()).find(s -> s.getPersonPk() == personPk);
+
+        // Create user
+        return User.create(student, username).save();
     }
 }
