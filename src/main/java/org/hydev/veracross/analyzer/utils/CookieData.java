@@ -1,5 +1,6 @@
 package org.hydev.veracross.analyzer.utils;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
+import static org.hydev.veracross.analyzer.utils.J$.null$;
 
 /**
  * This class is an utility class for cookies.
@@ -64,8 +66,8 @@ public class CookieData
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
 
         // Deserialize cookies
-        id = json.get("id").getAsLong();
-        personPk = json.get("personPk").getAsLong();
+        id = null$(json.get("id"), JsonElement::getAsLong);
+        personPk = null$(json.get("personPk"), JsonElement::getAsLong);
         username = json.get("username").getAsString();
         cookies = GSON.fromJson(json.get("cookies"), PARSABLE_COOKIES_TYPE);
         csrf = json.get("csrf").getAsString();
