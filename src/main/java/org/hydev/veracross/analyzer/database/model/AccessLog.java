@@ -2,7 +2,6 @@ package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
-import org.hydev.veracross.analyzer.database.VADatabase;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -56,6 +55,6 @@ public class AccessLog extends DatabaseModel<AccessLog>
      */
     public static void record(String user, String action, String details)
     {
-        VADatabase.transaction(s -> s.save(new AccessLog(user, action, details, new Date())));
+        new AccessLog(user, action, details, new Date()).save();
     }
 }
