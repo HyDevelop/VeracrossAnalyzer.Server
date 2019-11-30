@@ -29,10 +29,6 @@ import static org.hydev.veracross.analyzer.utils.L$.l$;
 @AllArgsConstructor
 @Entity
 @Table(name = "va_users")
-@NamedQueries(
-{
-    @NamedQuery(name="byUsername", query="from User where username=:username"),
-})
 public class User
 {
     /**
