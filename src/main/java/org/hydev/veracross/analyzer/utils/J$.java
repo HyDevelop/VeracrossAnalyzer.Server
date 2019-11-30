@@ -54,7 +54,7 @@ public class J$
      * @param <T> Type
      * @return Result or null
      */
-    public static <T, R> R null$(T value, Function<? super T, R> operation)
+    public static <T, R> R null$(T value, Function<T, R> operation)
     {
         try
         {
