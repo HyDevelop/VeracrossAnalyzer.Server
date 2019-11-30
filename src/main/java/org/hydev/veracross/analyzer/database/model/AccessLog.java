@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * TODO: Write a description for this class!
+ * Database model for access logs.
  * <p>
  * Class created by the HyDEV Team on 2019-10-09!
  *

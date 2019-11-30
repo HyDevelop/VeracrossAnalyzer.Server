@@ -1,7 +1,8 @@
 package org.hydev.veracross.analyzer.database;
 
 /**
- * TODO: Write a description for this class!
+ * General database model class. Contains methods that are useful in all
+ * database model classes.
  * <p>
  * Class created by the HyDEV Team on 2019-11-29!
  *

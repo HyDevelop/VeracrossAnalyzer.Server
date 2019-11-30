@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * TODO: Write a description for this class!
+ * Database model for courses.
  * <p>
  * Class created by the HyDEV Team on 2019-10-09!
  *
