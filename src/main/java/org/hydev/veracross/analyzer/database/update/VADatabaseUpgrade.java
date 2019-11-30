@@ -63,9 +63,6 @@ public class VADatabaseUpgrade
             // Has update
             if (currentVersion <= update.lowestVersion)
             {
-                // TODO: Remove debug output
-                System.out.println(update.lowestVersion);
-
                 try
                 {
                     // Update
