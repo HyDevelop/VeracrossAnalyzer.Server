@@ -2,8 +2,12 @@ package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
+import org.hydev.veracross.analyzer.database.VADatabase;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * TODO: Write a description for this class!
@@ -37,4 +41,18 @@ public class Course extends DatabaseModel<Course>
 
     @Column(name = "teacher")
     private String teacher;
+
+    /**
+     * Get course by id
+     *
+     * @param id ID
+     * @return Course
+     */
+    public static Course get(long id)
+    {
+        return VADatabase.query(s -> s
+                .createQuery("from Course where id=:id", Course.class)
+                .setParameter("id", id)
+                .getSingleResult());
+    }
 }
