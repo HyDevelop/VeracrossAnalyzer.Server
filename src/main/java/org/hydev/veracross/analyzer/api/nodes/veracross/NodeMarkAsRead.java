@@ -3,11 +3,11 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.utils.CookieUtils;
-import org.hydev.veracross.analyzer.utils.CookieUtils.CookieData;
+import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
-import static org.hydev.veracross.analyzer.VAConstants.*;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_SCORE_ID;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
 /**
  * This api node marks unread assignment as read
@@ -34,7 +34,7 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
         // Unwrap cookies
-        CookieData cookies = CookieUtils.unwrap(veracross, data.token);
+        CookieData cookies = new CookieData(data.token).store(veracross);
 
         // Mark as read
         boolean success = veracross.markAssignmentAsRead(cookies.getCsrf(), data.scoreId);
