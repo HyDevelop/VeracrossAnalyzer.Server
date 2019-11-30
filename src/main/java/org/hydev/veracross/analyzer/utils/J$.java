@@ -56,6 +56,13 @@ public class J$
      */
     public static <T, R> R null$(T value, Function<? super T, R> operation)
     {
-        return value == null ? null : operation.apply(value);
+        try
+        {
+            return value == null ? null : operation.apply(value);
+        }
+        catch (NullPointerException ignored)
+        {
+            return null;
+        }
     }
 }
