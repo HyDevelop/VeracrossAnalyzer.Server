@@ -67,12 +67,14 @@ public class CookieUtils
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
 
         // Deserialize cookies
+        long id = json.get("id").getAsLong();
+        int personPk = json.get("personPk").getAsInt();
         String username = json.get("username").getAsString();
         List<Cookie> cookies = GSON.fromJson(json.get("cookies"), PARSABLE_COOKIES_TYPE);
         String csrf = json.get("csrf").getAsString();
 
         // Return it
-        return new CookieData(username, cookies, csrf);
+        return new CookieData(id, personPk, username, cookies, csrf);
     }
 
     /**
@@ -96,6 +98,8 @@ public class CookieUtils
     @AllArgsConstructor
     public static class CookieData
     {
+        private long id;
+        private int personPk;
         private String username;
         private List<Cookie> cookies;
         private String csrf;
