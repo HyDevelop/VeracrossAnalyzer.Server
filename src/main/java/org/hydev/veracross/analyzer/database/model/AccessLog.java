@@ -21,6 +21,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "va_access_log")
 public class AccessLog extends DatabaseModel<AccessLog>

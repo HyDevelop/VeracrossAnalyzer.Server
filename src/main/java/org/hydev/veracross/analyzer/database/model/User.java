@@ -28,6 +28,7 @@ import static org.hydev.veracross.analyzer.utils.L$.l$;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "va_users")
 public class User extends DatabaseModel<User>

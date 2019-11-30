@@ -1,9 +1,6 @@
 package org.hydev.veracross.analyzer.database.model.msg;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
 
 import javax.persistence.*;
@@ -23,11 +20,12 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "va_msg_user")
 @NamedQueries(
 {
-        @NamedQuery(name="messageByUser", query="from UserMessage where user=:user"),
+        @NamedQuery(name="messageByUser", query="from UserMessage where senderId=:senderId"),
 })
 public class UserMessage extends DatabaseModel<UserMessage>
 {
