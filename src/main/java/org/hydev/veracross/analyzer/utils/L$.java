@@ -205,7 +205,7 @@ public class L$<T> extends ArrayList<T>
      */
     public T first()
     {
-        return first(null);
+        return first((T) null);
     }
 
     /**
