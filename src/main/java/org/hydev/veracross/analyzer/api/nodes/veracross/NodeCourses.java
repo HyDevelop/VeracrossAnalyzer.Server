@@ -3,7 +3,7 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.database.VADatabase;
+import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
@@ -46,7 +46,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         VeracrossCourses courses = veracross.getCourses();
 
         // Throw access log
-        VADatabase.accessLog(cookie.getUsername(), "Access Courses API", "Success");
+        AccessLog.record(cookie.getUsername(), "Access Courses API", "Success");
 
         // Save course info
         courses.forEach(NodeCourses::storeCourse);

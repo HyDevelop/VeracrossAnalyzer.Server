@@ -3,14 +3,9 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.database.VADatabase;
-import org.hydev.veracross.analyzer.database.model.User;
-import org.hydev.veracross.analyzer.utils.CookieUtils;
+import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-
-import java.util.Date;
-import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_PASSWORD;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
@@ -48,8 +43,8 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         // Login to Veracross
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
-        // Throw an access log
-        VADatabase.accessLog(data.username, "Access Login API", "Before Login");
+        // Throw access log
+        AccessLog.record(data.username, "Access Login API", "Before Login");
 
         // Return cookies
         return CookieUtils.wrap(data.username, veracross, veracross.getCsrfToken());
