@@ -1,9 +1,6 @@
 package org.hydev.veracross.analyzer.database.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.sdk.model.VeracrossStudent;
 
@@ -25,6 +22,7 @@ import static org.hydev.veracross.analyzer.VAConstants.EMAIL_SUFFIX;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "va_users")
 @NamedQueries(
