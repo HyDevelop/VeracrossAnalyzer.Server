@@ -30,18 +30,6 @@ public class CookieUtils
     private static final Type PARSABLE_COOKIES_TYPE = new TypeToken<ArrayList<BasicClientCookie>>(){}.getType();
 
     /**
-     * Wrap cookies into base64 string.
-     *
-     * @param cookieData Cookie data
-     * @return Wrapped cookies
-     */
-    public static String wrap(CookieData cookieData)
-    {
-        String json = GSON.toJson(cookieData);
-        return Base64Utils.encodeBase64C(json.getBytes());
-    }
-
-    /**
      * Unwrap cookies
      *
      * @param wrap Wrapped cookies
@@ -104,5 +92,17 @@ public class CookieUtils
         private String username;
         private List<Cookie> cookies;
         private String csrf;
+
+        /**
+         * Wrap cookies into base64 string.
+         *
+         * @param cookieData Cookie data
+         * @return Wrapped cookies
+         */
+        public String wrap(CookieData cookieData)
+        {
+            String json = GSON.toJson(cookieData);
+            return Base64Utils.encodeBase64C(json.getBytes());
+        }
     }
 }
