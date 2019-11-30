@@ -66,7 +66,7 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
      */
     public static void set(int id, String name, String value)
     {
-        VADatabase.saveOrUpdate(new SystemMeta(id, name, value));
+        VADatabase.save(new SystemMeta(id, name, value));
     }
 
     /**

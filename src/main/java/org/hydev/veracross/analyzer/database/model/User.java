@@ -146,6 +146,6 @@ public class User extends DatabaseModel<User>
         VeracrossStudent student = l$(client.getDirectoryStudents()).find(s -> s.getPersonPk() == personPk);
 
         // Create user
-        return User.create(student, username).save();
+        return User.create(student, username).insert();
     }
 }

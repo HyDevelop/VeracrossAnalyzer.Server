@@ -58,6 +58,6 @@ public class AccessLog extends DatabaseModel<AccessLog>
      */
     public static void record(String user, String action, String details)
     {
-        new AccessLog(user, action, details, new Date()).save();
+        new AccessLog(user, action, details, new Date()).insert();
     }
 }

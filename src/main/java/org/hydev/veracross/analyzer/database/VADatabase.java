@@ -125,7 +125,7 @@ public class VADatabase
      * @param object Database model object
      * @param <T> Type of the object
      */
-    public static <T> void saveOrUpdate(T object)
+    public static <T> void save(T object)
     {
         transaction(s -> s.saveOrUpdate(object));
     }
@@ -136,7 +136,7 @@ public class VADatabase
      * @param object Database model object
      * @param <T> Type of the object
      */
-    public static <T> void save(T object)
+    public static <T> void insert(T object)
     {
         transaction(s -> s.save(object));
     }

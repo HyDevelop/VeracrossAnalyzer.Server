@@ -80,7 +80,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         // Create one if it does not exist
         if (Course.get(course.getId()) == null)
         {
-            new Course(course.getId(), course.getName(), course.getTeacherName()).save();
+            new Course(course.getId(), course.getName(), course.getTeacherName()).insert();
         }
     }
 }
