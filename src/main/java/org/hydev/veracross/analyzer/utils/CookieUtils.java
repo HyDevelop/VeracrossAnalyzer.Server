@@ -32,19 +32,6 @@ public class CookieUtils
     /**
      * Wrap cookies into base64 string.
      *
-     * @param username Username
-     * @param client Http client
-     * @param csrf CSRF token
-     * @return Wrapped cookies
-     */
-    public static String wrap(String username, GeneralHttpClient client, String csrf)
-    {
-        return wrap(new CookieData(username, client.getCookies().getCookies(), csrf));
-    }
-
-    /**
-     * Wrap cookies into base64 string.
-     *
      * @param cookieData Cookie data
      * @return Wrapped cookies
      */
@@ -98,8 +85,22 @@ public class CookieUtils
     @AllArgsConstructor
     public static class CookieData
     {
-        private long id;
-        private int personPk;
+        /**
+         * Constructor
+         *
+         * @param id User ID
+         * @param personPk User school pk
+         * @param username Username
+         * @param client Http client
+         * @param csrf CSRF token
+         */
+        public CookieData(Long id, Integer personPk, String username, GeneralHttpClient client, String csrf)
+        {
+            this(id, personPk, username, client.getCookies().getCookies(), csrf);
+        }
+
+        private Long id;
+        private Integer personPk;
         private String username;
         private List<Cookie> cookies;
         private String csrf;
