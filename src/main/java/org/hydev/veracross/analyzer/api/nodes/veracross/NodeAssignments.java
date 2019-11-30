@@ -3,12 +3,13 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.utils.CookieUtils;
+import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.io.IOException;
 
-import static org.hydev.veracross.analyzer.VAConstants.*;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_ASSIGNMENTS_ID;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
 /**
  * This api node obtains the assignments information from Veracross and
@@ -33,13 +34,13 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
     protected Object processJson(ApiAccess access, Model data) throws IOException
     {
         // Create http client
-        VeracrossHttpClient veracross = new VeracrossHttpClient();
+        VeracrossHttpClient client = new VeracrossHttpClient();
 
         // Unwrap cookies
-        CookieUtils.unwrap(veracross, data.token);
+        new CookieData(data.token).store(client);
 
         // Get it
-        return veracross.getAssignments(data.assignmentsId);
+        return client.getAssignments(data.assignmentsId);
     }
 
     @Override
