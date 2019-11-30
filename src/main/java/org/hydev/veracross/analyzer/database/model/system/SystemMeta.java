@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hydev.veracross.analyzer.database.DatabaseModel;
 import org.hydev.veracross.analyzer.database.VADatabase;
 
 import javax.persistence.Column;
@@ -27,7 +28,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "va_system_meta")
-public class SystemMeta
+public class SystemMeta extends DatabaseModel<SystemMeta>
 {
     // ID list
     public static final int ID_VERSION_BUILD = 0;

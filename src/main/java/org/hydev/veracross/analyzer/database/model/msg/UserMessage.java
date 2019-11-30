@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hydev.veracross.analyzer.database.DatabaseModel;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,7 +29,7 @@ import java.util.Date;
 {
         @NamedQuery(name="messageByUser", query="from UserMessage where user=:user"),
 })
-public class UserMessage
+public class UserMessage extends DatabaseModel<UserMessage>
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
+import org.hydev.veracross.analyzer.database.DatabaseModel;
 import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeracrossStudent;
@@ -29,7 +30,7 @@ import static org.hydev.veracross.analyzer.utils.L$.l$;
 @AllArgsConstructor
 @Entity
 @Table(name = "va_users")
-public class User
+public class User extends DatabaseModel<User>
 {
     /**
      * Create user from student data
@@ -110,17 +111,6 @@ public class User
 
     @Column(name = "token")
     private String token;
-
-    /**
-     * Save or update
-     *
-     * @return Self
-     */
-    public User save()
-    {
-        VADatabase.saveOrUpdate(this);
-        return this;
-    }
 
     /**
      * Find user by the username or return null

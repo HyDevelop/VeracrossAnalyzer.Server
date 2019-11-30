@@ -1,6 +1,8 @@
 package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
+import org.hydev.veracross.analyzer.database.DatabaseModel;
+import org.hydev.veracross.analyzer.database.VADatabase;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,7 +24,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "va_access_log")
-public class AccessLog
+public class AccessLog extends DatabaseModel<AccessLog>
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

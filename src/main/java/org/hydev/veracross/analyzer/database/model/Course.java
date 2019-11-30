@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
+import org.hydev.veracross.analyzer.database.DatabaseModel;
 
 import javax.persistence.*;
 
@@ -24,7 +25,7 @@ import javax.persistence.*;
 {
     @NamedQuery(name="byId", query="from Course where id=:id"),
 })
-public class Course
+public class Course extends DatabaseModel<Course>
 {
     @Id
     @Column(name = "id")
