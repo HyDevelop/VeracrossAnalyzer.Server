@@ -85,12 +85,11 @@ public class CookieData
     /**
      * Wrap cookies into base64 string.
      *
-     * @param cookieData Cookie data
      * @return Wrapped cookies
      */
-    public String wrap(CookieData cookieData)
+    public String wrap()
     {
-        String json = GSON.toJson(cookieData);
+        String json = GSON.toJson(this);
         return Base64Utils.encodeBase64C(json.getBytes());
     }
 }
