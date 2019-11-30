@@ -1,5 +1,7 @@
 package org.hydev.veracross.analyzer.utils;
 
+import java.util.function.Function;
+
 /**
  * Java $weetener: General syntax sugar.
  * <p>
@@ -43,5 +45,17 @@ public class J$
     public static String str(Object o)
     {
         return o.toString();
+    }
+
+    /**
+     * Null safe operation
+     *
+     * @param operation Operation
+     * @param <T> Type
+     * @return Result or null
+     */
+    public static <T, R> R null$(T value, Function<? super T, R> operation)
+    {
+        return value == null ? null : operation.apply(value);
     }
 }

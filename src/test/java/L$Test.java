@@ -4,7 +4,7 @@ import org.hydev.veracross.analyzer.utils.L$;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
- * TODO: Write a description for this class!
+ * Tester for L$
  * <p>
  * Class created by the HyDEV Team on 2019-11-14!
  *
