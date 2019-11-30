@@ -26,10 +26,6 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "va_courses")
-@NamedQueries(
-{
-    @NamedQuery(name="byId", query="from Course where id=:id"),
-})
 public class Course extends DatabaseModel<Course>
 {
     @Id
