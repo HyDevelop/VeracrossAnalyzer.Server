@@ -1,6 +1,8 @@
 package org.hydev.veracross.analyzer;
 
 import com.google.gson.Gson;
+import org.hydev.veracross.analyzer.utils.CookieData;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import static java.lang.Integer.parseInt;
 import static org.hydev.veracross.analyzer.utils.L$.last;
@@ -36,6 +38,10 @@ public class VAConstants
     public static final int LENGTH_ASSIGNMENTS_ID = 15;
     public static final int LENGTH_SCORE_ID = 25;
     public static final int LENGTH_CSRF = 90;
+
+    // Default veracross account
+    public static final VeracrossHttpClient DVC = new VeracrossHttpClient();
+    public static final CookieData DVC_COOKIE = new CookieData(readSplit("/operation-account.entry")[0]).store(DVC);
 
     // School Email suffix
     public static final String EMAIL_SUFFIX = "@stjohnsprep.org";
