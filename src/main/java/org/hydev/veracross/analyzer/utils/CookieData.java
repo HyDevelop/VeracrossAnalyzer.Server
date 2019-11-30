@@ -76,7 +76,7 @@ public class CookieData
      * @param client Http client
      * @return self
      */
-    public CookieData restore(GeneralHttpClient client)
+    public CookieData store(GeneralHttpClient client)
     {
         client.restoreCookies(cookies);
         return this;
