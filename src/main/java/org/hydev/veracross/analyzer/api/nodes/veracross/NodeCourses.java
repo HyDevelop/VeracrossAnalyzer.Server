@@ -11,8 +11,6 @@ import org.hydev.veracross.sdk.model.VeracrossCourse;
 import org.hydev.veracross.sdk.model.VeracrossCourses;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
-import static org.hydev.veracross.analyzer.database.VADatabase.query;
-import static org.hydev.veracross.analyzer.database.VADatabase.transaction;
 
 /**
  * This api node obtains the courses information from Veracross and
@@ -80,10 +78,9 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     private static void storeCourse(VeracrossCourse course)
     {
         // Create one if it does not exist
-        if (query(s -> s.createNamedQuery("byId", Course.class).setParameter("id", course.getId()).list()).size() == 0)
+        if (Course.get(course.getId()) == null)
         {
-            Course saved = new Course(course.getId(), course.getName(), course.getTeacherName());
-            transaction(s -> s.save(saved));
+            new Course(course.getId(), course.getName(), course.getTeacherName()).save();
         }
     }
 }
