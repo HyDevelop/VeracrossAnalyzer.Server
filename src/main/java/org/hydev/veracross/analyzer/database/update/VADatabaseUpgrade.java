@@ -35,8 +35,8 @@ public class VADatabaseUpgrade
                 SystemMeta.setBuildVersion(VERSION_BUILD);
             }),
 
-            // TODO: Use actual release version number
-            new VersionUpdate(66, 999, veracross ->
+            // v66 to Latest
+            new VersionUpdate(66, VERSION_BUILD, veracross ->
             {
                 // Update: Users database - remove all existing users
                 VADatabase.transaction(session -> session.createQuery("delete from User").executeUpdate());
