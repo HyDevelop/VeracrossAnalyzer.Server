@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Accessors(fluent = true)
 @Entity
 @Table(name = "va_access_log")
 public class AccessLog extends DatabaseModel<AccessLog>

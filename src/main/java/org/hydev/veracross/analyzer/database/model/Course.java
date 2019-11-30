@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
 import org.hydev.veracross.analyzer.database.VADatabase;
 
@@ -24,6 +25,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Accessors(fluent = true)
 @Entity
 @Table(name = "va_courses")
 public class Course extends DatabaseModel<Course>

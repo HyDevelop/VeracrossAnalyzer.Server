@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
 import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
@@ -29,6 +30,7 @@ import static org.hydev.veracross.analyzer.utils.L$.l$;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Accessors(fluent = true)
 @Entity
 @Table(name = "va_users")
 public class User extends DatabaseModel<User>

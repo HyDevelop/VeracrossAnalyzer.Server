@@ -1,6 +1,7 @@
 package org.hydev.veracross.analyzer.database.model.msg;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Accessors(fluent = true)
 @Entity
 @Table(name = "va_msg_user")
 @NamedQueries(
