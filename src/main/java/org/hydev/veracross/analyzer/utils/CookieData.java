@@ -71,15 +71,15 @@ public class CookieData
     }
 
     /**
-     * Unwrap cookies and store them back to the http client.
+     * Restore cookies to http client
      *
      * @param client Http client
-     * @param wrap Wrapped cookies
+     * @return self
      */
-    public CookieData(GeneralHttpClient client, String wrap)
+    public CookieData restore(GeneralHttpClient client)
     {
-        this(wrap);
         client.restoreCookies(cookies);
+        return this;
     }
 
     /**
