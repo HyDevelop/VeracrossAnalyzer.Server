@@ -1,5 +1,6 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross
 
+import com.github.salomonbrys.kotson.jsonObject
 import org.hydev.veracross.analyzer.VAConstants
 import org.hydev.veracross.analyzer.api.ApiAccess
 import org.hydev.veracross.analyzer.api.JsonApiConfig
@@ -39,11 +40,9 @@ class NodeLoginToken : JsonApiNode<NodeLoginToken.Model>()
         // Verify login
         if (!client.validateLogin())
         {
-            return object
-            {
-                val success = false
-                val user = "logout"
-            }
+            return jsonObject(
+                    "success" to false,
+                    "user" to "logout")
         }
 
         // Update token
@@ -79,11 +78,9 @@ class NodeLoginToken : JsonApiNode<NodeLoginToken.Model>()
             }.save()
 
             // Return
-            return object
-            {
-                val user = user
-                val maintenance = SystemMeta.get(SystemMeta.ID_MAINTENANCE)
-            }
+            return jsonObject(
+                    "user" to user,
+                    "maintenance" to SystemMeta.get(SystemMeta.ID_MAINTENANCE))
         }
     }
 
