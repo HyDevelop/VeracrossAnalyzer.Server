@@ -70,11 +70,11 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
         VADatabase.save(new SystemMeta(id, name, value));
     }
 
-    /**
-     * Set build version
-     *
-     * @param version Build version number
-     */
+    public static int getBuildVersion()
+    {
+        return Integer.parseInt(get(ID_VERSION_BUILD));
+    }
+
     public static void setBuildVersion(int version)
     {
         set(ID_VERSION_BUILD, "Build Version", "" + version);
