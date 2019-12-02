@@ -34,11 +34,11 @@ public class CookieData
 {
     private static final Type PARSABLE_COOKIES_TYPE = new TypeToken<ArrayList<BasicClientCookie>>(){}.getType();
 
-    private Long id;
-    private Long personPk;
-    private String username;
-    private List<Cookie> cookies;
-    private String csrf;
+    public Long id;
+    public Long personPk;
+    public String username;
+    public List<Cookie> cookies;
+    public String csrf;
 
     /**
      * Constructor
