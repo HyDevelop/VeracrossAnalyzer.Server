@@ -79,4 +79,9 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
     {
         set(ID_VERSION_BUILD, "Build Version", "" + version);
     }
+
+    public static String getMaintenance()
+    {
+        return get(ID_MAINTENANCE);
+    }
 }
