@@ -84,4 +84,9 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
     {
         return get(ID_MAINTENANCE);
     }
+
+    public static void setMaintenance(String maintenance)
+    {
+        set(ID_MAINTENANCE, "Maintenance", maintenance);
+    }
 }
