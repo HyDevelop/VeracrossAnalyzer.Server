@@ -82,6 +82,7 @@ class NodeLoginToken : JsonApiNode<NodeLoginToken.Model?>()
             return object
             {
                 val user = user
+                val maintenance = SystemMeta.get(SystemMeta.ID_MAINTENANCE)
             }
         }
     }
