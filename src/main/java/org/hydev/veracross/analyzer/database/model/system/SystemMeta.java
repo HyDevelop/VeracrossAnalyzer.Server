@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * The entries in this database represents meta settings / information.
  * <p>
@@ -72,7 +74,8 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
 
     public static int getBuildVersion()
     {
-        return Integer.parseInt(get(ID_VERSION_BUILD));
+        String currentVersionString = SystemMeta.get(ID_VERSION_BUILD);
+        return currentVersionString == null ? -1 : parseInt(currentVersionString);
     }
 
     public static void setBuildVersion(int version)
