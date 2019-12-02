@@ -44,7 +44,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         // Verify login
         if (!client.validateLogin())
         {
-            throw new JsonKnownError("Logout");
+            throw new JsonKnownError("Login expired");
         }
 
         // Update token TODO: Check if actually online
