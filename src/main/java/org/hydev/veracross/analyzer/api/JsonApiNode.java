@@ -57,6 +57,9 @@ public abstract class JsonApiNode<T> implements ApiNode
             // Null case
             if (result == null || result == "") return "";
 
+            // Directly return strings
+            if (result instanceof String) return (String) result;
+
             // Return
             return GSON.toJson(new GeneralReturnData(true, result));
         }
