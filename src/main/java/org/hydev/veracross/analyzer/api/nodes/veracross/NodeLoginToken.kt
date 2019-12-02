@@ -22,7 +22,7 @@ import java.util.*
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-11-07 19:14
  */
-class NodeLoginToken : JsonApiNode<NodeLoginToken.Model?>()
+class NodeLoginToken : JsonApiNode<NodeLoginToken.Model>()
 {
     override fun path(): String
     {
@@ -30,11 +30,11 @@ class NodeLoginToken : JsonApiNode<NodeLoginToken.Model?>()
     }
 
     @Throws(Exception::class)
-    override fun processJson(access: ApiAccess?, data: Model?): Any
+    override fun processJson(access: ApiAccess, data: Model): Any
     {
         // Create http client with token
         val client = VeracrossHttpClient()
-        val cookie = CookieData(data!!.token).store(client)
+        val cookie = CookieData(data.token).store(client)
 
         // Verify login
         if (!client.validateLogin())
