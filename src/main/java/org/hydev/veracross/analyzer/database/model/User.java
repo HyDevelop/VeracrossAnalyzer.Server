@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.EMAIL_SUFFIX;
+import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
@@ -112,7 +113,7 @@ public class User extends DatabaseModel<User>
     @Column(name = "avatarUrl")
     private String avatarUrl;
 
-    @Column(name = "token")
+    @Column(name = "token", length = LENGTH_TOKEN)
     private String token;
 
     /**
