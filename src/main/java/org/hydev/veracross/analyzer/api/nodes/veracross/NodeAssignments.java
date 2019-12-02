@@ -12,7 +12,7 @@ import static org.hydev.veracross.analyzer.VAConstants.LENGTH_ASSIGNMENTS_ID;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
 /**
- * This api node obtains the assignments information from Veracross and
+ * This api node obtains the assignment information from Veracross and
  * returns it to the requester.
  * <p>
  * Class created by the HyDEV Team on 2019-08-16!
@@ -52,7 +52,7 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
     }
 
     @Override
-    protected Class model()
+    protected Class<Model> model()
     {
         return Model.class;
     }

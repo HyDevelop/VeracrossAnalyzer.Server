@@ -64,7 +64,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
     }
 
     @Override
-    protected Class model()
+    protected Class<Model> model()
     {
         return Model.class;
     }

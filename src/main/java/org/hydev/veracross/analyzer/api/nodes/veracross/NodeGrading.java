@@ -43,7 +43,7 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
     }
 
     @Override
-    protected Class model()
+    protected Class<Model> model()
     {
         return Model.class;
     }

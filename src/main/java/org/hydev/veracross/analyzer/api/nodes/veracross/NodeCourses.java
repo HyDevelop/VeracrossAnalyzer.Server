@@ -60,7 +60,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     }
 
     @Override
-    protected Class model()
+    protected Class<Model> model()
     {
         return Model.class;
     }
