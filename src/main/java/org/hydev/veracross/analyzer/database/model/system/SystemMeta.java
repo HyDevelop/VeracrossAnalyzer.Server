@@ -32,6 +32,7 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
 {
     // ID list
     public static final int ID_VERSION_BUILD = 0;
+    public static final int ID_MAINTENANCE = 1;
 
     @Id
     @Column(name = "id")
