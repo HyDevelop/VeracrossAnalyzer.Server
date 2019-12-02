@@ -39,7 +39,7 @@ public class VADatabaseUpgrade
             new VersionUpdate(66, VERSION_BUILD, veracross ->
             {
                 // Update: Users database - remove all existing users
-                VADatabase.transaction(session -> session.createQuery("delete from User").executeUpdate());
+                VADatabase.transaction(session -> session.createSQLQuery("TRUNCATE TABLE va_users;").executeUpdate());
             })
     );
 
