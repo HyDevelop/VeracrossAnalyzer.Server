@@ -51,8 +51,7 @@ public class VADatabaseUpgrade
     public static void checkUpdates(VeracrossHttpClient veracross)
     {
         // Get current database version from database
-        String currentVersionString = SystemMeta.get(ID_VERSION_BUILD);
-        int currentVersion = currentVersionString == null ? -1 : parseInt(currentVersionString);
+        int current = SystemMeta.getBuildVersion();
 
         // Sort
         updates.sortInt(u -> u.lowestVersion);
@@ -61,7 +60,7 @@ public class VADatabaseUpgrade
         updates.forEach(update ->
         {
             // Has update
-            if (currentVersion <= update.lowestVersion)
+            if (current <= update.lowestVersion)
             {
                 try
                 {
