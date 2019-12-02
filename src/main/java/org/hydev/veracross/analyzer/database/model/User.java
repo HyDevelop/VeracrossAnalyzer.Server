@@ -64,57 +64,57 @@ public class User extends DatabaseModel<User>
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    public long id;
 
     @Column(name = "school_person_pk")
-    private Integer schoolPersonPk;
+    public Integer schoolPersonPk;
 
     @NonNull
     @Column(name = "username")
-    private String username;
+    public String username;
 
     @NonNull
     @Column(name = "last_login")
-    private Date lastLogin;
+    public Date lastLogin;
 
     @NonNull
     @Column(name = "first_login")
-    private Date firstLogin;
+    public Date firstLogin;
 
     @NonNull
     @Column(name = "first")
-    private String firstName;
+    public String firstName;
 
     @NonNull
     @Column(name = "last")
-    private String lastName;
+    public String lastName;
 
     @Column(name = "nick", length = 32)
-    private String nickname;
+    public String nickname;
 
     @NonNull
     @Column(name = "graduation_year", length = 6)
-    private Short graduationYear;
+    public Short graduationYear;
 
     @Column(name = "groups")
-    private String groups;
+    public String groups;
 
     @NonNull
     @Column(name = "emails")
-    private String emails;
+    public String emails;
 
     @NonNull
     @Column(name = "classes")
-    private String classes;
+    public String classes;
 
     @Column(name = "birthday")
-    private String birthday;
+    public String birthday;
 
     @Column(name = "avatarUrl")
-    private String avatarUrl;
+    public String avatarUrl;
 
     @Column(name = "token", length = LENGTH_TOKEN)
-    private String token;
+    public String token;
 
     /**
      * Find user by the username or return null
