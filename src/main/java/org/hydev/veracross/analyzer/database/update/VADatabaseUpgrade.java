@@ -9,9 +9,7 @@ import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.io.IOException;
 
-import static java.lang.Integer.parseInt;
 import static org.hydev.veracross.analyzer.VAConstants.VERSION_BUILD;
-import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.ID_VERSION_BUILD;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
@@ -35,11 +33,18 @@ public class VADatabaseUpgrade
                 SystemMeta.setBuildVersion(VERSION_BUILD);
             }),
 
-            // v66 to Latest
-            new VersionUpdate(66, VERSION_BUILD, veracross ->
+            // v66 to v381
+            new VersionUpdate(66, 381, veracross ->
             {
                 // Update: Users database - remove all existing users
                 VADatabase.transaction(session -> session.createSQLQuery("TRUNCATE TABLE va_users;").executeUpdate());
+            }),
+
+            // v381 to latest
+            new VersionUpdate(381, VERSION_BUILD, veracross ->
+            {
+                // Update: Added maintenance message field
+                SystemMeta.setMaintenance("");
             })
     );
 
