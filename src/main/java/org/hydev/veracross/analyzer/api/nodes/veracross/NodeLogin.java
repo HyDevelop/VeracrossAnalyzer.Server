@@ -51,7 +51,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         long pk = veracross.getCourses().getPersonPk();
 
         // Return cookies
-        return NodeLoginToken.afterLogin(veracross,
+        return NodeLoginToken.Companion.afterLogin(veracross,
                 new CookieData(null, pk, data.username, veracross, veracross.getCsrfToken()));
     }
 
