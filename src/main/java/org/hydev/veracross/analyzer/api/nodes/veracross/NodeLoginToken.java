@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.api.JsonKnownError;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
 import org.hydev.veracross.analyzer.utils.CookieData;
@@ -43,7 +44,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         // Verify login
         if (!client.validateLogin())
         {
-            return "{\"success\":false,\"user\":\"logout\"}";
+            throw new JsonKnownError("Logout");
         }
 
         // Update token TODO: Check if actually online
