@@ -26,7 +26,7 @@ import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
  */
 public abstract class JsonApiNode<T> implements ApiNode
 {
-    private final JsonApiConfig config = initConfig();
+    private final JsonApiConfig<T> config = initConfig();
 
     @Override
     public String process(ApiAccess access)
@@ -53,7 +53,7 @@ public abstract class JsonApiNode<T> implements ApiNode
             }
 
             // Process
-            Object result = processJson(access, GSON.fromJson(data, model()));
+            Object result = processJson(access, GSON.fromJson(data, config.getModel()));
 
             // Null case
             if (result == null || result == "") return "";
@@ -96,17 +96,17 @@ public abstract class JsonApiNode<T> implements ApiNode
      *
      * @return Config
      */
-    protected abstract JsonApiConfig config();
+    protected abstract JsonApiConfig<T> config();
 
     /**
      * Init config
      *
      * @return Config
      */
-    private JsonApiConfig initConfig()
+    private JsonApiConfig<T> initConfig()
     {
         // Get config from sub class
-        JsonApiConfig config = config();
+        JsonApiConfig<T> config = config();
 
         // Check null case
         if (config == null) throw new NullPointerException("Config can't be null");
