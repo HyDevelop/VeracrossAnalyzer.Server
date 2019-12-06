@@ -141,10 +141,10 @@ public class User extends DatabaseModel<User>
     public static User register(String username, VeracrossHttpClient client) throws IOException
     {
         // Get person pk
-        long personPk = client.getCourses().getPersonPk();
+        Integer personPk = client.getCourses().getPersonPk();
 
         // Get user data from Veracross
-        VeracrossStudent student = l$(client.getDirectoryStudents()).find(s -> s.getPersonPk() == personPk);
+        VeracrossStudent student = l$(client.getDirectoryStudents()).find(s -> s.getPersonPk().equals(personPk));
 
         // Create user
         return User.create(student, username).insert();
