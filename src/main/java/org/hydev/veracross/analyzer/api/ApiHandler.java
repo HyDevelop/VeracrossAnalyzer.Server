@@ -158,6 +158,7 @@ public class ApiHandler extends AbstractHandler
 
             // Allow CORS
             response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
 
             // Declare response status code
             response.setStatus(HttpServletResponse.SC_OK);
