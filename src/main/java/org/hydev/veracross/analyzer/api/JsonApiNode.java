@@ -99,13 +99,6 @@ public abstract class JsonApiNode<T> implements ApiNode
     protected abstract JsonApiConfig config();
 
     /**
-     * Define the data model
-     *
-     * @return Data model class
-     */
-    protected abstract Class<? extends T> model();
-
-    /**
      * Init config
      *
      * @return Config
