@@ -19,6 +19,7 @@ import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2019-10-01 17:59
  */
+@Deprecated
 public class NodeGrading extends JsonApiNode<NodeGrading.Model>
 {
     @Override
@@ -31,7 +32,7 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
         // Return grading
-        return CookieData.restore(data.token).getGrading(data.assignmentsId);
+        return CookieData.restore(data.token).getGrading(data.assignmentsId, 0);
     }
 
     @Override
