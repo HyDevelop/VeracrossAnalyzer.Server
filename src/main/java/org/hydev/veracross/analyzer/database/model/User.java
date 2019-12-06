@@ -50,7 +50,7 @@ public class User extends DatabaseModel<User>
                 .lastLogin(new Date())
                 .firstName(student.getFirstName())
                 .lastName(student.getLastName())
-                .nickname(student.getFullName())
+                .nickname(student.getFirstName())
                 .graduationYear(student.getGraduationYear())
                 .groups("student")
                 .emails(student.getEmail() == null ? username + EMAIL_SUFFIX : student.getEmail())
