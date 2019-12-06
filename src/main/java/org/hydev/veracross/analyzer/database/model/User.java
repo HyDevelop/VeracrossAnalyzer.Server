@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
 import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.VeracrossStudent;
+import org.hydev.veracross.sdk.model.VeraStudent;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class User extends DatabaseModel<User>
      *
      * @param student Student data
      */
-    private static User create(VeracrossStudent student, String username)
+    private static User create(VeraStudent student, String username)
     {
         return User.builder()
                 .username(username)
@@ -144,7 +144,7 @@ public class User extends DatabaseModel<User>
         Integer personPk = client.getCourses().getPersonPk();
 
         // Get user data from Veracross
-        VeracrossStudent student = l$(client.getDirectoryStudents()).find(s -> s.getPersonPk().equals(personPk));
+        VeraStudent student = l$(client.getDirectoryStudents()).find(s -> s.getPersonPk().equals(personPk));
 
         // Create user
         return User.create(student, username).insert();

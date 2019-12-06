@@ -7,8 +7,8 @@ import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.VeracrossCourse;
-import org.hydev.veracross.sdk.model.VeracrossCourses;
+import org.hydev.veracross.sdk.model.VeraCourse;
+import org.hydev.veracross.sdk.model.VeraCourses;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
@@ -41,7 +41,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         CookieData cookie = new CookieData(data.token).store(veracross);
 
         // Get courses
-        VeracrossCourses courses = veracross.getCourses();
+        VeraCourses courses = veracross.getCourses();
 
         // Throw access log
         AccessLog.record(cookie.getUsername(), "Access Courses API", "Success");
@@ -75,7 +75,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
      *
      * @param course Course info
      */
-    private static void storeCourse(VeracrossCourse course)
+    private static void storeCourse(VeraCourse course)
     {
         // Create one if it does not exist
         if (Course.get(course.getId()) == null)
