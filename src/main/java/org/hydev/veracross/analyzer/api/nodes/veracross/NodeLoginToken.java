@@ -1,10 +1,8 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
 import lombok.AllArgsConstructor;
-import org.hydev.veracross.analyzer.api.ApiAccess;
-import org.hydev.veracross.analyzer.api.JsonApiConfig;
-import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.api.JsonKnownError;
+import org.hydev.veracross.analyzer.api.*;
+import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
 import org.hydev.veracross.analyzer.utils.CookieData;
@@ -44,10 +42,12 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         // Verify login
         if (!client.validateLogin())
         {
+            // Throw access log
+            AccessLog.record(cookie.username, "Access Login API", "Token Expired");
             throw new JsonKnownError("Login expired");
         }
 
-        // Update token TODO: Check if actually online
+        // Update token
         cookie.setCsrf(client.getCsrfToken());
 
         // After login

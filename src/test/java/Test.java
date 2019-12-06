@@ -1,5 +1,5 @@
 /**
- * TODO: Write a description for this class!
+ * Random tests
  * <p>
  * Class created by the HyDEV Team on 2019-12-02!
  *
