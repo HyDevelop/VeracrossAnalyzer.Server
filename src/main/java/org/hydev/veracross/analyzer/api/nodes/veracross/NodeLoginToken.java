@@ -50,6 +50,9 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         // Update token
         cookie.setCsrf(client.getCsrfToken());
 
+        // Throw access log
+        AccessLog.record(cookie.username, "Access Login API", "Token Login");
+
         // After login
         return afterLogin(client, cookie);
     }
