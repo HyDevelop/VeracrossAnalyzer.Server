@@ -35,17 +35,11 @@ public class NodeGrading extends JsonApiNode<NodeGrading.Model>
     }
 
     @Override
-    protected JsonApiConfig config()
+    protected JsonApiConfig<Model> config()
     {
-        return new JsonApiConfig()
+        return new JsonApiConfig<>(Model.class)
                 .key("token", LENGTH_TOKEN)
                 .key("assignmentsId", LENGTH_ASSIGNMENTS_ID);
-    }
-
-    @Override
-    protected Class<Model> model()
-    {
-        return Model.class;
     }
 
     protected static class Model

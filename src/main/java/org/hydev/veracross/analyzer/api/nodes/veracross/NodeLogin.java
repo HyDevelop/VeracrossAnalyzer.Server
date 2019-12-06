@@ -53,17 +53,11 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
     }
 
     @Override
-    protected JsonApiConfig config()
+    protected JsonApiConfig<Model> config()
     {
-        return new JsonApiConfig()
+        return new JsonApiConfig<>(Model.class)
                 .key("username", LENGTH_USERNAME)
                 .key("password", LENGTH_PASSWORD);
-    }
-
-    @Override
-    protected Class<Model> model()
-    {
-        return Model.class;
     }
 
     public static class Model

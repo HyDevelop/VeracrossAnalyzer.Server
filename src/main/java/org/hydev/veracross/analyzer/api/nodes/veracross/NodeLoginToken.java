@@ -80,15 +80,9 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
     }
 
     @Override
-    protected JsonApiConfig config()
+    protected JsonApiConfig<Model> config()
     {
-        return new JsonApiConfig().key("token", LENGTH_TOKEN);
-    }
-
-    @Override
-    protected Class<Model> model()
-    {
-        return Model.class;
+        return new JsonApiConfig<>(Model.class).key("token", LENGTH_TOKEN);
     }
 
     public static class Model

@@ -47,17 +47,11 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
     }
 
     @Override
-    protected JsonApiConfig config()
+    protected JsonApiConfig<Model> config()
     {
-        return new JsonApiConfig()
+        return new JsonApiConfig<>(Model.class)
                 .key("token", LENGTH_TOKEN)
                 .key("scoreId", LENGTH_SCORE_ID);
-    }
-
-    @Override
-    protected Class<Model> model()
-    {
-        return Model.class;
     }
 
     protected static class Model
