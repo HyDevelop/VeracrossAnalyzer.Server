@@ -1,8 +1,7 @@
 package org.hydev.veracross.analyzer.api;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +18,11 @@ import java.util.Map;
  * @since 2019-10-12 14:09
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class JsonApiConfig
+@RequiredArgsConstructor
+public class JsonApiConfig<T>
 {
+    private final Class<T> model;
+
     /** Check for body length */
     private int maxBodyLength = -1;
 
@@ -35,7 +35,7 @@ public class JsonApiConfig
      * @param value Max body length
      * @return Self
      */
-    public JsonApiConfig maxBodyLength(int value)
+    public JsonApiConfig<T> maxBodyLength(int value)
     {
         maxBodyLength = value;
         return this;
@@ -48,7 +48,7 @@ public class JsonApiConfig
      * @param length Value length
      * @return Self
      */
-    public JsonApiConfig key(String key, int length)
+    public JsonApiConfig<T> key(String key, int length)
     {
         keyLengths.put(key, length);
         return this;
