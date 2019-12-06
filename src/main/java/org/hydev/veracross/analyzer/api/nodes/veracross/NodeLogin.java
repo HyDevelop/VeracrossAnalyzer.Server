@@ -45,14 +45,11 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
         // Throw access log
-        AccessLog.record(data.username, "Access Login API", "Before Login");
-
-        // Get pk
-        long pk = veracross.getCourses().getPersonPk();
+        AccessLog.record(data.username, "Access Login API", "First Login");
 
         // Return cookies
         return NodeLoginToken.afterLogin(veracross,
-                new CookieData(null, pk, data.username, veracross, veracross.getCsrfToken()));
+                new CookieData(null, -1L, data.username, veracross, veracross.getCsrfToken()));
     }
 
     @Override
