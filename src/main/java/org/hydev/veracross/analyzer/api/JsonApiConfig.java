@@ -2,6 +2,7 @@ package org.hydev.veracross.analyzer.api;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Map;
  * @since 2019-10-12 14:09
  */
 @Data
+@Accessors(fluent = true)
 @RequiredArgsConstructor
 public class JsonApiConfig<T>
 {
@@ -29,17 +31,6 @@ public class JsonApiConfig<T>
     /** Check for key value length */
     private Map<String, Integer> keyLengths = new HashMap<>();
 
-    /**
-     * Set max body length
-     *
-     * @param value Max body length
-     * @return Self
-     */
-    public JsonApiConfig<T> maxBodyLength(int value)
-    {
-        maxBodyLength = value;
-        return this;
-    }
     /** Log object when debugging or not */
     private boolean secret = false;
 
