@@ -35,14 +35,14 @@ public abstract class JsonApiNode<T> implements ApiNode
         {
             // Validate body
             String body = access.getContent();
-            if (body == null || body.isEmpty() || body.length() > config.getMaxBodyLength())
+            if (body == null || body.isEmpty() || body.length() > config.maxBodyLength())
                 throw new JsonKnownError("Bad request");
 
             // Parse body
             JsonObject data = new JsonParser().parse(access.getContent()).getAsJsonObject();
 
             // Check key length
-            for (Entry<String, Integer> entry : config.getKeyLengths().entrySet())
+            for (Entry<String, Integer> entry : config.keyLengths().entrySet())
             {
                 // Check if key exists
                 if (!data.has(entry.getKey())) throw new JsonKnownError("Missing keys");
@@ -53,7 +53,7 @@ public abstract class JsonApiNode<T> implements ApiNode
             }
 
             // Process
-            Object result = processJson(access, GSON.fromJson(data, config.getModel()));
+            Object result = processJson(access, GSON.fromJson(data, config.model()));
 
             // Null case
             if (result == null || result == "") return "";
@@ -112,10 +112,10 @@ public abstract class JsonApiNode<T> implements ApiNode
         if (config == null) throw new NullPointerException("Config can't be null");
 
         // Check auto length
-        if (config.getMaxBodyLength() == -1)
+        if (config.maxBodyLength() == -1)
         {
             int length = 0;
-            for (int value : config.getKeyLengths().values()) length += value + 5;
+            for (int value : config.keyLengths().values()) length += value + 5;
             config.maxBodyLength(length);
         }
 
