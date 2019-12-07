@@ -40,6 +40,8 @@ public class JsonApiConfig<T>
         maxBodyLength = value;
         return this;
     }
+    /** Log object when debugging or not */
+    private boolean secret = false;
 
     /**
      * Add a key value length check
