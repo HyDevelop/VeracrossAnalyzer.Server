@@ -68,10 +68,7 @@ public abstract class JsonApiNode<T> implements ApiNode
         catch (Exception e)
         {
             // Log errors if it is not known
-            if (!(e instanceof JsonKnownError
-                    || e instanceof VeracrossException
-                    || e.getMessage().equals("JsonNull")
-                    || e instanceof JsonSyntaxException))
+            if (!isKnownError(e))
             {
                 err.println("============= START =============");
                 err.println("Error occurred when processing " + path());
@@ -91,6 +88,18 @@ public abstract class JsonApiNode<T> implements ApiNode
 
             return GSON.toJson(new GeneralReturnData(false, "Error: " + e.getMessage()));
         }
+    }
+
+    private boolean isKnownError(Exception e)
+    {
+        if (e == null) return false;
+        if (e instanceof JsonKnownError || e instanceof VeracrossException) return true;
+        if (e instanceof JsonSyntaxException) return true;
+
+        if (e.getMessage() == null) return false;
+        if (e.getMessage().equals("JsonNull")) return true;
+
+        return false;
     }
 
     /**
