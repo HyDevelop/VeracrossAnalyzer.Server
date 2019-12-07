@@ -39,7 +39,8 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         if (!data.username.matches("[a-z]+[0-9]+"))
         {
             System.err.println("Error: Invalid username: " + data.username);
-            throw new JsonKnownError("Invalid username!");
+            throw new JsonKnownError("Invalid username! It should be in 'flast00' format, " +
+                    "if you don't know it, try login with your SJP email.");
         }
 
         // Login to St. John's
