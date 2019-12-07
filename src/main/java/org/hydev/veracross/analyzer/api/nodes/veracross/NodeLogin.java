@@ -9,8 +9,7 @@ import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
-import static org.hydev.veracross.analyzer.VAConstants.LENGTH_PASSWORD;
-import static org.hydev.veracross.analyzer.VAConstants.LENGTH_USERNAME;
+import static org.hydev.veracross.analyzer.VAConstants.*;
 
 /**
  * This api node logs in to Veracross with specified username and
@@ -35,7 +34,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
         // Check username (Always in "flast00" format)
-        data.username = data.username.toLowerCase().replace("@stjohnsprep.org", "");
+        data.username = data.username.toLowerCase().replace(EMAIL_SUFFIX, "");
         if (!data.username.matches("[a-z]+[0-9]+"))
         {
             System.err.println("Error: Invalid username: " + data.username);
