@@ -73,8 +73,8 @@ public abstract class JsonApiNode<T> implements ApiNode
                     || e instanceof JsonSyntaxException))
             {
                 logger.error("Error occurred when processing " + path() +
-                                "\n - With json: " + access.getContent() +
-                                "\n - With headers: " + access.getHeaders(), e);
+                        (!path().equals("/api/login") ? "\n - With json: " + access.getContent() : "") +
+                        "\n - With headers: " + access.getHeaders(), e);
             }
 
             // TODO: Log errors
