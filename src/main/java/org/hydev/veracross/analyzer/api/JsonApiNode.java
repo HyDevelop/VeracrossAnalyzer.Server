@@ -11,8 +11,8 @@ import org.hydev.veracross.sdk.exceptions.VeracrossException;
 
 import java.util.Map.Entry;
 
+import static java.lang.System.err;
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
-import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
 
 /**
  * This class is a type of api node dealing with json.
@@ -72,12 +72,17 @@ public abstract class JsonApiNode<T> implements ApiNode
                     || e.getMessage().equals("JsonNull")
                     || e instanceof JsonSyntaxException))
             {
-                logger.error("Error occurred when processing " + path() +
-                        (!path().equals("/api/login") ? "\n - With json: " + access.getContent() : "") +
-                        "\n - With headers: " + access.getHeaders(), e);
+                err.println("Error occurred when processing " + path());
+                err.println("- With headers: " + access.getHeaders());
+
+                if (!config.secret())
+                {
+                    err.println("\n - With json: " + access.getContent());
+                }
+
+                e.printStackTrace();
             }
 
-            // TODO: Log errors
             return GSON.toJson(new GeneralReturnData(false, "Error: " + e.getMessage()));
         }
     }
