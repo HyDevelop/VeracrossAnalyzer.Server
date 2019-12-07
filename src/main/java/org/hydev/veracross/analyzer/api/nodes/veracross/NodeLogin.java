@@ -34,8 +34,8 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
         // Check username (Always in "flast00" format)
-        data.username = data.username.toLowerCase();
         if (!data.username.matches("[a-z]+[0-9]+")) throw new Exception("Invalid username");
+        data.username = data.username.toLowerCase().replace("@stjohnsprep.org", "");
 
         // Login to St. John's
         StJohnsHttpClient stJohns = new StJohnsHttpClient();
