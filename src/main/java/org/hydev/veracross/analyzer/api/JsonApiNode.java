@@ -12,6 +12,7 @@ import org.hydev.veracross.sdk.exceptions.VeracrossException;
 import java.util.Map.Entry;
 
 import static java.lang.System.err;
+import static java.lang.System.out;
 import static org.hydev.veracross.analyzer.VAConstants.GSON;
 
 /**
@@ -72,6 +73,7 @@ public abstract class JsonApiNode<T> implements ApiNode
                     || e.getMessage().equals("JsonNull")
                     || e instanceof JsonSyntaxException))
             {
+                err.println("============= START =============");
                 err.println("Error occurred when processing " + path());
                 err.println("- With headers: " + access.getHeaders());
 
@@ -80,7 +82,8 @@ public abstract class JsonApiNode<T> implements ApiNode
                     err.println("\n - With json: " + access.getContent());
                 }
 
-                e.printStackTrace();
+                e.printStackTrace(err);
+                err.println("-------------- END --------------");
             }
 
             return GSON.toJson(new GeneralReturnData(false, "Error: " + e.getMessage()));
