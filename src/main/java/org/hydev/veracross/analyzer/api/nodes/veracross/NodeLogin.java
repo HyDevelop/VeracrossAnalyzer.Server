@@ -3,6 +3,7 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.api.JsonKnownError;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
@@ -34,8 +35,12 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
         // Check username (Always in "flast00" format)
-        if (!data.username.matches("[a-z]+[0-9]+")) throw new Exception("Invalid username");
         data.username = data.username.toLowerCase().replace("@stjohnsprep.org", "");
+        if (!data.username.matches("[a-z]+[0-9]+"))
+        {
+            System.err.println("Error: Invalid username: " + data.username);
+            throw new JsonKnownError("Invalid username!");
+        }
 
         // Login to St. John's
         StJohnsHttpClient stJohns = new StJohnsHttpClient();
