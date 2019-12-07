@@ -86,6 +86,9 @@ public abstract class JsonApiNode<T> implements ApiNode
                 err.println("-------------- END --------------");
             }
 
+            // TODO: Remove this
+            out.println("Ignored error: " + e.getMessage());
+
             return GSON.toJson(new GeneralReturnData(false, "Error: " + e.getMessage()));
         }
     }
