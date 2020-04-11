@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.github.HyDevelop</groupId>
             <artifactId>VeracrossAnalyzer.SDK</artifactId>
-            <version>3.0.0.276</version>
+            <version>3.0.1.279</version>
         </dependency>
 
         <!-- Web Server -->
