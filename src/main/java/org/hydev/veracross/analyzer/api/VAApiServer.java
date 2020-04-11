@@ -7,6 +7,7 @@ import cc.moecraft.logger.environments.FileEnv;
 import lombok.Getter;
 import org.eclipse.jetty.server.Server;
 import org.hydev.veracross.analyzer.VAConstants;
+import org.hydev.veracross.analyzer.api.nodes.NodeSystemMeta;
 import org.hydev.veracross.analyzer.api.nodes.NodeTest;
 import org.hydev.veracross.analyzer.api.nodes.NodeVersion;
 import org.hydev.veracross.analyzer.api.nodes.veracross.*;
@@ -51,6 +52,7 @@ public class VAApiServer
         handler.getManager().register(
                 new NodeTest(),
                 new NodeVersion(),
+                new NodeSystemMeta(),
 
                 new NodeLogin(),
                 new NodeLoginToken(),
