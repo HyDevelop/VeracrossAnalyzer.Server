@@ -52,7 +52,7 @@ public class NodeDirectory extends JsonApiNode<NodeDirectory.Model>
         CookieData cookie = new CookieData(data.token).store(veracross);
 
         // Check cache
-        if (directoryJsonCache == null || System.currentTimeMillis() - cacheTime > 24 * 3600000)
+        if (System.currentTimeMillis() - cacheTime > 24 * 3600000)
         {
             // Update cache
             directoryJsonCache = new Gson().toJson(veracross.getDirectoryStudents());
