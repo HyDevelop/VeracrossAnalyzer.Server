@@ -50,20 +50,24 @@ public class VAApiServer
         // Create API Handler
         ApiHandler handler = new ApiHandler(this);
         handler.getManager().register(
-                new NodeTest(),
-                new NodeVersion(),
-                new NodeSystemMeta(),
+            // Meta nodes
+            new NodeTest(),
+            new NodeVersion(),
+            new NodeSystemMeta(),
 
-                new NodeLogin(),
-                new NodeLoginToken(),
+            // Login
+            new NodeLogin(),
+            new NodeLoginToken(),
 
-                new NodeAssignments(),
-                new NodeCourses(),
-                new NodeGradingTerm(),
-                new NodeMarkAsRead(),
-                new NodeDirectory(),
+            // Veracross
+            new NodeAssignments(),
+            new NodeCourses(),
+            new NodeGradingTerm(),
+            new NodeMarkAsRead(),
+            new NodeDirectory(),
 
-                new NodeAllCourses()
+            // Database
+            new NodeAllCourses()
         );
 
         // Load Hibernate
