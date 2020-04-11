@@ -59,7 +59,6 @@ public class VAApiServer
 
                 new NodeAssignments(),
                 new NodeCourses(),
-                new NodeGrading(),
                 new NodeGradingTerm(),
                 new NodeMarkAsRead()
         );
