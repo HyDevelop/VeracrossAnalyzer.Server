@@ -7,9 +7,6 @@ import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
 /**
@@ -41,7 +38,9 @@ public class NodeDirectory extends JsonApiNode<NodeDirectory.Model>
         String token;
     }
 
-    private static final Map<Long, String> directoryJsonCache = new HashMap<>();
+    // TODO: This method of caching only works for the one school, have to be modified if other schools are added.
+    private static String directoryJsonCache;
+    private static long cacheTime = 0;
 
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
@@ -53,12 +52,13 @@ public class NodeDirectory extends JsonApiNode<NodeDirectory.Model>
         CookieData cookie = new CookieData(data.token).store(veracross);
 
         // Check cache
-        if (!directoryJsonCache.containsKey(cookie.personPk))
+        if (directoryJsonCache == null || System.currentTimeMillis() - cacheTime > 24 * 3600000)
         {
-            // Create cache
-            directoryJsonCache.put(cookie.personPk, new Gson().toJson(veracross.getDirectoryStudents()));
+            // Update cache
+            directoryJsonCache = new Gson().toJson(veracross.getDirectoryStudents());
+            cacheTime = System.currentTimeMillis();
         }
 
-        return directoryJsonCache.get(cookie.personPk);
+        return directoryJsonCache;
     }
 }
