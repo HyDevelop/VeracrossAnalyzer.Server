@@ -31,6 +31,7 @@ VeracrossAnalyzer.Server.iml
 .idea/dataSources.local.xml
 .idea/dataSources.xml
 .idea/sqldialects.xml
+.idea/
 
 ###################
 # Sensative files #
