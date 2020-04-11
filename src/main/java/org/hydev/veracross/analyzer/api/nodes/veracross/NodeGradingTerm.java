@@ -30,8 +30,19 @@ public class NodeGradingTerm extends JsonApiNode<NodeGradingTerm.Model>
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
+        // Fix: the idiotic school system uses 1 for quarter 1, 2 for quarter 2,
+        // but 3 for semester 1, and 4 for the actual quarter 3...
+        int gradingPeriod;
+        switch (data.term)
+        {
+            default: gradingPeriod = data.term; break; // Quarter 1 and 2, and -1 for current
+            case 2: case 3: gradingPeriod = data.term + 1; break; // Quarter 3 and 4
+            case 4: gradingPeriod = 2; break; // Semester 1
+            case 5: gradingPeriod = 4; break; // Semester 2
+        }
+
         // Return grading
-        return CookieData.restore(data.token).getGrading(data.assignmentsId, data.term);
+        return CookieData.restore(data.token).getGrading(data.assignmentsId, gradingPeriod);
     }
 
     @Override
