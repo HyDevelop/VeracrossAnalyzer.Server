@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
  * Database model for courses.
@@ -52,5 +53,15 @@ public class Course extends DatabaseModel<Course>
                 .createQuery("from Course where id=:id", Course.class)
                 .setParameter("id", id)
                 .getSingleResult());
+    }
+
+    /**
+     * Get all courses
+     *
+     * @return Courses
+     */
+    public static List<Course> getAll()
+    {
+        return VADatabase.query(s -> s.createQuery("from Course", Course.class).getResultList());
     }
 }
