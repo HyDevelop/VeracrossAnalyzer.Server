@@ -34,13 +34,13 @@ public class NodeAssignments extends JsonApiNode<NodeAssignments.Model>
     protected Object processJson(ApiAccess access, Model data) throws IOException
     {
         // Create http client
-        VeracrossHttpClient client = new VeracrossHttpClient();
+        VeracrossHttpClient veracross = new VeracrossHttpClient();
 
         // Unwrap cookies
-        new CookieData(data.token).store(client);
+        new CookieData(data.token).store(veracross);
 
         // Get it
-        return client.getAssignments(data.assignmentsId);
+        return veracross.getAssignments(data.assignmentsId);
     }
 
     @Override

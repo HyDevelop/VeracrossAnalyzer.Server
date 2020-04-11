@@ -3,6 +3,7 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.api.JsonKnownError;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
@@ -34,13 +35,17 @@ public class NodeMarkAsRead extends JsonApiNode<NodeMarkAsRead.Model>
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
         // Unwrap cookies
-        CookieData cookies = new CookieData(data.token).store(veracross);
+        CookieData cookie = new CookieData(data.token).store(veracross);
 
         // Mark as read
-        boolean success = veracross.markAssignmentAsRead(cookies.getCsrf(), data.scoreId);
+        boolean success = veracross.markAssignmentAsRead(cookie.getCsrf(), data.scoreId);
 
         // Not success
-        if (!success) throw new RuntimeException("Unable to mark as read");
+        if (!success)
+        {
+            System.err.println("Unable to mark as read");
+            throw new JsonKnownError("Unable to mark as read");
+        }
 
         // Return success
         return "Marked as read";
