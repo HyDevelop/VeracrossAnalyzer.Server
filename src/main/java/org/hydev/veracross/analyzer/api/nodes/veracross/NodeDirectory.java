@@ -1,12 +1,15 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
-import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
+import java.util.ArrayList;
+
+import static org.hydev.veracross.analyzer.VAConstants.GSON;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
 /**
@@ -38,6 +41,15 @@ public class NodeDirectory extends JsonApiNode<NodeDirectory.Model>
         String token;
     }
 
+    /**
+     * Return model, used to filter irrelevant data
+     */
+    protected static class ReturnModel
+    {
+        int current_grade_id;
+        String all_classes;
+    }
+
     // TODO: This method of caching only works for the one school, have to be modified if other schools are added.
     private static String directoryJsonCache;
     private static long cacheTime = 0;
@@ -55,7 +67,8 @@ public class NodeDirectory extends JsonApiNode<NodeDirectory.Model>
         if (System.currentTimeMillis() - cacheTime > 24 * 3600000)
         {
             // Update cache
-            directoryJsonCache = new Gson().toJson(veracross.getDirectoryStudents());
+            directoryJsonCache = GSON.toJson(GSON.fromJson(GSON.toJson(veracross.getDirectoryStudents()),
+                new TypeToken<ArrayList<ReturnModel>>(){}.getType()));
             cacheTime = System.currentTimeMillis();
         }
 
