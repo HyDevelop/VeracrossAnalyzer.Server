@@ -61,7 +61,9 @@ public class VAApiServer
                 new NodeCourses(),
                 new NodeGradingTerm(),
                 new NodeMarkAsRead(),
-                new NodeDirectory()
+                new NodeDirectory(),
+
+                new NodeAllCourses()
         );
 
         // Load Hibernate
