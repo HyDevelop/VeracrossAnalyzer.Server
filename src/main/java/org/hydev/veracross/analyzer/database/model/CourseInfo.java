@@ -6,6 +6,7 @@ import org.hydev.veracross.analyzer.database.DatabaseModel;
 import org.hydev.veracross.analyzer.database.VADatabase;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -60,6 +61,7 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
      */
     public List<Integer> getCourseIds()
     {
+        if (courseIds == null) return new ArrayList<>();
         return stream(courseIds.split("\\|")).map(Integer::parseInt).collect(Collectors.toList());
     }
 
@@ -80,6 +82,7 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
      */
     public void addCourseId(Integer courseId)
     {
+        if (this.courseIds == null) this.courseIds = "";
         if (!this.courseIds.equals("")) this.courseIds += "|";
         this.courseIds += courseId;
     }
