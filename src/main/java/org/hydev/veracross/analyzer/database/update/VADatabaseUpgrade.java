@@ -89,7 +89,7 @@ public class VADatabaseUpgrade
 
                     if (!map.containsKey(key))
                     {
-                        map.put(key, new CourseInfo(index.get(), schoolYear, c.name(), c.teacher(), c.level(), "", true));
+                        map.put(key, new CourseInfo(index.get(), schoolYear, c.name(), c.teacher(), c.level(), ""));
                         s.save(map.get(key));
                         index.getAndIncrement();
                     }
