@@ -72,4 +72,15 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
     {
         this.courseIds = courseIds.stream().map(Objects::toString).collect(joining("|"));
     }
+
+    /**
+     * Add a course id (without saving)
+     *
+     * @param courseId Course id
+     */
+    public void addCourseId(Integer courseId)
+    {
+        if (!this.courseIds.equals("")) this.courseIds += "|";
+        this.courseIds += courseId;
+    }
 }
