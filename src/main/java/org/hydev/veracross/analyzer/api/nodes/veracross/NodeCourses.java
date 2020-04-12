@@ -140,4 +140,20 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         // Really unknown
         return null;
     }
+
+    /**
+     * Get current school year
+     *
+     * @return School year
+     */
+    public static int getSchoolYear()
+    {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+
+        // Convert current year to current school year: +1 if it's after August
+        if (cal.get(Calendar.MONTH) > Calendar.AUGUST) year ++;
+
+        return year;
+    }
 }
