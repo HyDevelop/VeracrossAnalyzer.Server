@@ -10,6 +10,8 @@ import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeraCourse;
 import org.hydev.veracross.sdk.model.VeraCourses;
 
+import java.util.Calendar;
+
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 
 /**
@@ -72,9 +74,9 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     private static void storeCourse(VeraCourse course)
     {
         // Create one if it does not exist
-        if (Course.get(course.getId()) == null)
+        if (Course.get((int) course.getId()) == null)
         {
-            new Course(course.getId(), course.getName(), course.getTeacherName(), detectLevel(course.getName())).insert();
+            new Course((int) course.getId(), course.getName(), course.getTeacherName(), detectLevel(course.getName())).insert();
         }
     }
 

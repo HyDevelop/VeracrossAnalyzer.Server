@@ -33,7 +33,7 @@ public class Course extends DatabaseModel<Course>
 {
     @Id
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -50,7 +50,7 @@ public class Course extends DatabaseModel<Course>
      * @param id ID
      * @return Course
      */
-    public static Course get(long id)
+    public static Course get(int id)
     {
         return VADatabase.query(s -> s
                 .createQuery("from Course where id=:id", Course.class)
