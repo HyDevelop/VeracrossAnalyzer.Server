@@ -48,7 +48,7 @@ public class NodeDirectory extends JsonApiNode<NodeDirectory.Model>
     @Data @AllArgsConstructor
     protected static class ReturnModel
     {
-        int grade;
+        int gradeLevel;
         String classes;
     }
 
