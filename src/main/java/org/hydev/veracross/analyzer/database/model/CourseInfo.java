@@ -62,4 +62,14 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
     {
         return stream(courseIds.split("\\|")).map(Integer::parseInt).collect(Collectors.toList());
     }
+
+    /**
+     * Set course ids (without saving)
+     *
+     * @param courseIds Course ids
+     */
+    public void setCourseIds(List<Integer> courseIds)
+    {
+        this.courseIds = courseIds.stream().map(Objects::toString).collect(joining("|"));
+    }
 }
