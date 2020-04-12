@@ -45,7 +45,7 @@ public class Course extends DatabaseModel<Course>
     private String level;
 
     @Column(name = "id_ci")
-    private int id_ci;
+    private Integer id_ci;
 
     /**
      * Get course by id
