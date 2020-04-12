@@ -34,6 +34,7 @@ import static java.util.stream.Collectors.joining;
 public class CourseInfo extends DatabaseModel<CourseInfo>
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_ci")
     private int id_ci;
 
