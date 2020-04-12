@@ -25,7 +25,7 @@ public class NodeAllCourses extends JsonApiNode<NodeAllCourses.Model>
     @Override
     public String path()
     {
-        return "/api/directory";
+        return "/api/all-courses";
     }
 
     @Override
