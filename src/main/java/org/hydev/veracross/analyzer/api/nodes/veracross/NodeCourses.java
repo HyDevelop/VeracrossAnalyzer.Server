@@ -126,8 +126,11 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         if (name.contains("Wellness")) return SPORT;
         if (name.contains("Team")) return SPORT;
         if (name.contains("Cross Fit")) return SPORT;
+        if (name.contains("Crossfit")) return SPORT;
         if (name.contains("Judo")) return SPORT;
+        if (name.contains("Jiu Jitsu")) return SPORT;
         if (name.contains("Introduction to Algorithmic Thinking")) return Accelerated;
+        if (name.equals("Ceramics 1")) return CP;
         if (name.equals("Cafeteria")) return "None";
         if (name.equals("Campus Ministry")) return "None";
         if (name.equals("CLAS Homeroom")) return "None";
