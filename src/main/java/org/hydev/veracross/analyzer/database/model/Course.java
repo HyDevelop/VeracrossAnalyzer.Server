@@ -41,6 +41,9 @@ public class Course extends DatabaseModel<Course>
     @Column(name = "teacher")
     private String teacher;
 
+    @Column(name = "level", length = 8)
+    private String level;
+
     /**
      * Get course by id
      *
