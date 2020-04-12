@@ -79,7 +79,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         {
             String level = detectLevel(course.getName());
             int infoId = -1;
-            if (level != null && !level.equals(SPORT) && !level.equals(Club))
+            if (level != null /*&& !level.equals(SPORT) && !level.equals(Club)*/)
             {
                 // Get info
                 CourseInfo info = CourseInfo.getOrCreate(getSchoolYear(), course.getName(), course.getTeacherName(), level);
