@@ -52,4 +52,14 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
 
     @Column(name = "course_ids")
     private String courseIds;
+
+    /**
+     * Get course ids to list
+     *
+     * @return Course ids
+     */
+    public List<Integer> getCourseIds()
+    {
+        return stream(courseIds.split("\\|")).map(Integer::parseInt).collect(Collectors.toList());
+    }
 }
