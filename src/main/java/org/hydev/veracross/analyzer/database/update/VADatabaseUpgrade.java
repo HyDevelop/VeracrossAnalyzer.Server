@@ -2,13 +2,18 @@ package org.hydev.veracross.analyzer.database.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses;
 import org.hydev.veracross.analyzer.database.model.Course;
+import org.hydev.veracross.analyzer.database.model.CourseInfo;
 import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
 import org.hydev.veracross.analyzer.utils.L$;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hydev.veracross.analyzer.VAConstants.VERSION_BUILD;
 import static org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses.detectLevel;
@@ -50,19 +55,46 @@ public class VADatabaseUpgrade
             SystemMeta.setMaintenance("");
         }),
 
-        // v466 to latest
-        new VersionUpdate(466, VERSION_BUILD, veracross ->
+        // v466 to v478
+        new VersionUpdate(466, 478, veracross ->
         {
+            // Update: Add levels and types to courses
             List<Course> courses = Course.getAll();
 
             transaction(s ->
             {
-                // Update: Add levels and types to courses
                 courses.forEach(c ->
                 {
                     c.level(detectLevel(c.name()));
                     s.saveOrUpdate(c);
                 });
+            });
+        }),
+
+        // v478 to latest
+        new VersionUpdate(478, VERSION_BUILD, veracross ->
+        {
+            // Update: Add course info
+            List<Course> courses = Course.getAll();
+            int schoolYear = NodeCourses.getSchoolYear();
+
+            Map<String, CourseInfo> map = new HashMap<>();
+            AtomicInteger index = new AtomicInteger();
+
+            transaction(s ->
+            {
+                for (Course c : courses)
+                {
+                    String key = c.name() + c.teacher() + c.level();
+
+                    if (!map.containsKey(key))
+                    {
+                        map.put(key, new CourseInfo(index.get(), schoolYear, c.name(), c.teacher(), c.level(), ""));
+                        s.save(map.get(key));
+                        index.getAndIncrement();
+                    }
+                    map.get(key).addCourseId(c.id());
+                }
             });
         })
     );
