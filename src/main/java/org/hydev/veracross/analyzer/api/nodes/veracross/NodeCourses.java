@@ -74,7 +74,65 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         // Create one if it does not exist
         if (Course.get(course.getId()) == null)
         {
-            new Course(course.getId(), course.getName(), course.getTeacherName()).insert();
+            new Course(course.getId(), course.getName(), course.getTeacherName(), detectLevel(course.getName())).insert();
         }
+    }
+
+    public static final String AP = "AP";
+    public static final String Honors = "H";
+    public static final String Accelerated = "A";
+    public static final String CP = "CP";
+    public static final String SPORT = "Sport";
+    public static final String Club = "Club";
+
+    /**
+     * TODO: Optimize detectLevel
+     */
+    public static String detectLevel(String name)
+    {
+        name = name.trim();
+
+        // Common ones
+        if (name.startsWith("AP")) return AP;
+        if (name.endsWith(" H")) return Honors;
+        if (name.endsWith(" A")) return Accelerated;
+        if (name.endsWith(" CP")) return CP;
+        if (name.startsWith("HS ")) return Club;
+        if (name.startsWith("MS ")) return Club;
+        if (name.endsWith("-BS")) return SPORT;
+        if (name.endsWith("-DS")) return SPORT;
+        if (name.endsWith(" AS")) return SPORT;
+        if (name.endsWith(" BS")) return SPORT;
+
+        // Uncommon ones
+        String lower = name.toLowerCase();
+
+        if (name.startsWith("Pre-AP")) return AP;
+        if (lower.endsWith(" acc")) return Accelerated;
+        if (name.endsWith("H")) return Honors;
+        if (name.endsWith("A")) return Accelerated;
+        if (name.endsWith("CP")) return CP;
+
+        // Even more uncommon
+        if (lower.contains("honors")) return Honors;
+        if (lower.contains("accelerated")) return Accelerated;
+        if (name.contains("Advanced")) return Accelerated;
+        if (name.startsWith("Varsity ")) return SPORT;
+        if (name.startsWith("JV ")) return SPORT;
+        if (name.startsWith("Freshman ")) return SPORT;
+
+        // Specific
+        if (name.contains("Strength")) return SPORT;
+        if (name.contains("Wellness")) return SPORT;
+        if (name.contains("Team")) return SPORT;
+        if (name.contains("Cross Fit")) return SPORT;
+        if (name.contains("Judo")) return SPORT;
+        if (name.contains("Introduction to Algorithmic Thinking")) return Accelerated;
+        if (name.equals("Cafeteria")) return "None";
+        if (name.equals("Campus Ministry")) return "None";
+        if (name.equals("CLAS Homeroom")) return "None";
+
+        // Really unknown
+        return null;
     }
 }
