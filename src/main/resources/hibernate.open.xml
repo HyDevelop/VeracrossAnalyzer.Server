@@ -40,6 +40,7 @@
         <!-- Mapping -->
         <mapping class="org.hydev.veracross.analyzer.database.model.AccessLog" />
         <mapping class="org.hydev.veracross.analyzer.database.model.Course" />
+        <mapping class="org.hydev.veracross.analyzer.database.model.CourseInfo" />
         <mapping class="org.hydev.veracross.analyzer.database.model.User" />
 
         <mapping class="org.hydev.veracross.analyzer.database.model.msg.UserMessage" />
