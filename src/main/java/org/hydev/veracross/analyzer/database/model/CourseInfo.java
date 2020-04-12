@@ -1,0 +1,51 @@
+package org.hydev.veracross.analyzer.database.model;
+
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.hydev.veracross.analyzer.database.DatabaseModel;
+import org.hydev.veracross.analyzer.database.VADatabase;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
+
+/**
+ * TODO: Write a description for this class!
+ * <p>
+ * Class created by the HyDEV Team on 2020-04-11!
+ *
+ * @author HyDEV Team (https://github.com/HyDevelop)
+ * @author Hykilpikonna (https://github.com/hykilpikonna)
+ * @author Vanilla (https://github.com/VergeDX)
+ * @since 2020-04-11 22:35
+ */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Accessors(fluent = true)
+@Entity
+@Table(name = "va_courses_info")
+public class CourseInfo extends DatabaseModel<CourseInfo>
+{
+    @Id
+    @Column(name = "id_ci")
+    private int id_ci;
+
+    @Column(name = "year") // School year
+    private int year;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "teacher")
+    private String teacher;
+
+    @Column(name = "level", length = 8)
+    private String level;
+}
