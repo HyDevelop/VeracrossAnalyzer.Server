@@ -64,7 +64,6 @@ public class VAApiServer
             new NodeCourses(),
             new NodeGradingTerm(),
             new NodeMarkAsRead(),
-            new NodeDirectory(),
 
             // Database
             new NodeCourseInfo()
