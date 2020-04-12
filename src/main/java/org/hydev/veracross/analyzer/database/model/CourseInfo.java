@@ -83,4 +83,33 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
         if (!this.courseIds.equals("")) this.courseIds += "|";
         this.courseIds += courseId;
     }
+
+    /**
+     * Get course info with specific conditions
+     *
+     * @param year Year
+     * @param name Name
+     * @param teacher Teacher
+     * @param level Level
+     * @return Existing courseInfo or create a new one
+     */
+    public static CourseInfo getOrCreate(int year, String name, String teacher, String level)
+    {
+        List<CourseInfo> query = VADatabase.query(s -> s
+            .createQuery("from CourseInfo where year=:year and name=:name and teacher=:teacher and level=:level", CourseInfo.class)
+            .setParameter("year", year)
+            .setParameter("name", name)
+            .setParameter("teacher", teacher)
+            .setParameter("level", level)
+            .getResultList());
+
+        if (query == null || query.size() == 0)
+        {
+            return new CourseInfoBuilder().year(year).name(name).teacher(teacher).level(level).build();
+        }
+        else
+        {
+            return query.get(0);
+        }
+    }
 }
