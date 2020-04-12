@@ -53,8 +53,6 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
     @Column(name = "course_ids")
     private String courseIds = "";
 
-    private boolean created = false;
-
     /**
      * Get course ids to list
      *
@@ -107,7 +105,7 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
 
         if (query == null || query.size() == 0)
         {
-            return new CourseInfoBuilder().year(year).name(name).teacher(teacher).level(level).courseIds("").created(true).build();
+            return new CourseInfoBuilder().year(year).name(name).teacher(teacher).level(level).courseIds("").build();
         }
         else
         {
