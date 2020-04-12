@@ -24,28 +24,28 @@ import static org.hydev.veracross.analyzer.utils.L$.l$;
  */
 public class VADatabaseUpgrade
 {
-    private static L$<VersionUpdate> updates = l$
+    private static final L$<VersionUpdate> updates = l$
     (
-            // First time initialization
-            new VersionUpdate(-1, 66, veracross ->
-            {
-                // Create meta
-                SystemMeta.setBuildVersion(VERSION_BUILD);
-            }),
+        // First time initialization
+        new VersionUpdate(-1, 66, veracross ->
+        {
+            // Create meta
+            SystemMeta.setBuildVersion(VERSION_BUILD);
+        }),
 
-            // v66 to v381
-            new VersionUpdate(66, 381, veracross ->
-            {
-                // Update: Users database - remove all existing users
-                VADatabase.transaction(session -> session.createSQLQuery("TRUNCATE TABLE va_users;").executeUpdate());
-            }),
+        // v66 to v381
+        new VersionUpdate(66, 381, veracross ->
+        {
+            // Update: Users database - remove all existing users
+            VADatabase.transaction(session -> session.createSQLQuery("TRUNCATE TABLE va_users;").executeUpdate());
+        }),
 
-            // v381 to latest
-            new VersionUpdate(381, VERSION_BUILD, veracross ->
-            {
-                // Update: Added maintenance message field
-                SystemMeta.setMaintenance("");
-            })
+        // v381 to latest
+        new VersionUpdate(381, VERSION_BUILD, veracross ->
+        {
+            // Update: Added maintenance message field
+            SystemMeta.setMaintenance("");
+        })
     );
 
     /**
