@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hydev.veracross.analyzer.VAConstants.VERSION_BUILD;
+import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
 import static org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses.detectLevel;
 import static org.hydev.veracross.analyzer.database.VADatabase.transaction;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
@@ -120,11 +121,18 @@ public class VADatabaseUpgrade
             {
                 try
                 {
+                    logger.timing.init();
+                    logger.log("Updating from {} to {}", current, update.lowestVersion);
+
                     // Update
                     update.operator.run(veracross);
+
+                    logger.log("Update success, taking {} ms", logger.timing.getTime());
                 }
                 catch (IOException e)
                 {
+                    logger.error("Error: Unable to update " + update + ", reverting...", e);
+
                     // Set database version to previous version
                     SystemMeta.setBuildVersion(update.lowestVersion);
 
