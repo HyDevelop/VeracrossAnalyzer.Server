@@ -2,14 +2,17 @@ package org.hydev.veracross.analyzer.database.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hydev.veracross.analyzer.database.VADatabase;
+import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
 import org.hydev.veracross.analyzer.utils.L$;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.VERSION_BUILD;
+import static org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses.detectLevel;
+import static org.hydev.veracross.analyzer.database.VADatabase.transaction;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
@@ -37,14 +40,30 @@ public class VADatabaseUpgrade
         new VersionUpdate(66, 381, veracross ->
         {
             // Update: Users database - remove all existing users
-            VADatabase.transaction(session -> session.createSQLQuery("TRUNCATE TABLE va_users;").executeUpdate());
+            transaction(session -> session.createSQLQuery("TRUNCATE TABLE va_users;").executeUpdate());
         }),
 
-        // v381 to latest
-        new VersionUpdate(381, VERSION_BUILD, veracross ->
+        // v381 to v466
+        new VersionUpdate(381, 466, veracross ->
         {
             // Update: Added maintenance message field
             SystemMeta.setMaintenance("");
+        }),
+
+        // v466 to latest
+        new VersionUpdate(466, VERSION_BUILD, veracross ->
+        {
+            List<Course> courses = Course.getAll();
+
+            transaction(s ->
+            {
+                // Update: Add levels and types to courses
+                courses.forEach(c ->
+                {
+                    c.level(detectLevel(c.name()));
+                    s.saveOrUpdate(c);
+                });
+            });
         })
     );
 
