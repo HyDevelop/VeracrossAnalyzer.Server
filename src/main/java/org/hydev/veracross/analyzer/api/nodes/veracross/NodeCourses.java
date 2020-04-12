@@ -49,8 +49,8 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         // Throw access log
         AccessLog.record(cookie.getUsername(), "Access Courses API", "Success");
 
-        // Save course info
-        courses.forEach(NodeCourses::storeCourse);
+        // Save course info async
+        new Thread(() -> courses.forEach(NodeCourses::storeCourse)).start();
 
         // Return it
         return courses;
