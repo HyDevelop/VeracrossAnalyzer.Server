@@ -74,25 +74,26 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
      */
     private static void storeCourse(VeraCourse course)
     {
+        String level = detectLevel(course.getName());
+        int infoId = -1;
+        if (level != null /*&& !level.equals(SPORT) && !level.equals(Club)*/)
+        {
+            // Get info
+            CourseInfo info = CourseInfo.getOrCreate(getSchoolYear(), course.getName(), course.getTeacherName(), level);
+
+            // Add course id
+            if (!info.courseIds().contains("" + course.getId()))
+            {
+                info.addCourseId((int) course.getId());
+            }
+
+            // Save and get info id
+            infoId = info.save().id_ci();
+        }
+
         // Create one if it does not exist
         if (Course.get((int) course.getId()) == null)
         {
-            String level = detectLevel(course.getName());
-            int infoId = -1;
-            if (level != null /*&& !level.equals(SPORT) && !level.equals(Club)*/)
-            {
-                // Get info
-                CourseInfo info = CourseInfo.getOrCreate(getSchoolYear(), course.getName(), course.getTeacherName(), level);
-
-                // Add course id
-                if (!info.courseIds().contains("" + course.getId()))
-                {
-                    info.addCourseId((int) course.getId());
-                }
-
-                // Save and get info id
-                infoId = info.save().id_ci();
-            }
             new Course((int) course.getId(), course.getName(), course.getTeacherName(), detectLevel(course.getName()), infoId).insert();
         }
     }
