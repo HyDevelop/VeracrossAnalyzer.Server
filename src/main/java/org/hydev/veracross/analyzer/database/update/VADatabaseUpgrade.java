@@ -66,7 +66,7 @@ public class VADatabaseUpgrade
                 courses.forEach(c ->
                 {
                     c.level(detectLevel(c.name()));
-                    s.saveOrUpdate(c);
+                    s.update(c);
                 });
             });
         }),
