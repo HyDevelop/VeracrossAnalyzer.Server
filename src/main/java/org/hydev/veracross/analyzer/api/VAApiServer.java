@@ -67,7 +67,7 @@ public class VAApiServer
             new NodeDirectory(),
 
             // Database
-            new NodeAllCourses()
+            new NodeCourseInfo()
         );
 
         // Load Hibernate

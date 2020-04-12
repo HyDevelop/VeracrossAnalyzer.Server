@@ -4,7 +4,7 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonKnownError;
-import org.hydev.veracross.analyzer.database.model.Course;
+import org.hydev.veracross.analyzer.database.model.CourseInfo;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
@@ -20,12 +20,12 @@ import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
  * @author Vanilla (https://github.com/VergeDX)
  * @since 2020-04-11 17:44
  */
-public class NodeAllCourses extends JsonApiNode<NodeAllCourses.Model>
+public class NodeCourseInfo extends JsonApiNode<NodeCourseInfo.Model>
 {
     @Override
     public String path()
     {
-        return "/api/all-courses";
+        return "/api/course-info";
     }
 
     @Override
@@ -51,6 +51,6 @@ public class NodeAllCourses extends JsonApiNode<NodeAllCourses.Model>
         // Validate login
         if (!veracross.validateLogin()) throw new JsonKnownError("Login expired!");
 
-        return Course.getAll();
+        return CourseInfo.getAll();
     }
 }
