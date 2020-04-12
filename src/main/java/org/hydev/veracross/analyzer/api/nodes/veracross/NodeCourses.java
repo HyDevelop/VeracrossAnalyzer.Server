@@ -14,6 +14,7 @@ import org.hydev.veracross.sdk.model.VeraCourses;
 import java.util.Calendar;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
 
 /**
  * This api node obtains the courses information from Veracross and
@@ -95,6 +96,8 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         if (Course.get((int) course.getId()) == null)
         {
             new Course((int) course.getId(), course.getName(), course.getTeacherName(), detectLevel(course.getName()), infoId).insert();
+
+            logger.log("Course {} created!", course.getName());
         }
     }
 
