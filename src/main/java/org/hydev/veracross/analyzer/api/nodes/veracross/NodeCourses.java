@@ -5,6 +5,7 @@ import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.Course;
+import org.hydev.veracross.analyzer.database.model.CourseInfo;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeraCourse;
@@ -76,7 +77,23 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         // Create one if it does not exist
         if (Course.get((int) course.getId()) == null)
         {
-            new Course((int) course.getId(), course.getName(), course.getTeacherName(), detectLevel(course.getName())).insert();
+            String level = detectLevel(course.getName());
+            int infoId = -1;
+            if (level != null && !level.equals(SPORT) && !level.equals(Club))
+            {
+                // Get info
+                CourseInfo info = CourseInfo.getOrCreate(getSchoolYear(), course.getName(), course.getTeacherName(), level);
+
+                // Add course id
+                if (!info.courseIds().contains("" + course.getId()))
+                {
+                    info.addCourseId((int) course.getId());
+                }
+
+                // Save and get info id
+                infoId = info.save().id_ci();
+            }
+            new Course((int) course.getId(), course.getName(), course.getTeacherName(), detectLevel(course.getName()), infoId).insert();
         }
     }
 
