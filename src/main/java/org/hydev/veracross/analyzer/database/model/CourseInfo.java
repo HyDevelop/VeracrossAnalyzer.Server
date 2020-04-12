@@ -112,4 +112,14 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
             return query.get(0);
         }
     }
+
+    /**
+     * Get all course info
+     *
+     * @return Courses' info
+     */
+    public static List<CourseInfo> getAll()
+    {
+        return VADatabase.query(s -> s.createQuery("from CourseInfo", CourseInfo.class).getResultList());
+    }
 }
