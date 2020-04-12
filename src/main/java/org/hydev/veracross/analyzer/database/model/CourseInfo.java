@@ -49,4 +49,7 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
 
     @Column(name = "level", length = 8)
     private String level;
+
+    @Column(name = "course_ids")
+    private String courseIds;
 }
