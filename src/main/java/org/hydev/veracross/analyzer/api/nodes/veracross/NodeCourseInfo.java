@@ -78,13 +78,14 @@ public class NodeCourseInfo extends JsonApiNode<NodeCourseInfo.Model>
         // Validate login
         if (!veracross.validateLogin()) throw new JsonKnownError("Login expired!");
 
-        // Check cache
-        if (System.currentTimeMillis() - cacheTime > 24 * 3600000)
+        // Check cache for directory (time = 24h)
+        long time = System.currentTimeMillis();
+        if (time - cacheTime > 24 * 3600000)
         {
             // Update cache
             directoryJsonCache = veracross.getDirectoryStudents().stream()
                 .map(s -> new StudentInfo(s.getCurrentGradeId(), s.getAllClasses())).collect(toList());
-            cacheTime = System.currentTimeMillis();
+            cacheTime = time;
         }
 
         return new ReturnModel(CourseInfo.getAll(), directoryJsonCache, Course.getAll());
