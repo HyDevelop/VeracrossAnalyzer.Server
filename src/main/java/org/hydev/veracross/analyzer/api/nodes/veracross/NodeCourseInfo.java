@@ -6,6 +6,7 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonKnownError;
+import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.CourseInfo;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
@@ -58,6 +59,7 @@ public class NodeCourseInfo extends JsonApiNode<NodeCourseInfo.Model>
     {
         List<CourseInfo> courseInfos;
         List<StudentInfo> studentInfos;
+        List<Course> classes;
     }
 
     // TODO: This method of caching only works for the one school, have to be modified if other schools are added.
@@ -85,6 +87,6 @@ public class NodeCourseInfo extends JsonApiNode<NodeCourseInfo.Model>
             cacheTime = System.currentTimeMillis();
         }
 
-        return new ReturnModel(CourseInfo.getAll(), directoryJsonCache);
+        return new ReturnModel(CourseInfo.getAll(), directoryJsonCache, Course.getAll());
     }
 }
