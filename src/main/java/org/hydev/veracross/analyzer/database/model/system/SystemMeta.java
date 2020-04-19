@@ -69,7 +69,15 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
      */
     public static void set(int id, String name, String value)
     {
-        VADatabase.save(new SystemMeta(id, name, value));
+        SystemMeta systemMeta = get(id);
+        if (systemMeta == null)
+        {
+            VADatabase.save(new SystemMeta(id, name, value));
+        }
+        else
+        {
+            systemMeta.name(name).value(value).save();
+        }
     }
 
     public static int getBuildVersion()
