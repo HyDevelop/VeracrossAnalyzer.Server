@@ -66,6 +66,10 @@ public class NodeCourseInfo extends JsonApiNode<NodeCourseInfo.Model>
     private static List<StudentInfo> directoryJsonCache;
     private static long cacheTime = 0;
 
+    private static List<CourseInfo> courseInfoCache;
+    private static List<Course> classesCache;
+    private static long courseInfoCacheTime = 0;
+
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
@@ -88,6 +92,15 @@ public class NodeCourseInfo extends JsonApiNode<NodeCourseInfo.Model>
             cacheTime = time;
         }
 
-        return new ReturnModel(CourseInfo.getAll(), directoryJsonCache, Course.getAll());
+        // Check cache for CourseInfo and Course (time = 10 min)
+        if (time - courseInfoCacheTime > 10 * 60000)
+        {
+            // Update cache
+            courseInfoCache = CourseInfo.getAll();
+            classesCache = Course.getAll();
+            courseInfoCacheTime = time;
+        }
+
+        return new ReturnModel(courseInfoCache, directoryJsonCache, classesCache);
     }
 }
