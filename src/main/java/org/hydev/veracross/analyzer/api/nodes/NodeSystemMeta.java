@@ -2,10 +2,9 @@ package org.hydev.veracross.analyzer.api.nodes;
 
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.ApiNode;
+import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
 
 import static org.hydev.veracross.analyzer.VAConstants.VERSION;
-import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.ID_MAINTENANCE;
-import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.get;
 
 /**
  * This node returns meta information about the system
@@ -37,7 +36,7 @@ public class NodeSystemMeta implements ApiNode
         switch (access.getContent())
         {
             case "version": return VERSION;
-            case "maintenance": return get(ID_MAINTENANCE);
+            case "maintenance": return SystemMeta.getMaintenance();
         }
 
         return null;

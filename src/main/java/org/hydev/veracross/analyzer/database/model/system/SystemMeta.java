@@ -38,13 +38,13 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
 
     @Id
     @Column(name = "id")
-    private int id;
+    public int id;
 
     @Column(name = "name")
-    private String name;
+    public String name;
 
     @Column(name = "value")
-    private String value;
+    public String value;
 
     /**
      * Get entry by id
@@ -52,12 +52,12 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
      * @param id ID
      * @return Value
      */
-    public static String get(int id)
+    public static SystemMeta get(int id)
     {
         return VADatabase.query(s -> s
                 .createQuery("from SystemMeta where id=:id", SystemMeta.class)
                 .setParameter("id", id)
-                .getSingleResult().value);
+                .getSingleResult());
     }
 
     /**
@@ -74,7 +74,7 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
 
     public static int getBuildVersion()
     {
-        String currentVersionString = SystemMeta.get(ID_VERSION_BUILD);
+        String currentVersionString = SystemMeta.get(ID_VERSION_BUILD).value;
         return currentVersionString == null ? -1 : parseInt(currentVersionString);
     }
 
@@ -85,7 +85,7 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
 
     public static String getMaintenance()
     {
-        return get(ID_MAINTENANCE);
+        return get(ID_MAINTENANCE).value;
     }
 
     public static void setMaintenance(String maintenance)

@@ -1,7 +1,10 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross;
 
 import lombok.AllArgsConstructor;
-import org.hydev.veracross.analyzer.api.*;
+import org.hydev.veracross.analyzer.api.ApiAccess;
+import org.hydev.veracross.analyzer.api.JsonApiConfig;
+import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.api.JsonKnownError;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
@@ -12,7 +15,6 @@ import java.io.IOException;
 import java.util.Date;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
-import static org.hydev.veracross.analyzer.database.model.system.SystemMeta.ID_MAINTENANCE;
 
 /**
  * Login with token
@@ -77,7 +79,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         user.lastLogin(new Date()).token(cookie.wrap()).save();
 
         // Return
-        return new ReturnModel(user, SystemMeta.get(ID_MAINTENANCE));
+        return new ReturnModel(user, SystemMeta.getMaintenance());
     }
 
     @Override
