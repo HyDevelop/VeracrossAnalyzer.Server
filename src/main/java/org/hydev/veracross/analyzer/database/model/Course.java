@@ -68,7 +68,7 @@ public class Course extends DatabaseModel<Course>
      */
     public static List<Course> get(List<Long> ids)
     {
-        return query(s -> s.createQuery("from Course where id = (:id)", Course.class)
+        return query(s -> s.createQuery("select c from Course c where c.id in (:id)", Course.class)
             .setParameter("id", ids).list());
     }
 
