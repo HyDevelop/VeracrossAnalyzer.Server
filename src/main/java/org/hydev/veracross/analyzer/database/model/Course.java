@@ -66,7 +66,7 @@ public class Course extends DatabaseModel<Course>
      * @param ids IDs
      * @return Course
      */
-    public static List<Course> getAll(int... ids)
+    public static List<Course> get(List<Integer> ids)
     {
         return query(s -> s.createQuery("from Course where id = (:id)", Course.class)
             .setParameter("id", ids).list());
