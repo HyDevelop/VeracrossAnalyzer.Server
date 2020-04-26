@@ -41,4 +41,25 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
 
     @Column(name = "user")
     private String user;
+
+    // Is the course is enjoyable?
+    @Column(name = "course_enjoyable")
+    private Short courseEnjoyable;
+
+    // Is the knowledge interesting or important?
+    // Is it something you feel worth learning?
+    @Column(name = "course_knowledge")
+    private Short courseKnowledge;
+
+    // Is the teacher interesting or boring?
+    @Column(name = "teacher_interesting")
+    private Short teacherInteresting;
+
+    // Is the teacher easy to understand?
+    @Column(name = "teacher_eloquence")
+    private Short teacherEloquence;
+
+    // How fair is the grading, is credit given in proportion to work?
+    @Column(name = "teacher_fair")
+    private Short teacherFair;
 }
