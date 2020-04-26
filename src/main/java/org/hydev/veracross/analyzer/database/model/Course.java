@@ -3,13 +3,14 @@ package org.hydev.veracross.analyzer.database.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
-import org.hydev.veracross.analyzer.database.VADatabase;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.List;
+
+import static org.hydev.veracross.analyzer.database.VADatabase.query;
 
 /**
  * Database model for courses.
@@ -55,10 +56,20 @@ public class Course extends DatabaseModel<Course>
      */
     public static Course get(int id)
     {
-        return VADatabase.query(s -> s
-                .createQuery("from Course where id=:id", Course.class)
-                .setParameter("id", id)
-                .getSingleResult());
+        return query(s -> s.createQuery("from Course where id=:id", Course.class)
+            .setParameter("id", id).getSingleResult());
+    }
+
+    /**
+     * Get courses by ids
+     *
+     * @param ids IDs
+     * @return Course
+     */
+    public static List<Course> getAll(int... ids)
+    {
+        return query(s -> s.createQuery("from Course where id = (:id)", Course.class)
+            .setParameter("id", ids).list());
     }
 
     /**
@@ -68,6 +79,6 @@ public class Course extends DatabaseModel<Course>
      */
     public static List<Course> getAll()
     {
-        return VADatabase.query(s -> s.createQuery("from Course", Course.class).getResultList());
+        return query(s -> s.createQuery("from Course", Course.class).list());
     }
 }
