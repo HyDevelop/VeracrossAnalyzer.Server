@@ -6,13 +6,13 @@ import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.CourseInfo;
+import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeraCourse;
 import org.hydev.veracross.sdk.model.VeraCourses;
 
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
@@ -55,6 +55,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         // Find courses
         List<Course> courses = Course.get(veraCourses.stream().mapToLong(VeraCourse::getId)
             .boxed().collect(Collectors.toList()));
+        Map<Long, Course> courseMap = new HashMap<>();
 
         // Save course info async
         for (VeraCourse veraCourse : veraCourses)
@@ -66,11 +67,16 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
                 courses.add(storeCourse(veraCourse));
             }
         }
+        courses.forEach(c -> courseMap.put(c.id(), c));
+
+        // Find ratings
+        List<CourseInfoRating> ratings = CourseInfoRating.getByUser(veraCourses.getPersonPk());
+        List<Integer> ratedIds = new ArrayList<>();
+        ratings.forEach(r -> ratedIds.add(r.id_ci()));
 
         // Return it
-        return veraCourses.stream().map(v ->
-            new CombinedCourse(v, courses.stream().filter(c -> c.id() == v.getId()).findFirst().orElse(null)))
-            .collect(Collectors.toList());
+        return veraCourses.stream().map(v -> new CombinedCourse(v, courseMap.get(v.getId()),
+            ratedIds.contains(courseMap.get(v.getId()).id_ci()))).collect(Collectors.toList());
     }
 
     @Override
@@ -88,8 +94,9 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     {
         public String level;
         public Integer id_ci;
+        public boolean rated;
 
-        public CombinedCourse(VeraCourse other, Course course)
+        public CombinedCourse(VeraCourse other, Course course, boolean rated)
         {
             super(other);
 
@@ -98,6 +105,8 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
                 this.level = course.level();
                 this.id_ci = course.id_ci();
             }
+
+            this.rated = rated;
         }
     }
 
