@@ -71,7 +71,13 @@ public class VADatabaseUpgrade
                 for (Course c : courses)
                 {
                     c.level(detectLevel(c.name()));
-                    if (c.level() == null || c.level().equals("None") || c.level().equals("Sport")) continue;
+
+                    // Ignore sports and nones
+                    if (c.level() == null || c.level().equals("None") || c.level().equals("Sport"))
+                    {
+                        s.update(c);
+                        continue;
+                    }
 
                     String key = c.name() + c.teacher() + c.level();
 
