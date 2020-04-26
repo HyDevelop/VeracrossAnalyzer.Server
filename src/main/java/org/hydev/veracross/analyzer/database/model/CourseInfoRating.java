@@ -62,4 +62,7 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
     // How fair is the grading, is credit given in proportion to work?
     @Column(name = "teacher_fair")
     private Short teacherFair;
+
+    @Column(name = "comment", length = 5000)
+    private String comment;
 }
