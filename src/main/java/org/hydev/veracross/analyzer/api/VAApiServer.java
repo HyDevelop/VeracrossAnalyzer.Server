@@ -11,6 +11,8 @@ import org.hydev.veracross.analyzer.api.nodes.NodeSystemMeta;
 import org.hydev.veracross.analyzer.api.nodes.NodeTest;
 import org.hydev.veracross.analyzer.api.nodes.NodeVersion;
 import org.hydev.veracross.analyzer.api.nodes.veracross.*;
+import org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo.NodeCourseInfo;
+import org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo.NodeCourseInfoGetRating;
 import org.hydev.veracross.analyzer.database.VADatabase;
 
 import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
@@ -66,7 +68,8 @@ public class VAApiServer
             new NodeMarkAsRead(),
 
             // Database
-            new NodeCourseInfo()
+            new NodeCourseInfo(),
+            new NodeCourseInfoGetRating()
         );
 
         // Load Hibernate
