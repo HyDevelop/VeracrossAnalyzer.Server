@@ -3,7 +3,6 @@ package org.hydev.veracross.analyzer.database.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
-import org.hydev.veracross.analyzer.database.VADatabase;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeraStudent;
 
@@ -14,6 +13,7 @@ import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.EMAIL_SUFFIX;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.database.VADatabase.query;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
@@ -125,9 +125,24 @@ public class User extends DatabaseModel<User>
     public static User get(String username) throws IOException
     {
         // Check database
-        List<User> users = VADatabase.query(s -> s
-                .createQuery("from User where username=:username", User.class)
+        List<User> users = query(s -> s.createQuery("from User where username=:username", User.class)
                 .setParameter("username", username).list());
+
+        // Return
+        return l$(users).first();
+    }
+
+    /**
+     * Find user by the username or return null
+     *
+     * @param id User ID
+     * @return User
+     */
+    public static User get(long id) throws IOException
+    {
+        // Check database
+        List<User> users = query(s -> s.createQuery("from User where id=:id", User.class)
+                .setParameter("id", id).list());
 
         // Return
         return l$(users).first();
