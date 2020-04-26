@@ -39,8 +39,11 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
     @Column(name = "id_user")
     private long id_user;
 
-    @Column(name = "user")
-    private String user;
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "user_full_name")
+    private String userFullName;
 
     @Column(name = "anonymous")
     private boolean anonymous;
