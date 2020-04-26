@@ -71,7 +71,6 @@ public class VADatabaseUpgrade
                 for (Course c : courses)
                 {
                     c.level(detectLevel(c.name()));
-                    s.update(c);
 
                     String key = c.name() + c.teacher() + c.level();
 
@@ -82,6 +81,9 @@ public class VADatabaseUpgrade
                         index.getAndIncrement();
                     }
                     map.get(key).addCourseId(c.id());
+                    c.id_ci(map.get(key).id_ci());
+
+                    s.update(c);
                 }
             });
         })

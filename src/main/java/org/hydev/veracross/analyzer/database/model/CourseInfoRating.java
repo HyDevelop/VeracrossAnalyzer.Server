@@ -26,7 +26,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(fluent = true)
 @Entity
-@Table(name = "va_courses_info")
+@Table(name = "va_courses_info_rating")
 public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
 {
     @Id
