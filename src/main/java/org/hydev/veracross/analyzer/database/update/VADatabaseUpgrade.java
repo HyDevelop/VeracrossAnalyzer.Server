@@ -56,24 +56,8 @@ public class VADatabaseUpgrade
             SystemMeta.setMaintenance("");
         }),
 
-        // v466 to v478
-        new VersionUpdate(466, 478, veracross ->
-        {
-            // Update: Add levels and types to courses
-            List<Course> courses = Course.getAll();
-
-            transaction(s ->
-            {
-                courses.forEach(c ->
-                {
-                    c.level(detectLevel(c.name()));
-                    s.update(c);
-                });
-            });
-        }),
-
         // v478 to latest
-        new VersionUpdate(478, VERSION_BUILD, veracross ->
+        new VersionUpdate(466, VERSION_BUILD, veracross ->
         {
             // Update: Add course info
             List<Course> courses = Course.getAll();
@@ -86,6 +70,9 @@ public class VADatabaseUpgrade
             {
                 for (Course c : courses)
                 {
+                    c.level(detectLevel(c.name()));
+                    s.update(c);
+
                     String key = c.name() + c.teacher() + c.level();
 
                     if (!map.containsKey(key))
