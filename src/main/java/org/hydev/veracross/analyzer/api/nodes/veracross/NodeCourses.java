@@ -113,7 +113,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
      */
     public static String detectLevel(String name)
     {
-        name = name.trim().replace("\\([^)]*\\)", "");
+        name = name.replaceAll("\\([^()]*\\)", "").trim();
 
         // Common ones
         if (name.startsWith("AP")) return AP;
