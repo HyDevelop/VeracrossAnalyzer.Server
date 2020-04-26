@@ -58,9 +58,9 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
      *
      * @return Course ids
      */
-    public List<Integer> getCourseIds()
+    public List<Long> getCourseIds()
     {
-        return stream(courseIds.split("\\|")).map(Integer::parseInt).collect(Collectors.toList());
+        return stream(courseIds.split("\\|")).map(Long::parseLong).collect(Collectors.toList());
     }
 
     /**
@@ -78,7 +78,7 @@ public class CourseInfo extends DatabaseModel<CourseInfo>
      *
      * @param courseId Course id
      */
-    public void addCourseId(Integer courseId)
+    public void addCourseId(Long courseId)
     {
         if (!this.courseIds.equals("")) this.courseIds += "|";
         this.courseIds += courseId;

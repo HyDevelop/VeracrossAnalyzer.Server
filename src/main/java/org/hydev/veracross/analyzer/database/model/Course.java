@@ -34,7 +34,7 @@ public class Course extends DatabaseModel<Course>
 {
     @Id
     @Column(name = "id")
-    private int id;
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -54,7 +54,7 @@ public class Course extends DatabaseModel<Course>
      * @param id ID
      * @return Course
      */
-    public static Course get(int id)
+    public static Course get(long id)
     {
         return query(s -> s.createQuery("from Course where id=:id", Course.class)
             .setParameter("id", id).getSingleResult());

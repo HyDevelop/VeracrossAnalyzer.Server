@@ -118,7 +118,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
             // Add course id
             if (!info.courseIds().contains("" + veraCourse.getId()))
             {
-                info.addCourseId((int) veraCourse.getId());
+                info.addCourseId(veraCourse.getId());
             }
 
             // Save and get info id
