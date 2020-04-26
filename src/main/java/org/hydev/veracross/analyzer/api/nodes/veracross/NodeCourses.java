@@ -12,6 +12,7 @@ import org.hydev.veracross.sdk.model.VeraCourse;
 import org.hydev.veracross.sdk.model.VeraCourses;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
@@ -45,16 +46,28 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         CookieData cookie = new CookieData(data.token).store(veracross);
 
         // Get courses
-        VeraCourses courses = veracross.getCourses();
+        VeraCourses veraCourses = veracross.getCourses();
 
         // Throw access log
         AccessLog.record(cookie.getUsername(), "Access Courses API", "Success");
 
+        // Find courses
+        List<Course> courses = Course.get((List<Integer>) veraCourses.stream().mapToLong(VeraCourse::getId));
+
         // Save course info async
-        new Thread(() -> courses.forEach(NodeCourses::storeCourse)).start();
+        for (VeraCourse veraCourse : veraCourses)
+        {
+            // If there are no course exist for this id
+            if (courses.stream().noneMatch(c -> c.id() == veraCourse.getId()))
+            {
+                // Put a new course
+                courses.add(storeCourse(veraCourse));
+            }
+        }
 
         // Return it
-        return courses;
+        return veraCourses.stream().map(v ->
+            new CombinedCourse(v, courses.stream().filter(c -> c.id() == v.getId()).findFirst().orElse(null)));
     }
 
     @Override
@@ -68,24 +81,42 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         String token;
     }
 
+    protected static class CombinedCourse extends VeraCourse
+    {
+        public String level;
+        public Integer id_ci;
+
+        public CombinedCourse(VeraCourse other, Course course)
+        {
+            super(other);
+
+            if (course != null)
+            {
+                this.level = course.level();
+                this.id_ci = course.id_ci();
+            }
+        }
+    }
+
     /**
      * Save course info if not already saved
      *
-     * @param course Course info
+     * @param veraCourse Course info
      */
-    private static void storeCourse(VeraCourse course)
+    private static Course storeCourse(VeraCourse veraCourse)
     {
-        String level = detectLevel(course.getName());
+        String level = detectLevel(veraCourse.getName());
         int infoId = -1;
-        if (level != null /*&& !level.equals(SPORT) && !level.equals(Club)*/)
+        if (level != null && !level.equals(SPORT) /*&& !level.equals(Club)*/)
         {
             // Get info
-            CourseInfo info = CourseInfo.getOrCreate(getSchoolYear(), course.getName(), course.getTeacherName(), level);
+            CourseInfo info = CourseInfo.getOrCreate(getSchoolYear(), veraCourse.getName(),
+                veraCourse.getTeacherName(), level);
 
             // Add course id
-            if (!info.courseIds().contains("" + course.getId()))
+            if (!info.courseIds().contains("" + veraCourse.getId()))
             {
-                info.addCourseId((int) course.getId());
+                info.addCourseId((int) veraCourse.getId());
             }
 
             // Save and get info id
@@ -93,12 +124,11 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         }
 
         // Create one if it does not exist
-        if (Course.get((int) course.getId()) == null)
-        {
-            new Course((int) course.getId(), course.getName(), course.getTeacherName(), detectLevel(course.getName()), infoId).insert();
+        Course course = new Course((int) veraCourse.getId(), veraCourse.getName(),
+            veraCourse.getTeacherName(), level, infoId).insert();
 
-            logger.log("Course {} created!", course.getName());
-        }
+        logger.log("Course {} created!", course.name());
+        return course;
     }
 
     public static final String AP = "AP";
