@@ -93,5 +93,15 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
         String userFullName;
         Short[] ratings;
         String comment;
+
+        ReturnedRating(CourseInfoRating rating)
+        {
+            id_ci = rating.id_ci;
+            id_user = rating.anonymous ? -1 : rating.id_user;
+            userFullName = rating.anonymous ? "Anonymous Student" : rating.userFullName;
+            ratings = new Short[]{rating.courseEnjoyable, rating.courseKnowledge,
+                rating.teacherInteresting, rating.teacherEloquence, rating.teacherFair};
+            comment = rating.comment;
+        }
     }
 }
