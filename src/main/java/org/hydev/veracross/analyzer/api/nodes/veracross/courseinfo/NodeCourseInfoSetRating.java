@@ -1,8 +1,11 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo;
 
-import org.hydev.veracross.analyzer.api.ApiAccess;
-import org.hydev.veracross.analyzer.api.JsonApiConfig;
-import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.api.*;
+import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
+import org.hydev.veracross.analyzer.database.model.User;
+import org.hydev.veracross.analyzer.utils.CookieData;
+import org.hydev.veracross.sdk.VeracrossHttpClient;
+import org.hydev.veracross.sdk.model.VeraLoginInfo;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.ObtainedRating;
@@ -42,6 +45,31 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
-        return null;
+        // Create http client
+        VeracrossHttpClient veracross = new VeracrossHttpClient();
+
+        // Unwrap cookies
+        CookieData cookie = new CookieData(data.token).store(veracross);
+
+        // Validate login
+        VeraLoginInfo loginInfo = veracross.getLoginInfo();
+        if (loginInfo == null) throw new JsonKnownError("Login expired!");
+
+        // Get user
+        User user = User.get(loginInfo.personPk());
+
+        // Null case
+        if (user == null) throw new RuntimeException("User not registered. Something is wrong...");
+
+        // Create rating
+        CourseInfoRating rating = data.rating.toCourseInfoRating()
+            .id_user(loginInfo.personPk())
+            .username(user.username)
+            .userFullName(user.firstName + user.lastName);
+
+        // Save rating
+        rating.save();
+
+        return "Success!";
     }
 }
