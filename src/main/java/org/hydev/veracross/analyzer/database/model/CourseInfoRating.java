@@ -104,4 +104,14 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
                 rating.comment);
         }
     }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ObtainedRating
+    {
+        int id_ci;
+        Short[] ratings;
+        String comment;
+    }
 }
