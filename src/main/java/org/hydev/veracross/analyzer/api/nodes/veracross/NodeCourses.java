@@ -13,6 +13,7 @@ import org.hydev.veracross.sdk.model.VeraCourses;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
@@ -52,7 +53,8 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         AccessLog.record(cookie.getUsername(), "Access Courses API", "Success");
 
         // Find courses
-        List<Course> courses = Course.get((List<Integer>) veraCourses.stream().mapToLong(VeraCourse::getId));
+        List<Course> courses = Course.get(veraCourses.stream().mapToLong(VeraCourse::getId)
+            .boxed().collect(Collectors.toList()));
 
         // Save course info async
         for (VeraCourse veraCourse : veraCourses)
