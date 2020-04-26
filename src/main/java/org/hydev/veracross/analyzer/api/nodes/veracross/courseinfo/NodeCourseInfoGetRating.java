@@ -4,8 +4,12 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonKnownError;
+import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.Long.parseLong;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
@@ -60,13 +64,18 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
 
         try
         {
+            List<CourseInfoRating> ratings;
+
             // Condition
             switch (data.condition)
             {
-                case "user": return getByUser(parseLong(data.value));
-                case "course": return getByCourse(parseLong(data.value));
+                case "user": ratings = getByUser(parseLong(data.value)); break;
+                case "course": ratings = getByCourse(parseLong(data.value)); break;
                 default: return new JsonKnownError("What?");
             }
+
+            // Parse to ReturnedRating
+            return ratings.stream().map(CourseInfoRating.ReturnedRating::new).collect(Collectors.toList());
         }
         catch (NumberFormatException e)
         {

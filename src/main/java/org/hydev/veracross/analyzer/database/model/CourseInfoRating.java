@@ -94,7 +94,7 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
         Short[] ratings;
         String comment;
 
-        ReturnedRating(CourseInfoRating rating)
+        public ReturnedRating(CourseInfoRating rating)
         {
             this(rating.id_ci,
                 rating.anonymous ? -1 : rating.id_user,
