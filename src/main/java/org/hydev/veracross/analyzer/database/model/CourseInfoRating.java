@@ -42,6 +42,9 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
     @Column(name = "user")
     private String user;
 
+    @Column(name = "anonymous")
+    private boolean anonymous;
+
     // Is the course is enjoyable?
     @Column(name = "course_enjoyable")
     private Short courseEnjoyable;
