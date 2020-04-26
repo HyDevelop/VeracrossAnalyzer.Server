@@ -68,4 +68,10 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
 
     @Column(name = "comment", length = 5000)
     private String comment;
+
+    public static List<CourseInfoRating> getByUser(long user)
+    {
+        return VADatabase.query(s -> s.createQuery("from CourseInfoRating where user = :user")
+            .setParameter("user", user).list());
+    }
 }
