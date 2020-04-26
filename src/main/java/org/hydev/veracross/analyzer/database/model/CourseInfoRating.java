@@ -112,6 +112,7 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
     public static class ObtainedRating
     {
         int id_ci;
+        boolean anonymous;
         Short[] ratings;
         String comment;
 
@@ -119,7 +120,7 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
         {
             if (ratings.length != 5) throw new JsonKnownError("Invalid ratings length");
 
-            return new CourseInfoRating().id_ci(id_ci).comment(comment)
+            return new CourseInfoRating().id_ci(id_ci).comment(comment).anonymous(anonymous)
                 .courseEnjoyable(ratings[0]).courseKnowledge(ratings[1]).teacherInteresting(ratings[2])
                 .teacherEloquence(ratings[3]).teacherFair(ratings[4]);
         }
