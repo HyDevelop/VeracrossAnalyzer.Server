@@ -5,6 +5,7 @@ import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.ObtainedRating;
 
 /**
  * Call this api node to set a rating by a user for a course.
@@ -29,15 +30,13 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
     {
         return new JsonApiConfig<>(Model.class)
             .key("token", LENGTH_TOKEN)
-            .key("condition", 15)
-            .key("value", 20);
+            .key("rating", 5500);
     }
 
     protected static class Model
     {
         String token;
-        String condition;
-        String value;
+        ObtainedRating rating;
     }
 
     @Override
