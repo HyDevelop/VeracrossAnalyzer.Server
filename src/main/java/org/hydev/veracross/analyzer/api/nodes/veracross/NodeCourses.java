@@ -69,7 +69,8 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
 
         // Return it
         return veraCourses.stream().map(v ->
-            new CombinedCourse(v, courses.stream().filter(c -> c.id() == v.getId()).findFirst().orElse(null)));
+            new CombinedCourse(v, courses.stream().filter(c -> c.id() == v.getId()).findFirst().orElse(null)))
+            .collect(Collectors.toList());
     }
 
     @Override
