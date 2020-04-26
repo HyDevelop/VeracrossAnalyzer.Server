@@ -74,8 +74,8 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
 
     public static List<CourseInfoRating> getByUser(long user)
     {
-        return VADatabase.query(s -> s.createQuery("from CourseInfoRating where user = :user")
-            .setParameter("user", user).list());
+        return VADatabase.query(s -> s.createQuery("from CourseInfoRating where id_user = :id_user")
+            .setParameter("id_user", user).list());
     }
 
     public static List<CourseInfoRating> getByCourse(long id_ci)
