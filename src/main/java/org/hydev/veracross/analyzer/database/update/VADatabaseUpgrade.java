@@ -117,7 +117,7 @@ public class VADatabaseUpgrade
                     // Update
                     update.operator.run(veracross);
 
-                    logger.log("Update success, taking {} ms", logger.timing.getTime());
+                    logger.log("Update success, taking {} ms", (long) logger.timing.getMilliseconds());
                 }
                 catch (IOException e)
                 {
