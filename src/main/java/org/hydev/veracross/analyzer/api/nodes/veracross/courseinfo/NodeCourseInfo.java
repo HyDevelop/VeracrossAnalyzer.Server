@@ -1,4 +1,4 @@
-package org.hydev.veracross.analyzer.api.nodes.veracross;
+package org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
