@@ -45,6 +45,14 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
+        // Validate data
+        for (Short rating : data.rating.ratings())
+        {
+            // 0 1 2 3 4 5 (0 = unset)
+            if (rating < 0 || rating > 5) return "No you can't.";
+        }
+        if (data.rating.comment().length() > 4998) return "Comment too long.";
+
         // Create http client
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
