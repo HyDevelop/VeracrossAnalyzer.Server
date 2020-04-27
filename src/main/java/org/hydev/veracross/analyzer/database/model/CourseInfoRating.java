@@ -85,6 +85,12 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
             .setParameter("id_ci", id_ci).list());
     }
 
+    public static List<CourseInfoRating> getByUserAndCourse(long user, long id_ci)
+    {
+        return VADatabase.query(s -> s.createQuery("from CourseInfoRating where id_user = :id_user and id_ci = :id_ci")
+            .setParameter("id_user", user).setParameter("id_ci", id_ci).list());
+    }
+
     @Data
     @AllArgsConstructor
     public static class ReturnedRating
