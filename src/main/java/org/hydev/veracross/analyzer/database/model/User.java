@@ -154,7 +154,7 @@ public class User extends DatabaseModel<User>
      * @param id Veracross ID
      * @return User or null
      */
-    public static User getByVeracrossPersonPk(long id) throws IOException
+    public static User getByVeracrossPersonPk(int id) throws IOException
     {
         // Check database
         List<User> users = query(s -> s.createQuery("from User where schoolPersonPk=:id", User.class)
