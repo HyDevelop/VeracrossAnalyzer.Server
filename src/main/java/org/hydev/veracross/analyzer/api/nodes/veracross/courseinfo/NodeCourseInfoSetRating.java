@@ -64,7 +64,7 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
         if (loginInfo == null) throw new JsonKnownError("Login expired!");
 
         // Get user
-        User user = User.getByVeracrossPersonPk(loginInfo.personPk());
+        User user = User.getByVeracrossPersonPk((int) loginInfo.personPk());
 
         // Null case
         if (user == null) throw new RuntimeException("User not registered. Something is wrong...");
