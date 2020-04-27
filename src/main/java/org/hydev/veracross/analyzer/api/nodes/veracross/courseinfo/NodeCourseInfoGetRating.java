@@ -101,8 +101,8 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
                     short stars = rating.ratings()[i];
                     result.ratingCounts[i][stars]++;
                     result.ratingSums[i] += stars;
-                    result.totalCount++;
                 }
+                result.totalCount++;
             }
 
             return result;
