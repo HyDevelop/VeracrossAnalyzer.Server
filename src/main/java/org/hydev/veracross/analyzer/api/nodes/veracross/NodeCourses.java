@@ -70,7 +70,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         courses.forEach(c -> courseMap.put(c.id(), c));
 
         // Find ratings
-        List<CourseInfoRating> ratings = CourseInfoRating.getByUser(veraCourses.getPersonPk());
+        List<CourseInfoRating> ratings = CourseInfoRating.getByPersonPk(veraCourses.getPersonPk());
         Map<Integer, CourseInfoRating> ratingsMap = new HashMap<>();
         ratings.forEach(r -> ratingsMap.put(r.id_ci(), r));
 

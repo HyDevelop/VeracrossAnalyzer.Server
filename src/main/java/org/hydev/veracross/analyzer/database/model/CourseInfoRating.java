@@ -39,6 +39,9 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
     @Column(name = "id_user")
     private long id_user;
 
+    @Column(name = "person_pk")
+    private long personPk;
+
     @Column(name = "username")
     private String username;
 
@@ -76,6 +79,12 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
     {
         return VADatabase.query(s -> s.createQuery("from CourseInfoRating where id_user = :id_user")
             .setParameter("id_user", user).list());
+    }
+
+    public static List<CourseInfoRating> getByPersonPk(long personPk)
+    {
+        return VADatabase.query(s -> s.createQuery("from CourseInfoRating where personPk = :personPk")
+            .setParameter("personPk", personPk).list());
     }
 
     public static List<CourseInfoRating> getByCourse(int id_ci)

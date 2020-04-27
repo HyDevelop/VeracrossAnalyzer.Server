@@ -82,6 +82,7 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
 
         // Override rating
         data.rating.toCourseInfoRating(rating)
+            .personPk(loginInfo.personPk())
             .id_user(user.id)
             .username(user.username)
             .userFullName(user.firstName + "]=[" + user.lastName);
