@@ -90,6 +90,22 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
 
             // Return comments
             if (data.condition.equals("course-comments")) return returnedRatings;
+
+            // Analyze rating data
+            RatingData result = new RatingData();
+            for (ReturnedRating rating : returnedRatings)
+            {
+                // Each criteria
+                for (int i = 0; i < rating.ratings().length; i++)
+                {
+                    short stars = rating.ratings()[i];
+                    result.ratingCounts[i][stars]++;
+                    result.ratingSums[i] += stars;
+                    result.totalCount++;
+                }
+            }
+
+            return result;
         }
         catch (NumberFormatException e)
         {
