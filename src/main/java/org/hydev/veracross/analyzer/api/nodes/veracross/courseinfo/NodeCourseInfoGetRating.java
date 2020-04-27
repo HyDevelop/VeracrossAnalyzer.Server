@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import static java.lang.Integer.parseInt;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.getByCourse;
+import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.getCommentsByCourse;
 
 /**
  * This api node obtains the rating data for a course / a user
@@ -69,6 +70,7 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
             switch (data.condition)
             {
                 case "course": ratings = getByCourse(parseInt(data.value)); break;
+                case "course-comments": ratings = getCommentsByCourse(parseInt(data.value)); break;
                 default: return new JsonKnownError("What?");
             }
 
