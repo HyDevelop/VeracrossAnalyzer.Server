@@ -50,6 +50,16 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
         String value;
     }
 
+    static class RatingData
+    {
+        // ratingCounts[criteria][stars] = count
+        int[][] ratingCounts = new int[5][6];
+
+        // ratingSums[criteria] = total stars
+        int[] ratingSums = new int[5];
+        int totalCount = 0;
+    }
+
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
