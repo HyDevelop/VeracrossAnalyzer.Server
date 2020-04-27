@@ -6,6 +6,7 @@ import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.CourseInfo;
 import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
+import org.hydev.veracross.analyzer.database.model.CourseInfoRating.ReturnedRating;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeraCourse;
@@ -70,12 +71,12 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
 
         // Find ratings
         List<CourseInfoRating> ratings = CourseInfoRating.getByUser(veraCourses.getPersonPk());
-        List<Integer> ratedIds = new ArrayList<>();
-        ratings.forEach(r -> ratedIds.add(r.id_ci()));
+        Map<Integer, CourseInfoRating> ratingsMap = new HashMap<>();
+        ratings.forEach(r -> ratingsMap.put(r.id_ci(), r));
 
         // Return it
         return veraCourses.stream().map(v -> new CombinedCourse(v, courseMap.get(v.getId()),
-            ratedIds.contains(courseMap.get(v.getId()).id_ci()))).collect(Collectors.toList());
+            ratingsMap.getOrDefault(courseMap.get(v.getId()).id_ci(), null))).collect(Collectors.toList());
     }
 
     @Override
@@ -93,9 +94,9 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     {
         public String level;
         public Integer id_ci;
-        public boolean rated;
+        public ReturnedRating rating;
 
-        public CombinedCourse(VeraCourse other, Course course, boolean rated)
+        public CombinedCourse(VeraCourse other, Course course, CourseInfoRating rating)
         {
             super(other);
 
@@ -105,7 +106,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
                 this.id_ci = course.id_ci();
             }
 
-            this.rated = rated;
+            this.rating = rating == null ? null : new ReturnedRating(rating);
         }
     }
 
