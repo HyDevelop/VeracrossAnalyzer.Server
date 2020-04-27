@@ -133,15 +133,31 @@ public class User extends DatabaseModel<User>
     }
 
     /**
-     * Find user by the username or return null
+     * Find user by the user id or return null
      *
      * @param id User ID
      * @return User
      */
-    public static User get(long id) throws IOException
+    public static User getById(long id) throws IOException
     {
         // Check database
         List<User> users = query(s -> s.createQuery("from User where id=:id", User.class)
+                .setParameter("id", id).list());
+
+        // Return
+        return l$(users).first();
+    }
+
+    /**
+     * Find user by the veracross ID or return null
+     *
+     * @param id Veracross ID
+     * @return User or null
+     */
+    public static User getByVeracrossPersonPk(long id) throws IOException
+    {
+        // Check database
+        List<User> users = query(s -> s.createQuery("from User where schoolPersonPk=:id", User.class)
                 .setParameter("id", id).list());
 
         // Return
