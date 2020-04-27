@@ -46,6 +46,7 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
         // Validate data
+        if (data.rating.ratings().length != 5) throw new JsonKnownError("Invalid ratings length");
         for (Short rating : data.rating.ratings())
         {
             // 0 1 2 3 4 5 (0 = unset)

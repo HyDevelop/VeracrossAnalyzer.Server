@@ -2,7 +2,6 @@ package org.hydev.veracross.analyzer.database.model;
 
 import lombok.*;
 import lombok.experimental.Accessors;
-import org.hydev.veracross.analyzer.api.JsonKnownError;
 import org.hydev.veracross.analyzer.database.DatabaseModel;
 import org.hydev.veracross.analyzer.database.VADatabase;
 
@@ -124,7 +123,6 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
 
         public CourseInfoRating toCourseInfoRating()
         {
-            if (ratings.length != 5) throw new JsonKnownError("Invalid ratings length");
 
             return new CourseInfoRating().id_ci(id_ci).comment(comment).anonymous(anonymous)
                 .courseEnjoyable(ratings[0]).courseKnowledge(ratings[1]).teacherInteresting(ratings[2])
