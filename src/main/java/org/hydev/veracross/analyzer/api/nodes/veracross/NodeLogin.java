@@ -4,12 +4,12 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonKnownError;
-import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.StJohnsHttpClient;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import static org.hydev.veracross.analyzer.VAConstants.*;
+import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
 
 /**
  * This api node logs in to Veracross with specified username and
@@ -50,7 +50,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
         // Throw access log
-        AccessLog.record(data.username, "Access Login API", "First Login");
+        logger.log("User {} created a session.", data.username);
 
         // Return cookies
         return NodeLoginToken.afterLogin(veracross,

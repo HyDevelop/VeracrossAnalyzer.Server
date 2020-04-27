@@ -5,7 +5,6 @@ import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonKnownError;
-import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
 import org.hydev.veracross.analyzer.utils.CookieData;
@@ -15,6 +14,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
 
 /**
  * Login with token
@@ -45,7 +45,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         if (!client.validateLogin())
         {
             // Throw access log
-            AccessLog.record(cookie.username, "Access Login API", "Token Expired");
+            logger.log("User {} login session expired.", cookie.username);
             throw new JsonKnownError("Login expired");
         }
 
@@ -54,7 +54,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         cookie.setCookies(client.getCookies().getCookies());
 
         // Throw access log
-        AccessLog.record(cookie.username, "Access Login API", "Token Login");
+        logger.log("User {} renewed login session.", cookie.username);
 
         // After login
         return afterLogin(client, cookie);

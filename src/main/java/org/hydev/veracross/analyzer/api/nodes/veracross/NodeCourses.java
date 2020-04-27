@@ -3,7 +3,6 @@ package org.hydev.veracross.analyzer.api.nodes.veracross;
 import org.hydev.veracross.analyzer.api.ApiAccess;
 import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.database.model.AccessLog;
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.CourseInfo;
 import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
@@ -50,7 +49,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         VeraCourses veraCourses = veracross.getCourses();
 
         // Throw access log
-        AccessLog.record(cookie.getUsername(), "Access Courses API", "Success");
+        logger.log("User {} accessed courses api.", cookie.username);
 
         // Find courses
         List<Course> courses = Course.get(veraCourses.stream().mapToLong(VeraCourse::getId)
