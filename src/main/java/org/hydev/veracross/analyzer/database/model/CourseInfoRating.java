@@ -121,10 +121,9 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
         Short[] ratings;
         String comment;
 
-        public CourseInfoRating toCourseInfoRating()
+        public CourseInfoRating toCourseInfoRating(CourseInfoRating rating)
         {
-
-            return new CourseInfoRating().id_ci(id_ci).comment(comment).anonymous(anonymous)
+            return rating.id_ci(id_ci).comment(comment).anonymous(anonymous)
                 .courseEnjoyable(ratings[0]).courseKnowledge(ratings[1]).teacherInteresting(ratings[2])
                 .teacherEloquence(ratings[3]).teacherFair(ratings[4]);
         }
