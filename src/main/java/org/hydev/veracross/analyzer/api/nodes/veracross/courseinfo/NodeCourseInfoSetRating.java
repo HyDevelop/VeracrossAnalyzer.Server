@@ -84,7 +84,7 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
         data.rating.toCourseInfoRating(rating)
             .id_user(user.id)
             .username(user.username)
-            .userFullName(user.firstName + user.lastName);
+            .userFullName(user.firstName + "]=[" + user.lastName);
 
         // Save rating
         rating.save();
