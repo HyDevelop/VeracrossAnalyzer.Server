@@ -5,13 +5,14 @@ import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.api.JsonKnownError;
 import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
+import org.hydev.veracross.analyzer.database.model.CourseInfoRating.ReturnedRating;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
+import static java.util.stream.Collectors.toList;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.getByCourse;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.getCommentsByCourse;
@@ -80,12 +81,15 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
             switch (data.condition)
             {
                 case "course": ratings = getByCourse(parseInt(data.value)); break;
-                case "course-comments": ratings = getCommentsByCourse(parseInt(data.value)); break;
+                case "course-comments": return getCommentsByCourse(parseInt(data.value));
                 default: return new JsonKnownError("What?");
             }
 
-            // Parse to ReturnedRating
-            return ratings.stream().map(CourseInfoRating.ReturnedRating::new).collect(Collectors.toList());
+            // Parse into returned rating
+            List<ReturnedRating> returnedRatings = ratings.stream().map(ReturnedRating::new).collect(toList());
+
+            // Return comments
+            if (data.condition.equals("course-comments")) return returnedRatings;
         }
         catch (NumberFormatException e)
         {
