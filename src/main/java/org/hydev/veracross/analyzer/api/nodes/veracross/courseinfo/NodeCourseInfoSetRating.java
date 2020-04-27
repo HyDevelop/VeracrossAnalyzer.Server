@@ -1,14 +1,20 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo;
 
-import org.hydev.veracross.analyzer.api.*;
+import org.hydev.veracross.analyzer.api.ApiAccess;
+import org.hydev.veracross.analyzer.api.JsonApiConfig;
+import org.hydev.veracross.analyzer.api.JsonApiNode;
+import org.hydev.veracross.analyzer.api.JsonKnownError;
 import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeraLoginInfo;
 
+import java.util.List;
+
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.ObtainedRating;
+import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.getByUserAndCourse;
 
 /**
  * Call this api node to set a rating by a user for a course.
@@ -70,9 +76,13 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
         // Null case
         if (user == null) throw new RuntimeException("User not registered. Something is wrong...");
 
-        // Create rating
-        CourseInfoRating rating = data.rating.toCourseInfoRating()
-            .id_user(loginInfo.personPk())
+        // See if rating already exists.
+        List<CourseInfoRating> existingRating = getByUserAndCourse(user.id, data.rating.id_ci());
+        CourseInfoRating rating = existingRating.size() == 0 ? new CourseInfoRating() : existingRating.get(0);
+
+        // Override rating
+        data.rating.toCourseInfoRating(rating)
+            .id_user(user.id)
             .username(user.username)
             .userFullName(user.firstName + user.lastName);
 
