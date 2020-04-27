@@ -55,8 +55,8 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
         if (data.rating.ratings().length != 5) throw new JsonKnownError("Invalid ratings length");
         for (Short rating : data.rating.ratings())
         {
-            // 0 1 2 3 4 5 (0 = unset)
-            if (rating < 0 || rating > 5) return "No you can't.";
+            // 1 2 3 4 5
+            if (rating < 1 || rating > 5) return "No you can't.";
         }
         if (data.rating.comment().length() > 4998) return "Comment too long.";
 
