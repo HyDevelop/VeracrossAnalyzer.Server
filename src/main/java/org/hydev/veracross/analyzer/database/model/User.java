@@ -116,6 +116,9 @@ public class User extends DatabaseModel<User>
     @Column(name = "token", length = LENGTH_TOKEN)
     public String token;
 
+    @Column(name = "updateVersion")
+    public int updateVersion = 0;
+
     /**
      * Find user by the username or return null
      *
