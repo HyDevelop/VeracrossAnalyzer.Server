@@ -13,6 +13,7 @@ import org.hydev.veracross.sdk.model.VeraLoginInfo;
 import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.ObtainedRating;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.getByUserAndCourse;
 
@@ -51,20 +52,28 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
     @Override
     protected Object processJson(ApiAccess access, Model data) throws Exception
     {
-        // Validate data
-        if (data.rating.ratings().length != 5) throw new JsonKnownError("Invalid ratings length");
-        for (Short rating : data.rating.ratings())
-        {
-            // 1 2 3 4 5
-            if (rating < 1 || rating > 5) return "No you can't.";
-        }
-        if (data.rating.comment().length() > 4998) return "Comment too long.";
-
         // Create http client
         VeracrossHttpClient veracross = new VeracrossHttpClient();
 
         // Unwrap cookies
         CookieData cookie = new CookieData(data.token).store(veracross);
+
+        // Validate data
+        if (data.rating.ratings().length != 5) throw new JsonKnownError("Invalid ratings length");
+        for (Short rating : data.rating.ratings())
+        {
+            // 1 2 3 4 5
+            if (rating < 1 || rating > 5)
+            {
+                logger.error("[Rating Submit] {} - Invalid numeric rating", cookie.username);
+                return "No you can't.";
+            }
+        }
+        if (data.rating.comment().length() > 4998)
+        {
+            logger.error("[Rating Submit] {} - Comment too long", cookie.username);
+            return "Comment too long.";
+        }
 
         // Validate login
         VeraLoginInfo loginInfo = veracross.getLoginInfo();
