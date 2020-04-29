@@ -107,6 +107,9 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
         // Save rating
         rating.save();
 
+        // Log access (in case something wrong)
+        logger.log("[Rating Submit] {} - {}", user.username, data.rating.id_ci());
+
         return "Success!";
     }
 }
