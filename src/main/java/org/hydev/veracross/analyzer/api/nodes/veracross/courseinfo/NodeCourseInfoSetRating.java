@@ -8,7 +8,7 @@ import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.VeraLoginInfo;
+import org.hydev.veracross.sdk.model.VeraCourses;
 
 import java.util.List;
 
@@ -76,11 +76,19 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
         }
 
         // Validate login
-        VeraLoginInfo loginInfo = veracross.getLoginInfo();
-        if (loginInfo == null) throw new JsonKnownError("Login expired!");
+        VeraCourses loginInfo;
+        try
+        {
+            loginInfo = veracross.getCourses();
+        }
+        catch (Exception e)
+        {
+            logger.error("[Rating Submit] Unable to verify {}", cookie.username);
+            throw new JsonKnownError("Unable to verify: " + e.getMessage());
+        }
 
         // Get user
-        User user = User.getByVeracrossPersonPk((int) loginInfo.personPk());
+        User user = User.getByVeracrossPersonPk((int) loginInfo.getPersonPk());
 
         // Null case
         if (user == null) throw new RuntimeException("User not registered. Something is wrong...");
@@ -91,7 +99,7 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
 
         // Override rating
         data.rating.toCourseInfoRating(rating)
-            .personPk(loginInfo.personPk())
+            .personPk(loginInfo.getPersonPk())
             .id_user(user.id)
             .username(user.username)
             .userFullName(user.firstName + "]=[" + user.lastName);
