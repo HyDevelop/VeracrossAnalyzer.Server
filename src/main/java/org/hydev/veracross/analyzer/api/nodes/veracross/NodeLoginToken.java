@@ -45,7 +45,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         if (!client.validateLogin())
         {
             // Throw access log
-            logger.log("User {} login session expired.", cookie.username);
+            logger.log("[Login] Expire - {}", cookie.username);
             throw new JsonKnownError("Login expired");
         }
 
@@ -54,7 +54,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         cookie.setCookies(client.getCookies().getCookies());
 
         // Throw access log
-        logger.log("User {} renewed login session.", cookie.username);
+        logger.log("[Login] Token - {}", cookie.username);
 
         // After login
         return afterLogin(client, cookie);

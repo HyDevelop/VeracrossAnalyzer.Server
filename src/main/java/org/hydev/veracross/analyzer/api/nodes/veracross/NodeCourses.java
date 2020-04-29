@@ -50,7 +50,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         VeraCourses veraCourses = veracross.getCourses();
 
         // Throw access log
-        logger.log("User {} accessed courses api.", cookie.username);
+        logger.log("[Course] Load - {}", veraCourses.getUsername());
 
         // Find courses
         List<Course> courses = Course.get(veraCourses.stream().mapToLong(VeraCourse::getId)
@@ -139,7 +139,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         Course course = new Course((int) veraCourse.getId(), veraCourse.getName(),
             veraCourse.getTeacherName(), level, infoId).insert();
 
-        logger.log("Course {} created!", course.name());
+        logger.log("[Course] Create - {}", course.name());
         return course;
     }
 

@@ -1,9 +1,6 @@
 package org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo;
 
-import org.hydev.veracross.analyzer.api.ApiAccess;
-import org.hydev.veracross.analyzer.api.JsonApiConfig;
-import org.hydev.veracross.analyzer.api.JsonApiNode;
-import org.hydev.veracross.analyzer.api.JsonKnownError;
+import org.hydev.veracross.analyzer.api.*;
 import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
 import org.hydev.veracross.analyzer.database.model.CourseInfoRating.ReturnedRating;
 import org.hydev.veracross.analyzer.utils.CookieData;
@@ -14,6 +11,7 @@ import java.util.List;
 import static java.lang.Integer.parseInt;
 import static java.util.stream.Collectors.toList;
 import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
+import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.getByCourse;
 import static org.hydev.veracross.analyzer.database.model.CourseInfoRating.getCommentsByCourse;
 
@@ -104,6 +102,9 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
                 }
                 result.totalCount++;
             }
+
+            // Log
+            logger.log("[Rating Get] {}: {} - {}", data.condition, cookie.username, data.value);
 
             return result;
         }
