@@ -79,7 +79,7 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
             switch (data.condition)
             {
                 case "course": ratings = getByCourse(parseInt(data.value)); break;
-                case "course-comments": return getCommentsByCourse(parseInt(data.value));
+                case "course-comments": ratings = getCommentsByCourse(parseInt(data.value)); break;
                 default: return new JsonKnownError("What?");
             }
 
