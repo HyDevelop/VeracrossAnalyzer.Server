@@ -119,7 +119,7 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
         {
             this(rating.id_ci,
                 rating.anonymous ? -1 : rating.id_user,
-                rating.anonymous ? "Anonymous Student" : rating.userFullName,
+                rating.anonymous ? "Anonymous]=[Student" : rating.userFullName,
                 new Short[]{rating.courseEnjoyable, rating.courseKnowledge,
                 rating.teacherInteresting, rating.teacherEloquence, rating.teacherFair},
                 rating.comment);
