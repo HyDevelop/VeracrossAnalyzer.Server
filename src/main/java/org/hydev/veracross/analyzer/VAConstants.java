@@ -34,7 +34,7 @@ public class VAConstants
     // Param key lengths limits
     public static final int LENGTH_USERNAME = 30;
     public static final int LENGTH_PASSWORD = 30;
-    public static final int LENGTH_TOKEN = 1500;
+    public static final int LENGTH_TOKEN = 2000;
     public static final int LENGTH_ASSIGNMENTS_ID = 15;
     public static final int LENGTH_SCORE_ID = 25;
     public static final int LENGTH_CSRF = 90;
