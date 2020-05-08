@@ -87,7 +87,11 @@ public class NodeCourseInfoGetRating extends JsonApiNode<NodeCourseInfoGetRating
             List<ReturnedRating> returnedRatings = ratings.stream().map(ReturnedRating::new).collect(toList());
 
             // Return comments
-            if (data.condition.equals("course-comments")) return returnedRatings;
+            if (data.condition.equals("course-comments"))
+            {
+                returnedRatings.removeIf(r -> r.comment() == null || r.comment().trim().isEmpty());
+                return returnedRatings;
+            }
 
             // Analyze rating data
             RatingData result = new RatingData();
