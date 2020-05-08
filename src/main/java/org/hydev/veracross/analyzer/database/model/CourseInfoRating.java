@@ -95,7 +95,7 @@ public class CourseInfoRating extends DatabaseModel<CourseInfoRating>
 
     public static List<CourseInfoRating> getCommentsByCourse(int id_ci)
     {
-        return VADatabase.query(s -> s.createQuery("from CourseInfoRating where id_ci = :id_ci and datalength(comment) > 0")
+        return VADatabase.query(s -> s.createQuery("from CourseInfoRating where id_ci = :id_ci and LENGTH(comment) > 0")
             .setParameter("id_ci", id_ci).list());
     }
 
