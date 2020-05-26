@@ -2,6 +2,7 @@ package org.hydev.veracross.analyzer.utils;
 
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.CourseInfo;
+import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
 import org.hydev.veracross.sdk.model.VeraCourse;
 
 import java.util.Calendar;
@@ -58,6 +59,29 @@ public class CourseUtils
 
         logger.log("[Course] Create - {}", course.name());
         return course;
+    }
+
+    /**
+     * Course information combining level, id_ci, and ratings
+     */
+    public static class CombinedCourse extends VeraCourse
+    {
+        public String level;
+        public Integer id_ci;
+        public CourseInfoRating.ReturnedRating rating;
+
+        public CombinedCourse(VeraCourse other, Course course, CourseInfoRating rating)
+        {
+            super(other);
+
+            if (course != null)
+            {
+                this.level = course.level();
+                this.id_ci = course.id_ci();
+            }
+
+            this.rating = rating == null ? null : new CourseInfoRating.ReturnedRating(rating);
+        }
     }
 
     /**

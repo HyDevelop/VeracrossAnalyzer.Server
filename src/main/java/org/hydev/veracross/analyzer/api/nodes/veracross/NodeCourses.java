@@ -5,8 +5,8 @@ import org.hydev.veracross.analyzer.api.JsonApiConfig;
 import org.hydev.veracross.analyzer.api.JsonApiNode;
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
-import org.hydev.veracross.analyzer.database.model.CourseInfoRating.ReturnedRating;
 import org.hydev.veracross.analyzer.utils.CookieData;
+import org.hydev.veracross.analyzer.utils.CourseUtils.CombinedCourse;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeraCourse;
 import org.hydev.veracross.sdk.model.VeraCourses;
@@ -90,25 +90,5 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
     protected static class Model
     {
         String token;
-    }
-
-    protected static class CombinedCourse extends VeraCourse
-    {
-        public String level;
-        public Integer id_ci;
-        public ReturnedRating rating;
-
-        public CombinedCourse(VeraCourse other, Course course, CourseInfoRating rating)
-        {
-            super(other);
-
-            if (course != null)
-            {
-                this.level = course.level();
-                this.id_ci = course.id_ci();
-            }
-
-            this.rating = rating == null ? null : new ReturnedRating(rating);
-        }
     }
 }
