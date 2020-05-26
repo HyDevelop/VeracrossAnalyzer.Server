@@ -54,6 +54,17 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         // Throw access log
         logger.log("[Course] Load - {}", veraCourses.getUsername());
 
+        return processCourses(veraCourses);
+    }
+
+    /**
+     * Process courses after user is verified
+     *
+     * @param veraCourses Courses
+     * @return Courses with combined information
+     */
+    public static List<CombinedCourse> processCourses(VeraCourses veraCourses)
+    {
         // Find courses
         List<Course> courses = Course.get(veraCourses.stream().mapToLong(VeraCourse::getId)
             .boxed().collect(Collectors.toList()));
