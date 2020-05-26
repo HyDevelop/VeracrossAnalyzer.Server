@@ -2,7 +2,6 @@ package org.hydev.veracross.analyzer.database.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses;
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.CourseInfo;
 import org.hydev.veracross.analyzer.database.model.system.SystemMeta;
@@ -17,8 +16,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hydev.veracross.analyzer.VAConstants.VERSION_BUILD;
 import static org.hydev.veracross.analyzer.api.VAApiServer.logger;
-import static org.hydev.veracross.analyzer.api.nodes.veracross.NodeCourses.detectLevel;
 import static org.hydev.veracross.analyzer.database.VADatabase.transaction;
+import static org.hydev.veracross.analyzer.utils.CourseUtils.detectLevel;
+import static org.hydev.veracross.analyzer.utils.CourseUtils.getSchoolYear;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
 /**
@@ -61,7 +61,7 @@ public class VADatabaseUpgrade
         {
             // Update: Add course info
             List<Course> courses = Course.getAll();
-            int schoolYear = NodeCourses.getSchoolYear();
+            int schoolYear = getSchoolYear();
 
             Map<String, CourseInfo> map = new HashMap<>();
             AtomicInteger index = new AtomicInteger();
