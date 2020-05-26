@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 import static org.hydev.veracross.analyzer.VAConstants.EMAIL_SUFFIX;
-import static org.hydev.veracross.analyzer.VAConstants.LENGTH_TOKEN;
 import static org.hydev.veracross.analyzer.database.VADatabase.query;
 import static org.hydev.veracross.analyzer.utils.L$.l$;
 
@@ -52,12 +51,9 @@ public class User extends DatabaseModel<User>
                 .lastName(student.getLastName())
                 .nickname(student.getFirstName())
                 .graduationYear(student.getGraduationYear())
-                .groups("student")
                 .emails(student.getEmail() == null ? username + EMAIL_SUFFIX : student.getEmail())
                 .classes(student.getAllClasses())
-                .birthday(student.getBirthday())
                 .avatarUrl(null)
-                .token(null)
                 .build();
     }
 
@@ -96,9 +92,6 @@ public class User extends DatabaseModel<User>
     @Column(name = "graduation_year", length = 6)
     public Short graduationYear;
 
-    @Column(name = "groups")
-    public String groups;
-
     @NonNull
     @Column(name = "emails")
     public String emails;
@@ -107,14 +100,8 @@ public class User extends DatabaseModel<User>
     @Column(name = "classes")
     public String classes;
 
-    @Column(name = "birthday")
-    public String birthday;
-
     @Column(name = "avatarUrl")
     public String avatarUrl;
-
-    @Column(name = "token", length = LENGTH_TOKEN)
-    public String token;
 
     /**
      * Find user by the username or return null
