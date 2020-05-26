@@ -103,6 +103,6 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
     {
         User user;
         String token;
-        List<CombinedCourse> combinedCourses;
+        List<CombinedCourse> courses;
     }
 }
