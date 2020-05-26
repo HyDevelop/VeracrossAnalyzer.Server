@@ -49,7 +49,6 @@ public class User extends DatabaseModel<User>
                 .lastLogin(new Date())
                 .firstName(student.getFirstName())
                 .lastName(student.getLastName())
-                .nickname(student.getFirstName())
                 .graduationYear(student.getGraduationYear())
                 .emails(student.getEmail() == null ? username + EMAIL_SUFFIX : student.getEmail())
                 .classes(student.getAllClasses())
@@ -84,9 +83,6 @@ public class User extends DatabaseModel<User>
     @NonNull
     @Column(name = "last")
     public String lastName;
-
-    @Column(name = "nick", length = 32)
-    public String nickname;
 
     @NonNull
     @Column(name = "graduation_year", length = 6)
