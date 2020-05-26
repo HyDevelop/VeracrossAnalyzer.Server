@@ -54,7 +54,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
 
         // Return cookies
         return NodeLoginToken.afterLogin(veracross,
-                new CookieData(null, -1L, data.username, veracross, veracross.getCsrfToken()));
+            new CookieData(null, -1L, data.username, veracross, veracross.getCsrfToken()));
     }
 
     @Override
