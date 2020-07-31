@@ -1,6 +1,6 @@
 package org.hydev.veracross.analyzer.utils;
 
-import cn.hutool.core.io.resource.ResourceUtil;
+import java.util.Scanner;
 
 /**
  * Helper class to read resource files.
@@ -28,7 +28,7 @@ public class ResourceReader
             {
                 name = name.substring(1);
             }
-            return ResourceUtil.readUtf8Str(name);
+            return new Scanner(ResourceReader.class.getResourceAsStream(name), "UTF-8").useDelimiter("\\A").next();
         }
         catch (Exception e)
         {

@@ -117,13 +117,13 @@ public class VADatabaseUpgrade
             {
                 try
                 {
-                    logger.timing.init();
+                    logger.getTiming().reset();
                     logger.log("Updating from {} to {}", current, update.lowestVersion);
 
                     // Update
                     update.operator.run(veracross);
 
-                    logger.log("Update success, taking {} ms", (long) logger.timing.getMilliseconds());
+                    logger.log("Update success, taking {} ms", logger.getTiming().getElapsed());
                 }
                 catch (IOException e)
                 {

@@ -5,7 +5,7 @@ import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
 
-import static cc.moecraft.utils.StringUtils.repeat;
+import static org.hibernate.internal.util.StringHelper.repeat;
 
 /**
  * This class is used to encode/decode base64-custom format.
