@@ -24,9 +24,10 @@ public class ResourceReader
     {
         try
         {
-            if (name.startsWith("/"))
+            if (!name.startsWith("/"))
             {
-                name = name.substring(1);
+                // name = name.substring(1);
+                name = "/" + name;
             }
             return new Scanner(ResourceReader.class.getResourceAsStream(name), "UTF-8").useDelimiter("\\A").next();
         }
