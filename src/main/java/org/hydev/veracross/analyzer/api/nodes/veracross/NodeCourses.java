@@ -11,6 +11,7 @@ import org.hydev.veracross.sdk.VeracrossHttpClient;
 import org.hydev.veracross.sdk.model.VeraCourse;
 import org.hydev.veracross.sdk.model.VeraCourses;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +66,8 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
      */
     public static List<CombinedCourse> processCourses(VeraCourses veraCourses)
     {
+        if (veraCourses.size() == 0) return new ArrayList<>();
+
         // Find courses
         List<Course> courses = Course.get(veraCourses.stream().mapToLong(VeraCourse::getId)
             .boxed().collect(Collectors.toList()));
