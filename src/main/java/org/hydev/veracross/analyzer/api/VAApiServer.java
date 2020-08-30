@@ -93,7 +93,6 @@ public class VAApiServer
     {
         // Logger
         HyLoggerConfig.INSTANCE.getAppenders().add(new FileAppender("./logs", "veracross-analyzer.log"));
-        HyLoggerConfig.INSTANCE.installSysOut();
 
         new VAApiServer().start();
     }
