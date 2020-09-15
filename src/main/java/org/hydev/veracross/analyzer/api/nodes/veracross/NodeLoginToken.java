@@ -57,7 +57,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
         cookie.setCookies(client.getCookies().getCookies());
 
         // Throw access log
-        logger.log("[Login] Token - {}", cookie.username);
+        logger.log("[Login] Token - {} via version '{}'", cookie.username, client.getWebsiteVersion());
 
         // After login
         return afterLogin(client, cookie);
