@@ -37,8 +37,6 @@ public class ApiHandler extends AbstractHandler
     private final ApiNodeManager manager;
     private final HyLogger logger = new HyLogger("ApiHandler");
 
-    //private final TSDConnection db = new TSDConnection();
-
     public ApiHandler(VAApiServer server)
     {
         this.apiServer = server;

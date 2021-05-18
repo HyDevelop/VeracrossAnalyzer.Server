@@ -9,7 +9,7 @@ import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.analyzer.utils.CourseUtils.CombinedCourse;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.VeraCourses;
+import org.hydev.veracross.sdk.model.CourseListV3;
 
 import java.io.IOException;
 import java.util.Date;
@@ -72,7 +72,7 @@ public class NodeLoginToken extends JsonApiNode<NodeLoginToken.Model>
     public static ReturnModel afterLogin(VeracrossHttpClient veracross, CookieData cookieData) throws IOException
     {
         // Get courses
-        VeraCourses veraCourses = veracross.getCourses();
+        CourseListV3 veraCourses = veracross.getCourses();
 
         // Get user from database
         User user = User.get(veraCourses.getUsername());

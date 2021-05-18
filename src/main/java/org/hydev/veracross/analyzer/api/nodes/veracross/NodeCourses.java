@@ -8,8 +8,8 @@ import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.analyzer.utils.CourseUtils.CombinedCourse;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.VeraCourse;
-import org.hydev.veracross.sdk.model.VeraCourses;
+import org.hydev.veracross.sdk.model.CourseListV3;
+import org.hydev.veracross.sdk.model.CourseV3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,12 +50,12 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         CookieData cookie = new CookieData(data.token).store(veracross);
 
         // Get courses
-        VeraCourses veraCourses = veracross.getCourses();
+        CourseListV3 courses = veracross.getCourses();
 
         // Throw access log
-        logger.log("[Course] Load - {}", veraCourses.getUsername());
+        logger.log("[Course] Load - {}", courses.getUsername());
 
-        return processCourses(veraCourses);
+        return processCourses(courses);
     }
 
     /**
@@ -64,23 +64,23 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
      * @param veraCourses Courses
      * @return Courses with combined information
      */
-    public static List<CombinedCourse> processCourses(VeraCourses veraCourses)
+    public static List<CombinedCourse> processCourses(CourseListV3 veraCourses)
     {
-        if (veraCourses.size() == 0) return new ArrayList<>();
+        if (veraCourses.getCourses().size() == 0) return new ArrayList<>();
 
         // Find courses
-        List<Course> courses = Course.get(veraCourses.stream().mapToLong(VeraCourse::getId)
+        List<Course> courses = Course.get(veraCourses.getCourses().stream().mapToLong(CourseV3::getId)
             .boxed().collect(Collectors.toList()));
         Map<Long, Course> courseMap = new HashMap<>();
 
         // Save course info async
-        for (VeraCourse veraCourse : veraCourses)
+        for (CourseV3 course : veraCourses.getCourses())
         {
             // If there are no course exist for this id
-            if (courses.stream().noneMatch(c -> c.id() == veraCourse.getId()))
+            if (courses.stream().noneMatch(c -> c.id() == course.getId()))
             {
                 // Put a new course
-                courses.add(storeCourse(veraCourse));
+                courses.add(storeCourse(course));
             }
         }
         courses.forEach(c -> courseMap.put(c.id(), c));
@@ -91,7 +91,7 @@ public class NodeCourses extends JsonApiNode<NodeCourses.Model>
         ratings.forEach(r -> ratingsMap.put(r.id_ci(), r));
 
         // Return it
-        return veraCourses.stream().map(v -> new CombinedCourse(v, courseMap.get(v.getId()),
+        return veraCourses.getCourses().stream().map(v -> new CombinedCourse(v, courseMap.get(v.getId()),
             ratingsMap.getOrDefault(courseMap.get(v.getId()).id_ci(), null))).collect(Collectors.toList());
     }
 

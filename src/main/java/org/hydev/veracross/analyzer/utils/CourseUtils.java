@@ -3,7 +3,7 @@ package org.hydev.veracross.analyzer.utils;
 import org.hydev.veracross.analyzer.database.model.Course;
 import org.hydev.veracross.analyzer.database.model.CourseInfo;
 import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
-import org.hydev.veracross.sdk.model.VeraCourse;
+import org.hydev.veracross.sdk.model.CourseV3;
 
 import java.util.Calendar;
 
@@ -31,22 +31,22 @@ public class CourseUtils
     /**
      * Save course info if not already saved
      *
-     * @param veraCourse Course info
+     * @param course Course info
      */
-    public static Course storeCourse(VeraCourse veraCourse)
+    public static Course storeCourse(CourseV3 course)
     {
-        String level = detectLevel(veraCourse.getName());
+        String level = detectLevel(course.getName());
         int infoId = -1;
         if (level != null && !level.equals(SPORT) /*&& !level.equals(Club)*/)
         {
             // Get info
-            CourseInfo info = CourseInfo.getOrCreate(getSchoolYear(), veraCourse.getName(),
-                veraCourse.getTeacherName(), level);
+            CourseInfo info = CourseInfo.getOrCreate(getSchoolYear(), course.getName(),
+                course.getTeacherName(), level);
 
             // Add course id
-            if (!info.courseIds().contains("" + veraCourse.getId()))
+            if (!info.courseIds().contains("" + course.getId()))
             {
-                info.addCourseId(veraCourse.getId());
+                info.addCourseId(course.getId());
             }
 
             // Save and get info id
@@ -54,8 +54,8 @@ public class CourseUtils
         }
 
         // Create one if it does not exist
-        Course course = new Course((int) veraCourse.getId(), veraCourse.getName(),
-            veraCourse.getTeacherName(), level, infoId).insert();
+        Course course = new Course((int) course.getId(), course.name(),
+            course.teacher(), level, infoId).insert();
 
         logger.log("[Course] Create - {}", course.name());
         return course;
@@ -64,13 +64,13 @@ public class CourseUtils
     /**
      * Course information combining level, id_ci, and ratings
      */
-    public static class CombinedCourse extends VeraCourse
+    public static class CombinedCourse extends CourseV3
     {
         public String level;
         public Integer id_ci;
         public CourseInfoRating.ReturnedRating rating;
 
-        public CombinedCourse(VeraCourse other, Course course, CourseInfoRating rating)
+        public CombinedCourse(CourseV3 other, Course course, CourseInfoRating rating)
         {
             super(other);
 
@@ -128,8 +128,6 @@ public class CourseUtils
         if (name.contains("Crossfit")) return SPORT;
         if (name.contains("Judo")) return SPORT;
         if (name.contains("Jiu Jitsu")) return SPORT;
-        if (name.contains("Introduction to Algorithmic Thinking")) return Accelerated;
-        if (name.equals("Ceramics 1")) return CP;
         if (name.equals("Cafeteria")) return "None";
         if (name.equals("Campus Ministry")) return "None";
         if (name.equals("CLAS Homeroom")) return "None";

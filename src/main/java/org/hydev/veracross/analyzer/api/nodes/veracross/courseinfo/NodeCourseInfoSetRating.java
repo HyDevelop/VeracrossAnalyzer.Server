@@ -8,7 +8,7 @@ import org.hydev.veracross.analyzer.database.model.CourseInfoRating;
 import org.hydev.veracross.analyzer.database.model.User;
 import org.hydev.veracross.analyzer.utils.CookieData;
 import org.hydev.veracross.sdk.VeracrossHttpClient;
-import org.hydev.veracross.sdk.model.VeraCourses;
+import org.hydev.veracross.sdk.model.CourseListV3;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
         }
 
         // Validate login
-        VeraCourses loginInfo;
+        CourseListV3 loginInfo;
         try
         {
             loginInfo = veracross.getCourses();
@@ -92,6 +92,8 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
 
         // Null case
         if (user == null) throw new RuntimeException("User not registered. Something is wrong...");
+
+        // TODO: Case where a hacker might rate a course that isn't enrolled in, check id_ci
 
         // See if rating already exists.
         List<CourseInfoRating> existingRating = getByUserAndCourse(user.id, data.rating.id_ci());
