@@ -57,7 +57,7 @@ public abstract class JsonApiNode<T> implements ApiNode
             Object result = processJson(access, GSON.fromJson(data, config.model()));
 
             // Null case
-            if (result == null || result == "") return "";
+            if (result == null) return "";
 
             // Directly return strings
             if (result instanceof JsonDirectResponse)

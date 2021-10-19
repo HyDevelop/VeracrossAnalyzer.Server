@@ -1,11 +1,10 @@
 package org.hydev.veracross.analyzer.api;
 
-import cc.moecraft.logger.HyLogger;
-import cc.moecraft.logger.LoggerInstanceManager;
-import cc.moecraft.logger.environments.ConsoleColoredEnv;
-import cc.moecraft.logger.environments.FileEnv;
 import lombok.Getter;
 import org.eclipse.jetty.server.Server;
+import org.hydev.logger.HyLogger;
+import org.hydev.logger.HyLoggerConfig;
+import org.hydev.logger.appenders.FileAppender;
 import org.hydev.veracross.analyzer.VAConstants;
 import org.hydev.veracross.analyzer.api.nodes.NodeSystemMeta;
 import org.hydev.veracross.analyzer.api.nodes.NodeTest;
@@ -15,8 +14,6 @@ import org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo.NodeCourseInf
 import org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo.NodeCourseInfoGetRating;
 import org.hydev.veracross.analyzer.api.nodes.veracross.courseinfo.NodeCourseInfoSetRating;
 import org.hydev.veracross.analyzer.database.VADatabase;
-
-import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
 
 /**
  * API server for the veracross analyzer.
@@ -31,16 +28,7 @@ import static cc.moecraft.logger.environments.ColorSupportLevel.FORCED;
 @Getter
 public class VAApiServer
 {
-    private final LoggerInstanceManager lim;
-    public static HyLogger logger;
-
-    public VAApiServer()
-    {
-        // Setup logger
-        lim = new LoggerInstanceManager();
-        lim.addEnvironment(new ConsoleColoredEnv(FORCED), new FileEnv("./logs", "veracross-analyzer.log"));
-        logger = lim.getLoggerInstance("VA-Server", VAConstants.DEBUG);
-    }
+    public static HyLogger logger = new HyLogger("VA-Server");
 
     /**
      * Start the http server
@@ -103,6 +91,9 @@ public class VAApiServer
      */
     public static void main(String[] args)
     {
+        // Logger
+        HyLoggerConfig.INSTANCE.getAppenders().add(new FileAppender("./logs", "veracross-analyzer.log"));
+
         new VAApiServer().start();
     }
 }

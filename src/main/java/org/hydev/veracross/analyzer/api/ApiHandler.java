@@ -1,9 +1,9 @@
 package org.hydev.veracross.analyzer.api;
 
-import cc.moecraft.logger.HyLogger;
 import lombok.Getter;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.hydev.logger.HyLogger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +14,6 @@ import java.util.Map;
 
 import static java.lang.System.lineSeparator;
 import static java.util.stream.Collectors.joining;
-import static org.hydev.veracross.analyzer.VAConstants.DEBUG;
 import static org.hydev.veracross.analyzer.utils.ResourceReader.read;
 
 /**
@@ -36,7 +35,7 @@ public class ApiHandler extends AbstractHandler
 
     private final VAApiServer apiServer;
     private final ApiNodeManager manager;
-    private final HyLogger logger;
+    private final HyLogger logger = new HyLogger("ApiHandler");
 
     //private final TSDConnection db = new TSDConnection();
 
@@ -45,7 +44,6 @@ public class ApiHandler extends AbstractHandler
         this.apiServer = server;
         this.manager = new ApiNodeManager();
 
-        logger = server.getLim().getLoggerInstance("ApiHandler", DEBUG);
         logger.log("Api Handler Initialized!");
     }
 

@@ -50,7 +50,7 @@ public class NodeLogin extends JsonApiNode<NodeLogin.Model>
         VeracrossHttpClient veracross = stJohns.veracrossLoginSSO();
 
         // Throw access log
-        logger.log("[Login] New session - {}", data.username);
+        logger.log("[Login] New session - {} via version '{}'", data.username, veracross.getWebsiteVersion());
 
         // Return cookies
         return NodeLoginToken.afterLogin(veracross,
