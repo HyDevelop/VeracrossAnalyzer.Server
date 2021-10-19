@@ -93,6 +93,8 @@ public class NodeCourseInfoSetRating extends JsonApiNode<NodeCourseInfoSetRating
         // Null case
         if (user == null) throw new RuntimeException("User not registered. Something is wrong...");
 
+        // TODO: Case where a hacker might rate a course that isn't enrolled in, check id_ci
+
         // See if rating already exists.
         List<CourseInfoRating> existingRating = getByUserAndCourse(user.id, data.rating.id_ci());
         CourseInfoRating rating = existingRating.size() == 0 ? new CourseInfoRating() : existingRating.get(0);
