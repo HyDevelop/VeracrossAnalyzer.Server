@@ -41,3 +41,4 @@ VeracrossAnalyzer.Server.iml
 # This file stores a token string
 src/main/resources/operation-account.entry
 src/main/resources/hibernate.secret.xml
+._*
