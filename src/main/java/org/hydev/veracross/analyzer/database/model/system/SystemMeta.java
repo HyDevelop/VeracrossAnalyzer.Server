@@ -82,8 +82,8 @@ public class SystemMeta extends DatabaseModel<SystemMeta>
 
     public static int getBuildVersion()
     {
-        String currentVersionString = SystemMeta.get(ID_VERSION_BUILD).value;
-        return currentVersionString == null ? -1 : parseInt(currentVersionString);
+        SystemMeta currentVersion = SystemMeta.get(ID_VERSION_BUILD);
+        return currentVersion == null ? -1 : parseInt(currentVersion.value);
     }
 
     public static void setBuildVersion(int version)
