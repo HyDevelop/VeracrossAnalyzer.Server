@@ -1,9 +1,6 @@
 package org.hydev.veracross.analyzer.utils;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
-import java.io.IOException;
+import java.util.Base64;
 
 import static org.hibernate.internal.util.StringHelper.repeat;
 
@@ -19,37 +16,18 @@ import static org.hibernate.internal.util.StringHelper.repeat;
  */
 public class Base64Utils
 {
-    public static String encodeBase64C(byte[] bytes)
-    {
-        return new BASE64Encoder().encode(bytes)
-                .replace("=", "")
-                .replace("+", "-")
-                .replace("/", "_")
-                .replaceAll("[\\s*\t\n\r]", "");
-    }
-
     public static String encodeBase64C(String text)
     {
-        return encodeBase64C(text.getBytes());
+        return Base64.getEncoder().encodeToString(text.getBytes())
+            .replace("=", "")
+            .replace("+", "-")
+            .replace("/", "_")
+            .replaceAll("[\\s*\t\n\r]", "");
     }
 
-    public static byte[] decodeBase64C(String text)
+    public static String decodeBase64C(String text)
     {
         if (text.length() % 4 != 0) text += repeat("=", 4 - text.length() % 4);
-        try
-        {
-            return new BASE64Decoder().decodeBuffer(text
-                    .replace("-", "+")
-                    .replace("_", "/"));
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static String decodeBase64CStr(String text)
-    {
-        return new String(decodeBase64C(text));
+        return new String(Base64.getDecoder().decode(text));
     }
 }

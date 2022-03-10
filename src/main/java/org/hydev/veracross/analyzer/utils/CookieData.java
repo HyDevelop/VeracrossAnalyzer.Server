@@ -62,7 +62,7 @@ public class CookieData
     public CookieData(String wrap)
     {
         // Decode json
-        String jsonString = Base64Utils.decodeBase64CStr(wrap);
+        String jsonString = Base64Utils.decodeBase64C(wrap);
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
 
         // Deserialize cookies
@@ -92,8 +92,7 @@ public class CookieData
      */
     public String wrap()
     {
-        String json = GSON.toJson(this);
-        return Base64Utils.encodeBase64C(json.getBytes());
+        return Base64Utils.encodeBase64C(GSON.toJson(this));
     }
 
     /**
