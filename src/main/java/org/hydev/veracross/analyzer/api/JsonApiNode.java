@@ -40,7 +40,7 @@ public abstract class JsonApiNode<T> implements ApiNode
                 throw new JsonKnownError("Bad request");
 
             // Parse body
-            JsonObject data = new JsonParser().parse(access.getContent()).getAsJsonObject();
+            JsonObject data = JsonParser.parseString(access.getContent()).getAsJsonObject();
 
             // Check key length
             for (Entry<String, Integer> entry : config.keyLengths().entrySet())

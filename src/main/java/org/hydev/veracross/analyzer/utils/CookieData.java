@@ -19,7 +19,7 @@ import static org.hydev.veracross.analyzer.VAConstants.GSON;
 import static org.hydev.veracross.analyzer.utils.J$.null$;
 
 /**
- * This class is an utility class for cookies.
+ * This class is a utility class for cookies.
  * <p>
  * Class created by the HyDEV Team on 2019-09-07!
  *
@@ -63,7 +63,7 @@ public class CookieData
     {
         // Decode json
         String jsonString = Base64Utils.decodeBase64C(wrap);
-        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
 
         // Deserialize cookies
         id = null$(json.get("id"), JsonElement::getAsLong);

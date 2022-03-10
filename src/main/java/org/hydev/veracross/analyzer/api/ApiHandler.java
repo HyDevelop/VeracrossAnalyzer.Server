@@ -51,7 +51,7 @@ public class ApiHandler extends AbstractHandler
     public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response)
     {
         baseRequest.setHandled(true);
-        if (!request.getMethod().equalsIgnoreCase("get") && !request.getMethod().equalsIgnoreCase("post"))
+        if (!"get".equalsIgnoreCase(request.getMethod()) && !"post".equalsIgnoreCase(request.getMethod()))
         {
             writeResponse(response, ERROR_WRONG_METHOD);
             return;
