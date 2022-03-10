@@ -42,3 +42,4 @@ VeracrossAnalyzer.Server.iml
 src/main/resources/operation-account.entry
 src/main/resources/hibernate.secret.xml
 ._*
+logs/
