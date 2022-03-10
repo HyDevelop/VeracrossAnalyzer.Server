@@ -32,9 +32,9 @@
 
         <!-- HTTP Client -->
         <dependency>
-            <groupId>com.github.HyDevelop</groupId>
-            <artifactId>VeracrossAnalyzer.SDK</artifactId>
-            <version>3.1.1.294</version>
+            <groupId>org.hydev</groupId>
+            <artifactId>veracross-analyzer-sdk</artifactId>
+            <version>3.1.2.297</version>
         </dependency>
 
         <!-- Web Server -->
@@ -48,26 +48,26 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.6.Final</version>
+            <version>5.6.5.Final</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
-            <version>5.4.4.Final</version>
+            <version>5.6.5.Final</version>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.17</version>
+            <version>8.0.28</version>
         </dependency>
 
         <!-- Source Only -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
+            <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
